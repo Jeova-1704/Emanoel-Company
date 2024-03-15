@@ -20,15 +20,29 @@ public class ProdutoController {
     @Autowired
     private ProdutoService produtoService;
 
-    @PostMapping
+    @PostMapping("/cadastrarProduto")
     public ResponseEntity<Produto> cadastrar(@RequestBody Produto produto){
         Produto produtoSalvo = produtoService.salvar(produto);
         return new ResponseEntity<>(produtoSalvo, HttpStatus.CREATED);
     }
 
-    @GetMapping
+    @GetMapping("/listarProdutos")
     public ResponseEntity<List<Produto>> listarProdutos(){
         List<Produto> produtoList = produtoService.listarProdutos();
         return ResponseEntity.ok(produtoList);
+
     }
+    @GetMapping("/idProduto/{id}")
+    public ResponseEntity<Produto> buscarID(@PathVariable Long id){
+        Produto produto = produtoService.buscarID(id);
+        return ResponseEntity.ok(produto);
+    }
+    @GetMapping("/nome/{nome}")
+    public ResponseEntity<List<Produto>> filtrarNome(@PathVariable String nome){
+        List<Produto> listaNomes = produtoService.buscarNome(nome);
+        return ResponseEntity.ok(listaNomes);
+    }
+
+
+
 }

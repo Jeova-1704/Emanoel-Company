@@ -20,4 +20,11 @@ public class ProdutoService{
     public List<Produto> listarProdutos() {
         return produtoRepository.findAll();
     }
+
+    public Produto buscarID(Long idProduto){
+        return produtoRepository.findById(idProduto).get();
+    }
+    public List<Produto> buscarNome(String nome){
+        return produtoRepository.buscarNome(nome.trim().toUpperCase());
+    }
 }
