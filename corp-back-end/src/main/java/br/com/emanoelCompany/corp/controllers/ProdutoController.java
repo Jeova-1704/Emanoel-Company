@@ -43,7 +43,7 @@ public class ProdutoController {
         return ResponseEntity.ok(listaNomes);
     }
 
-    @DeleteMapping("/deletarProduto/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<String> deletarID(@PathVariable Long id){
         boolean deletado = produtoService.deletar(id);
         if(deletado){
