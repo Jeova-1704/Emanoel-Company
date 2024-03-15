@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ProdutoService{
@@ -27,4 +28,15 @@ public class ProdutoService{
     public List<Produto> buscarNome(String nome){
         return produtoRepository.buscarNome(nome.trim().toUpperCase());
     }
+
+    public boolean deletar(Long id){
+        Optional<Produto> produtoOptional = produtoRepository.findById(id);
+        if(produtoOptional.isPresent()){
+            produtoRepository.delete(produtoOptional.get());
+            return true;
+        }else {
+            return false;
+        }
+    }
+
 }

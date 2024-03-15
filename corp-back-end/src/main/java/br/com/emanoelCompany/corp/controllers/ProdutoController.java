@@ -43,6 +43,19 @@ public class ProdutoController {
         return ResponseEntity.ok(listaNomes);
     }
 
+    @DeleteMapping("/deletarProduto/{id}")
+    public ResponseEntity<String> deletarID(@PathVariable Long id){
+        boolean deletado = produtoService.deletar(id);
+        if(deletado){
+            return ResponseEntity.ok("Produto deletado!");
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Produto não encontrado");
+        }
+    }
+
+
+
+
 
 
 }
