@@ -1,6 +1,6 @@
-package br.com.emanoelCompany.repository;
+package br.com.emanoelCompany.corp.repository;
 
-import br.com.emanoelCompany.model.Produto;
+import br.com.emanoelCompany.corp.model.Produto;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
