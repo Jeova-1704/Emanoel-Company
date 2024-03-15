@@ -284,18 +284,3 @@
   new PureCounter();
 
 })()
-
-document.getElementById('cadastrarProduto').addEventListener('click', function(event) {
-  event.preventDefault(); // Evita que o navegador siga o link
-
-  var modal = new bootstrap.Modal(document.getElementById('modalCadastroProduto'));
-  modal.show();
-});
-
-document.addEventListener('DOMContentLoaded', function () {
-  var cadastroProdutoLink = document.querySelector('.icon-box a');
-  cadastroProdutoLink.addEventListener('click', function (e) {
-    e.preventDefault(); // Impede a navegação, se houver
-    $('#produtoModal').modal('show'); // Abre o modal
-  });
-});
