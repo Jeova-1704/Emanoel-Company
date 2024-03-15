@@ -3,8 +3,6 @@ target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
-corp-back-end/src/main/resources/application.properties
-../.idea/discord.xml
 
 ### STS ###
 .apt_generated

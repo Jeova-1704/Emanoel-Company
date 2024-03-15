@@ -2,24 +2,34 @@ package br.com.emanoelCompany.corp.controllers;
 
 import br.com.emanoelCompany.corp.model.Produto;
 import br.com.emanoelCompany.corp.repository.ProdutoRepository;
+import br.com.emanoelCompany.corp.services.ProdutoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import java.net.URI;
+import java.util.List;
 
 @RestController
+@RequestMapping("/produto")
 public class ProdutoController {
-    @Autowired
-    private ProdutoRepository produtoRepository;
 
-    @PostMapping(value = "/cadastrar")
-    @ResponseBody
+    @Autowired
+    private ProdutoService produtoService;
+
+    @PostMapping
     public ResponseEntity<Produto> cadastrar(@RequestBody Produto produto){
-        Produto produto1 = produtoRepository.save(produto);
-        return new ResponseEntity<Produto>(produto1, HttpStatus.CREATED);
+        Produto produtoSalvo = produtoService.salvar(produto);
+        return new ResponseEntity<>(produtoSalvo, HttpStatus.CREATED);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<Produto>> listarProdutos(){
+        List<Produto> produtoList = produtoService.listarProdutos();
+        return ResponseEntity.ok(produtoList);
     }
 
 }
