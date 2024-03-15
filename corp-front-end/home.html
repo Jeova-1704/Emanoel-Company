@@ -2,84 +2,155 @@
 <html lang="pt-br">
 
 <head>
-    <meta charset="utf-8">
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>Sistema de controle de estoque</title>
-    <meta content="" name="description">
-    <meta content="" name="keywords">
+  <title>Sistema de controle de estoque</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
 
-    <link href="images/logo.png" rel="icon">
-    <link href="images/logo.png" rel="apple-touch-icon">
+  <link href="assets/images/logo.png" rel="icon">
+  <link href="assets/images/logo.png" rel="apple-touch-icon">
 
-    <link
-        href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
-        rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+    rel="stylesheet">
 
-    <link href="assets/vendor/aos/aos.css" rel="stylesheet">
-    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-    <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-    <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-    <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
-    <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 
-    <link href="assets/css/style.css" rel="stylesheet">
+  <link href="assets/css/style.css" rel="stylesheet">
 </head>
 
 <body>
 
-    <header id="header" class="fixed-top ">
-        <div class="container d-flex align-items-center justify-content-lg-between">
 
-            <h1 class="logo me-auto me-lg-0"><a href="index.html">Emanoel Company<span>.</span></a></h1>
-            <a href="#about" class="get-started-btn scrollto">Sair do sistema</a>
+  <header id="header" class="fixed-top">
+    <div class="container d-flex align-items-center justify-content-lg-between">
+      <h1 class="logo me-auto me-lg-0"><a href="home.html">Emanoel Company<span>.</span></a></h1>
+      <a href="login.html" class="get-started-btn scrollto">Sair do sistema</a>
+    </div>
+  </header>
 
+  <section id="hero" class="d-flex align-items-center justify-content-center">
+    <div class="container" data-aos="fade-up">
+      <div class="row justify-content-center" data-aos="fade-up" data-aos-delay="150">
+        <div class="col-xl-6 col-lg-8">
+          <h1>O melhor sistema de controle de estoque<span>.</span></h1>
+          <h2>Controle tudo de bom em sua vida</h2>
         </div>
-    </header>
-    <section id="hero" class="d-flex align-items-center justify-content-center">
-        <div class="container" data-aos="fade-up">
+      </div>
+      <div class="row gy-4 mt-5 justify-content-center" data-aos="zoom-in" data-aos-delay="250">
+        <div class="col-xl-2 col-md-4">
+          <div class="icon-box">
+            <i class="ri-store-line"></i>
+            <h3><a href="#" data-bs-toggle="modal" data-bs-target="#produtoModal">Cadastrar produto</a></h3>
+          </div>
+        </div>
+        <div class="col-xl-2 col-md-4">
+          <div class="icon-box">
+            <i class="ri-bar-chart-box-line"></i>
+            <h3><a href="">Listar produtos no estoque</a></h3>
+          </div>
+        </div>
+        <div class="col-xl-2 col-md-4">
+          <div class="icon-box">
+            <i class="ri-calendar-todo-line"></i>
+            <h3><a href="">Vender produtos</a></h3>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    </div>
+  </section>
 
-            <div class="row justify-content-center" data-aos="fade-up" data-aos-delay="150">
-                <div class="col-xl-6 col-lg-8">
-                    <h1>O melhor sistema de controle de estoque<span>.</span></h1>
-                    <h2>Controle tudo, até o seu cabelo</h2>
-                </div>
+  <!-- Modal -->
+  <div class="modal fade" id="produtoModal" tabindex="-1" aria-labelledby="produtoModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="produtoModalLabel">Cadastrar Produto</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="mb-3">
+              <div class="alert alert-secondary" role="alert">
+                <h11>*</h11> Campos Obrigatórios
+              </div>
             </div>
 
-            <div class="row gy-4 mt-5 justify-content-center" data-aos="zoom-in" data-aos-delay="250">
-                <div class="col-xl-2 col-md-4">
-                    <div class="icon-box">
-                        <i class="ri-store-line"></i>
-                        <h3><a href="">Cadastrar produto</a></h3>
-                    </div>
-                </div>
-                <div class="col-xl-2 col-md-4">
-                    <div class="icon-box">
-                        <i class="ri-bar-chart-box-line"></i>
-                        <h3><a href="">Listar produtos no estoque</a></h3>
-                    </div>
-                </div>
-                <div class="col-xl-2 col-md-4">
-                    <div class="icon-box">
-                        <i class="ri-calendar-todo-line"></i>
-                        <h3><a href="">vender produtos</a></h3>
-                    </div>
-                </div>
+            <div class="mb-3 row">
+              <label for="nome" class="col-md-4 col-form-label">Nome do produto:<h11>*</h11></label>
+              <div class="col-md-8">
+                <input type="text" class="form-control" id="nome" name="nome" required>
+              </div>
             </div>
-        </div>
 
-        </div>
-    </section>
-    <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
-    <script src="assets/vendor/aos/aos.js"></script>
-    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
-    <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-    <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
-    <script src="assets/vendor/php-email-form/validate.js"></script>
+            <div class="mb-3 row">
+              <label for="codigo_produto" class="col-md-4 col-form-label">Código do produto:<h11>*</h11></label>
+              <div class="col-md-8">
+                <input type="text" class="form-control" id="codigo_produto" name="codigo_produto" required
+                  pattern="[0-9]+$">
+              </div>
+            </div>
 
-    <script src="assets/js/main.js"></script>
+            <div class="mb-3 row">
+              <label for="data_entrada" class="col-md-4 col-form-label">Data de entrada:<h11>*</h11></label>
+              <div class="col-md-8">
+                <input type="text" class="form-control" id="data_entrada" name="data_entrada" required>
+              </div>
+            </div>
+
+            <div class="mb-3 row">
+              <label for="quantidade" class="col-md-4 col-form-label">Quantidade:<h11>*</h11></label>
+              <div class="col-md-8">
+                <input type="number" class="form-control" id="quantidade" name="quantidade" required>
+              </div>
+            </div>
+
+            <div class="mb-3 row">
+              <label for="preco" class="col-md-4 col-form-label">Preço:<h11>*</h11></label>
+              <div class="col-md-8">
+                <input type="text" class="form-control" id="preco" name="preco" required>
+              </div>
+            </div>
+
+            <div class="mb-3 row">
+              <label for="categoria" class="col-md-4 col-form-label">Categoria do produto:<h11>*</h11></label>
+              <div class="col-md-8">
+                <input type="text" class="form-control" id="categoria" name="categoria" required>
+              </div>
+            </div>
+
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+              <button type="submit" class="btn btn-success">Cadastrar</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
+  <script src="assets/vendor/aos/aos.js"></script>
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+
+  <script src="assets/js/main.js"></script>
+
+
 
 </body>
 
