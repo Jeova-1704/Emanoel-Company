@@ -32,12 +32,12 @@ public class ProdutoController {
         return ResponseEntity.ok(produtoList);
 
     }
-    @GetMapping("/{id}")
+    @GetMapping("/id/{id}")
     public ResponseEntity<Produto> buscarID(@PathVariable Long id){
         Produto produto = produtoService.buscarID(id);
         return ResponseEntity.ok(produto);
     }
-    @GetMapping("/{nome}")
+    @GetMapping("/nome/{nome}")
     public ResponseEntity<List<Produto>> filtrarNome(@PathVariable String nome){
         List<Produto> listaNomes = produtoService.buscarNome(nome);
         return ResponseEntity.ok(listaNomes);
