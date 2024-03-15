@@ -31,5 +31,4 @@ public class ProdutoController {
         List<Produto> produtoList = produtoService.listarProdutos();
         return ResponseEntity.ok(produtoList);
     }
-
 }
