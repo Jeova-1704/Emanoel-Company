@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+  backend:
+    build:
+      context: .
+    container_name: app
+    depends_on:
+      - postgres
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/emanoelcompany
+      - SPRING_DATASOURCE_USERNAME=admin
+      - SPRING_DATASOURCE_PASSWORD=root
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+    ports:
+      - 8080:8080
+
+  postgres:
+    image: 'postgres:latest'
+    environment:
+      - 'POSTGRES_DB=emanoelcompany'
+      - 'POSTGRES_PASSWORD=root'
+      - 'POSTGRES_USER=admin'
+    ports:
+      - 5432:5432
