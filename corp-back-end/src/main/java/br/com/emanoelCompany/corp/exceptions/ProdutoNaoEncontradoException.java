@@ -6,8 +6,7 @@ public class ProdutoNaoEncontradoException extends RuntimeException {
         super("produto buscado não existe");
     }
 
-    public ProdutoNaoEncontradoException(String mensagem){
+    public ProdutoNaoEncontradoException(String mensagem) {
         super(mensagem);
     }
-
 }

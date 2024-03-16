@@ -29,7 +29,8 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
     }
 
     @ExceptionHandler(ProdutoNaoEncontradoException.class)
-    private ResponseEntity<String> produtoNaoEncontradoHandler(ProdutoNaoEncontradoException exception){
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Produto não encontrado !");
+    private ResponseEntity<ExceptionResponse> produtoNaoEncontradoHandler(ProdutoNaoEncontradoException ex,WebRequest request){
+        ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(),ex.getMessage(),request.getDescription(false));
+        return new ResponseEntity<>(exceptionResponse,HttpStatus.NOT_FOUND);
     }
 }
