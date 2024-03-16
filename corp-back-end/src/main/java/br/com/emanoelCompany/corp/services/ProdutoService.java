@@ -29,7 +29,8 @@ public class ProdutoService{
                 produto.getCategoria(),
                 produto.getQuantidade(),
                 produto.getDataEntrada().toString(),
-                produto.getCodigoProduto()
+                produto.getCodigoProduto(),
+                produto.getPrecoTotal()
         );
     }
 
@@ -59,6 +60,7 @@ public class ProdutoService{
         }
 
         Produto prod = new Produto(produto);
+        prod.setPrecoTotal(prod.valorTotal(prod.getQuantidade(), prod.getPreco()));
         Produto produtoSalvo = produtoRepository.save(prod);
 
         return convertToDTO(produtoSalvo);
@@ -108,11 +110,12 @@ public class ProdutoService{
         }
 
         Produto produto = produtoRepository.findById(produtoDTO.id())
-                .orElseThrow(() -> new ProdutoNaoEncontradoException("O ID fornecido não condiz com nenhum produto em nosso estoque!"));;
+                .orElseThrow(() -> new ProdutoNaoEncontradoException("O ID fornecido não condiz com nenhum produto em nosso estoque!"));
 
         produto.setPreco(produtoDTO.preco());
         produto.setQuantidade(produtoDTO.quantidade());
         produto.setDataEntrada(LocalDate.now());
+        produto.setPrecoTotal(produto.valorTotal(produtoDTO.quantidade(), produtoDTO.preco()));
         Produto produtoAtualizado = produtoRepository.save(produto);
 
 
