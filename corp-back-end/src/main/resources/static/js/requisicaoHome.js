@@ -203,7 +203,6 @@ function converterData(dataISO) {
     return `${dia}/${mes}/${ano}`;
 }
 function editarProduto(id) {
-    console.log(id);
     const confirmacaoModal = new bootstrap.Modal(document.getElementById('editarProdutoModal'));
     fetch(`http://localhost:8080/produto/buscarID/${id}`)
         .then(response => {
@@ -211,8 +210,7 @@ function editarProduto(id) {
             return response.json();
         })
         .then(produto => {
-            console.log(produto);
-            console.log(produto.nome)
+            console.log(produto.id);
             document.getElementById('produto_id').value = produto.id;
             document.getElementById('produto_nome').value = produto.nome;
             document.getElementById('produto_codigo_produto').value = produto.codigoProduto;
@@ -221,7 +219,6 @@ function editarProduto(id) {
             document.getElementById('produto_preco').value = produto.preco;
 
             confirmacaoModal.show();
-
         })
         .catch(error => console.error('Erro ao carregar dados do produto:', error));
 }
@@ -231,16 +228,30 @@ document.addEventListener('DOMContentLoaded', function() {
     const formEditarProduto = document.getElementById('editarProdutoForm');
 
     formEditarProduto.addEventListener('submit', function(event) {
-        event.preventDefault(); // Previne a submissão padrão do formulário
+        event.preventDefault();
 
         // Coleta os dados do formulário
-        const idProduto = document.getElementById('produto_id').value;
-        const nomeProduto = document.getElementById('produto_nome').value;
-        const codigoProduto = document.getElementById('produto_codigo_produto').value;
-        const dataEntrada = document.getElementById('produto_data_entrada').value;
-        const quantidade = document.getElementById('produto_quantidade').value;
-        const preco = document.getElementById('produto_preco').value;
-        const categoria = document.getElementById('produto_categoria').value;
+        const idProdutoElement = document.getElementById('produto_id');
+        const nomeProdutoElement = document.getElementById('produto_nome');
+        const codigoProdutoElement = document.getElementById('produto_codigo_produto');
+        const dataEntradaElement = document.getElementById('produto_data_entrada');
+        const quantidadeElement = document.getElementById('produto_quantidade');
+        const precoElement = document.getElementById('produto_preco');
+        const categoriaElement = document.getElementById('produto_categoria');
+
+        if (!idProdutoElement || !nomeProdutoElement || !codigoProdutoElement || !dataEntradaElement
+            || !quantidadeElement || !precoElement || !categoriaElement) {
+            console.error('Um ou mais elementos do formulário não foram encontrados.');
+            return;
+        }
+
+        const idProduto = idProdutoElement.value;
+        const nomeProduto = nomeProdutoElement.value;
+        const codigoProduto = codigoProdutoElement.value;
+        const dataEntrada = dataEntradaElement.value;
+        const quantidade = quantidadeElement.value;
+        const preco = precoElement.value;
+        const categoria = categoriaElement.value;
 
         const dadosProduto = {
             id: idProduto,
@@ -268,7 +279,8 @@ document.addEventListener('DOMContentLoaded', function() {
             })
             .then(data => {
                 console.log('Sucesso:', data);
-                const confirmacaoModal = bootstrap.Modal.getInstance(document.getElementById('editarProdutoModal'));
+                const confirmacaoModal = bootstrap.Modal.getInstance(document
+                    .getElementById('editarProdutoModal'));
                 confirmacaoModal.hide();
             })
             .catch(error => {
@@ -276,3 +288,4 @@ document.addEventListener('DOMContentLoaded', function() {
             });
     });
 });
+
