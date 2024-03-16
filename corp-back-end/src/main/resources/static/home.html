@@ -361,7 +361,7 @@
 
             <div class="modal-footer">
               <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
-              <button type="submit" class="btn btn-primary">Salvar Alterações</button>
+              <button type="submit" class="btn btn-primary" id="salvarAlteracoes">Salvar Alterações</button>
             </div>
           </div>
         </div>
@@ -369,7 +369,7 @@
     </form>
   </div>
 
-  <div id="toast" class="toast align-items-center text-white bg-success border-0" role="alert" aria-live="assertive"
+  <div id="toastAtualizado" class="toast align-items-center text-white bg-success border-0" role="alert" aria-live="assertive"
     aria-atomic="true" style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);">
     <div class="d-flex">
       <div class="toast-body">
@@ -378,7 +378,7 @@
       <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
     </div>
   </div>
-  <div id="toastErro" class="toast align-items-center text-white bg-danger border-0" role="alert" aria-live="assertive"
+  <div id="toastErroAtualizar" class="toast align-items-center text-white bg-danger border-0" role="alert" aria-live="assertive"
     aria-atomic="true" style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);">
     <div class="d-flex">
       <div class="toast-body">

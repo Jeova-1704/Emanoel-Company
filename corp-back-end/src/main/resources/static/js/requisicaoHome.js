@@ -195,6 +195,13 @@ function buscarProdutoPeloId(id) {
 
 
 // editar produto
+function converterData(dataISO) {
+    const data = new Date(dataISO);
+    const dia = data.getDate().toString().padStart(2, '0');
+    const mes = (data.getMonth() + 1).toString().padStart(2, '0'); // getMonth() retorna mês de 0 a 11
+    const ano = data.getFullYear();
+    return `${dia}/${mes}/${ano}`;
+}
 function editarProduto(id) {
     console.log(id);
     const confirmacaoModal = new bootstrap.Modal(document.getElementById('editarProdutoModal'));
@@ -208,14 +215,64 @@ function editarProduto(id) {
             console.log(produto.nome)
             document.getElementById('produto_id').value = produto.id;
             document.getElementById('produto_nome').value = produto.nome;
-            document.getElementById('produto_codigo_produto').value = produto.codigo_produto;
-            document.getElementById('produto_data_entrada').value = produto.data_entrada;
+            document.getElementById('produto_codigo_produto').value = produto.codigoProduto;
+            document.getElementById('produto_data_entrada').value = converterData(produto.dataEntrada);
             document.getElementById('produto_quantidade').value = produto.quantidade;
             document.getElementById('produto_preco').value = produto.preco;
 
-            // Mostrar o modal
-
             confirmacaoModal.show();
+
         })
         .catch(error => console.error('Erro ao carregar dados do produto:', error));
 }
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    const formEditarProduto = document.getElementById('editarProdutoForm');
+
+    formEditarProduto.addEventListener('submit', function(event) {
+        event.preventDefault(); // Previne a submissão padrão do formulário
+
+        // Coleta os dados do formulário
+        const idProduto = document.getElementById('produto_id').value;
+        const nomeProduto = document.getElementById('produto_nome').value;
+        const codigoProduto = document.getElementById('produto_codigo_produto').value;
+        const dataEntrada = document.getElementById('produto_data_entrada').value;
+        const quantidade = document.getElementById('produto_quantidade').value;
+        const preco = document.getElementById('produto_preco').value;
+        const categoria = document.getElementById('produto_categoria').value;
+
+        const dadosProduto = {
+            id: idProduto,
+            nome: nomeProduto,
+            codigoProduto: codigoProduto,
+            dataEntrada: dataEntrada,
+            quantidade: parseInt(quantidade),
+            preco: parseFloat(preco),
+            categoria: categoria
+        };
+
+        // Envia a requisição PUT
+        fetch(`http://localhost:8080/produto/atualizar`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(dadosProduto)
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Falha na requisição');
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('Sucesso:', data);
+                const confirmacaoModal = bootstrap.Modal.getInstance(document.getElementById('editarProdutoModal'));
+                confirmacaoModal.hide();
+            })
+            .catch(error => {
+                console.error('Erro:', error);
+            });
+    });
+});
