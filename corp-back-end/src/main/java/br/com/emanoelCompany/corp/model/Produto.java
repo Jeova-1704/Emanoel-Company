@@ -20,7 +20,8 @@ public class Produto implements Serializable {
     @Column(nullable = false)
     private Double preco;
 
-    private String categoria;
+    @Enumerated(EnumType.STRING)
+    private CategoriasEnum categoria;
 
     @Column(nullable = false)
     private Integer quantidade;
@@ -31,14 +32,21 @@ public class Produto implements Serializable {
     @Column(name = "codigo_produto", nullable = false)
     private String codigoProduto;
 
-    public Produto(Long id, Double preco, String nome, String categoria, int quantidade, LocalDate dataEntrada, String codigoProduto) {
+    @Column(name = "valor_total", nullable = false)
+    private Double precoTotal;
+
+
+    public Produto(Long id, Double preco, String nome, CategoriasEnum categoria, int quantidade, LocalDate dataEntrada
+            , String codigoProduto, Double precoTotal) {
+
         this.id = id;
         this.preco = preco;
         this.nome = nome;
-        this.categoria = categoria;
+        this.categoria = CategoriasEnum.valueOf(categoria.toString());
         this.quantidade = quantidade;
         this.dataEntrada = dataEntrada;
         this.codigoProduto = codigoProduto;
+        this.precoTotal = precoTotal;
     }
 
     public Produto() {}
@@ -46,10 +54,11 @@ public class Produto implements Serializable {
     public Produto(ProdutoDTO data) {
         this.nome = data.nome();
         this.preco = data.preco();
-        this.categoria = data.categoria();
+        this.categoria = CategoriasEnum.valueOf(data.categoria());
         this.quantidade = data.quantidade();
         this.dataEntrada = LocalDate.parse(data.dataEntrada());
         this.codigoProduto = data.codigoProduto();
+        this.precoTotal = data.precoTotal();
     }
 
     public Long getId() {
@@ -76,11 +85,11 @@ public class Produto implements Serializable {
         this.nome = nome;
     }
 
-    public String getCategoria() {
+    public CategoriasEnum getCategoria() {
         return categoria;
     }
 
-    public void setCategoria(String categoria) {
+    public void setCategoria(CategoriasEnum categoria) {
         this.categoria = categoria;
     }
 
@@ -108,4 +117,19 @@ public class Produto implements Serializable {
         this.codigoProduto = codigoProduto;
     }
 
+    public void setQuantidade(Integer quantidade) {
+        this.quantidade = quantidade;
+    }
+
+    public Double getPrecoTotal() {
+        return precoTotal;
+    }
+
+    public void setPrecoTotal(Double precoTotal) {
+        this.precoTotal = precoTotal;
+    }
+    public Double valorTotal(int quantidade, Double preco){
+        this.precoTotal = quantidade * preco;
+        return precoTotal;
+    }
 }

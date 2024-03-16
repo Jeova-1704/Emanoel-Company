@@ -27,10 +27,11 @@ public class ProdutoService{
                 produto.getId(),
                 produto.getNome(),
                 produto.getPreco(),
-                produto.getCategoria(),
+                produto.getCategoria().toString(),
                 produto.getQuantidade(),
                 produto.getDataEntrada().toString(),
-                produto.getCodigoProduto()
+                produto.getCodigoProduto(),
+                produto.getPrecoTotal()
         );
     }
 
@@ -60,6 +61,7 @@ public class ProdutoService{
         }
 
         Produto prod = new Produto(produto);
+        prod.setPrecoTotal(prod.valorTotal(prod.getQuantidade(), prod.getPreco()));
         Produto produtoSalvo = produtoRepository.save(prod);
 
         return convertToDTO(produtoSalvo);
@@ -67,10 +69,9 @@ public class ProdutoService{
 
     public List<ProdutoDTO> listarProdutos() {
         List<Produto> produtoList = produtoRepository.findAll();
-        List<ProdutoDTO> produtoDTOList = produtoList.stream()
+        return produtoList.stream()
                 .map(this::convertToDTO)
                 .collect(Collectors.toList());
-        return produtoDTOList;
     }
 
     public ProdutoDTO buscarID(Long idProduto){
@@ -87,10 +88,21 @@ public class ProdutoService{
         if(produtoList.isEmpty()) {
             throw new ProdutoNaoEncontradoException();
         }else {
-            List<ProdutoDTO> produtoDTOList = produtoList.stream()
+            return produtoList.stream()
                     .map(this::convertToDTO)
                     .collect(Collectors.toList());
-            return produtoDTOList;
+        }
+    }
+
+    public List<ProdutoDTO> buscarCategoria(String categoria){
+        List<Produto> produtoList = produtoRepository.findProdutoByCategoria(categoria.trim().toUpperCase());
+
+        if (produtoList.isEmpty()) {
+            throw new ProdutoNaoEncontradoException();
+        } else {
+            return produtoList.stream()
+                    .map(this::convertToDTO)
+                    .collect(Collectors.toList());
         }
     }
 
@@ -113,11 +125,12 @@ public class ProdutoService{
         }
 
         Produto produto = produtoRepository.findById(produtoDTO.id())
-                .orElseThrow(() -> new ProdutoNaoEncontradoException("O ID fornecido não condiz com nenhum produto em nosso estoque!"));;
+                .orElseThrow(() -> new ProdutoNaoEncontradoException("O ID fornecido não condiz com nenhum produto em nosso estoque!"));
 
         produto.setPreco(produtoDTO.preco());
         produto.setQuantidade(produtoDTO.quantidade());
         produto.setDataEntrada(LocalDate.now());
+        produto.setPrecoTotal(produto.valorTotal(produtoDTO.quantidade(), produtoDTO.preco()));
         Produto produtoAtualizado = produtoRepository.save(produto);
 
 
