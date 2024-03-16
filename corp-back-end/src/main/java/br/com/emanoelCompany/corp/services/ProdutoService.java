@@ -32,7 +32,16 @@ public class ProdutoService{
         }
     }
     public List<Produto> buscarNome(String nome){
-        return produtoRepository.buscarNome(nome.trim().toUpperCase());
+
+        List<Produto> produtoList = produtoRepository.buscarNome(nome.trim().toUpperCase());
+
+        if(produtoList.isEmpty()){
+            throw new ProdutoNaoEncontrado();
+        }else{
+            return produtoList;
+        }
+
+
     }
 
     public boolean deletar(Long id){

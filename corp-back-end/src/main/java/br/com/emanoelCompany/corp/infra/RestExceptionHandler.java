@@ -14,8 +14,4 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
     private ResponseEntity<String> produtoNaoEncontradoHandler(ProdutoNaoEncontrado exception){
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Produto não encontrado !");
     }
-
-
-
-
 }
