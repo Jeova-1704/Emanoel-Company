@@ -44,13 +44,13 @@ public class ProdutoService{
             throw new ProdutoDTOValidationException("Categoria do produto não pode ser nula ou vazia");
         }
         if (produto.quantidade() == null) {
-            throw new ProdutoDTOValidationException("Preço do produto não pode ser nulo");
+            throw new ProdutoDTOValidationException("A quantidade do produto não pode ser nula");
         }
         if (produto.dataEntrada() == null || produto.dataEntrada().isEmpty() || produto.dataEntrada().isBlank()) {
-            throw new ProdutoDTOValidationException("Categoria do produto não pode ser nula ou vazia");
+            throw new ProdutoDTOValidationException("A data de entrada não pode ser nula");
         }
         if (produto.codigoProduto() == null || produto.codigoProduto().isEmpty() || produto.codigoProduto().isBlank()) {
-            throw new ProdutoDTOValidationException("Categoria do produto não pode ser nula ou vazia");
+            throw new ProdutoDTOValidationException("O codigo do produto não pode ser nulo ou vazio");
         }
         try {
             LocalDate data = LocalDate.parse(produto.dataEntrada());
