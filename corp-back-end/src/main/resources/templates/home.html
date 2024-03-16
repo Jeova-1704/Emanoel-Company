@@ -70,9 +70,9 @@
 
   <!-- Modal -->
   <div class="modal fade" id="produtoModal" tabindex="-1" aria-labelledby="produtoModalLabel" aria-hidden="true">
-    <form id="produtoForm"> <!-- Adicionando o formulário -->
+    <form id="produtoForm">
       <div class="modal-dialog">
-        <div class="modal-content">
+        <div class="modal-content bg-dark text-white">
           <div class="modal-header">
             <h5 class="modal-title" id="produtoModalLabel">Cadastrar Produto</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -80,50 +80,49 @@
           <div class="modal-body">
             <form>
               <div class="mb-3">
-                <div class="alert alert-secondary" role="alert">
-                  <h11>*</h11> Campos Obrigatórios
+                <div class="alert alert-secondary text-center" role="alert">
+                  <h5>Preencha todos os dados abaixo</h5>
+                </div>
+              </div>
+              <div class="mb-3 row">
+                <label for="nome" class="col-md-4 col-form-label">Nome do produto:</label>
+                <div class="col-md-8">
+                  <input type="text" class="form-control" id="nome" name="nome">
                 </div>
               </div>
 
               <div class="mb-3 row">
-                <label for="nome" class="col-md-4 col-form-label">Nome do produto:<h11>*</h11></label>
+                <label for="codigo_produto" class="col-md-4 col-form-label">Código do produto:</label>
                 <div class="col-md-8">
-                  <input type="text" class="form-control" id="nome" name="nome" required>
+                  <input type="text" class="form-control" id="codigo_produto" name="codigo_produto">
                 </div>
               </div>
 
               <div class="mb-3 row">
-                <label for="codigo_produto" class="col-md-4 col-form-label">Código do produto:<h11>*</h11></label>
+                <label for="data_entrada" class="col-md-4 col-form-label">Data de entrada:</label>
                 <div class="col-md-8">
-                  <input type="text" class="form-control" id="codigo_produto" name="codigo_produto" required>
+                  <input type="text" class="form-control" id="data_entrada" name="data_entrada">
                 </div>
               </div>
 
               <div class="mb-3 row">
-                <label for="data_entrada" class="col-md-4 col-form-label">Data de entrada:<h11>*</h11></label>
+                <label for="quantidade" class="col-md-4 col-form-label">Quantidade:</label>
                 <div class="col-md-8">
-                  <input type="text" class="form-control" id="data_entrada" name="data_entrada" required>
+                  <input type="number" class="form-control" id="quantidade" name="quantidade">
                 </div>
               </div>
 
               <div class="mb-3 row">
-                <label for="quantidade" class="col-md-4 col-form-label">Quantidade:<h11>*</h11></label>
+                <label for="preco" class="col-md-4 col-form-label">Preço(Unidade):</label>
                 <div class="col-md-8">
-                  <input type="number" class="form-control" id="quantidade" name="quantidade" required>
+                  <input type="number" class="form-control" id="preco" name="preco" step="any" pattern="[0-9]+([\.,][0-9]+)?" title="Use apenas números e um ponto ou vírgula como separador decimal">
                 </div>
               </div>
 
               <div class="mb-3 row">
-                <label for="preco" class="col-md-4 col-form-label">Preço:<h11>*</h11></label>
+                <label for="categoria" class="col-md-4 col-form-label">Categoria do produto:</label>
                 <div class="col-md-8">
-                    <input type="number" class="form-control" id="preco" name="preco" required step="any" pattern="[0-9]+([\.,][0-9]+)?" title="Use apenas números e um ponto ou vírgula como separador decimal">
-                </div>
-            </div>
-
-              <div class="mb-3 row">
-                <label for="categoria" class="col-md-4 col-form-label">Categoria do produto:<h11>*</h11></label>
-                <div class="col-md-8">
-                  <input type="text" class="form-control" id="categoria" name="categoria" required>
+                  <input type="text" class="form-control" id="categoria" name="categoria">
                 </div>
               </div>
 
@@ -134,8 +133,8 @@
             </form>
 
             <div id="toast" class="toast align-items-center text-white bg-success border-0" role="alert"
-              aria-live="assertive" aria-atomic="true"
-              style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+                 aria-live="assertive" aria-atomic="true"
+                 style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);">
               <div class="d-flex">
                 <div class="toast-body">
                   Produto cadastrado com sucesso!
@@ -144,8 +143,8 @@
               </div>
             </div>
             <div id="toastErro" class="toast align-items-center text-white bg-danger border-0" role="alert"
-              aria-live="assertive" aria-atomic="true"
-              style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+                 aria-live="assertive" aria-atomic="true"
+                 style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);">
               <div class="d-flex">
                 <div class="toast-body">
                   Erro ao cadastrar produto!
@@ -157,7 +156,7 @@
           </div>
         </div>
       </div>
-    </form> <!-- Fechando o formulário -->
+    </form>
   </div>
 
   <script src="vendor/purecounter/purecounter_vanilla.js"></script>
