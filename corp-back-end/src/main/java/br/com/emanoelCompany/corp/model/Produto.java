@@ -20,7 +20,8 @@ public class Produto implements Serializable {
     @Column(nullable = false)
     private Double preco;
 
-    private String categoria;
+    @Enumerated(EnumType.STRING)
+    private CategoriasEnum categoria;
 
     @Column(nullable = false)
     private Integer quantidade;
@@ -31,7 +32,7 @@ public class Produto implements Serializable {
     @Column(name = "codigo_produto", nullable = false)
     private String codigoProduto;
 
-    public Produto(Long id, Double preco, String nome, String categoria, int quantidade, LocalDate dataEntrada, String codigoProduto) {
+    public Produto(Long id, Double preco, String nome, CategoriasEnum categoria, int quantidade, LocalDate dataEntrada, String codigoProduto) {
         this.id = id;
         this.preco = preco;
         this.nome = nome;
@@ -46,7 +47,7 @@ public class Produto implements Serializable {
     public Produto(ProdutoDTO data) {
         this.nome = data.nome();
         this.preco = data.preco();
-        this.categoria = data.categoria();
+        this.categoria = CategoriasEnum.valueOf(data.categoria());
         this.quantidade = data.quantidade();
         this.dataEntrada = LocalDate.parse(data.dataEntrada());
         this.codigoProduto = data.codigoProduto();
@@ -76,11 +77,11 @@ public class Produto implements Serializable {
         this.nome = nome;
     }
 
-    public String getCategoria() {
+    public CategoriasEnum getCategoria() {
         return categoria;
     }
 
-    public void setCategoria(String categoria) {
+    public void setCategoria(CategoriasEnum categoria) {
         this.categoria = categoria;
     }
 
