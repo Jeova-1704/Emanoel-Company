@@ -110,10 +110,8 @@ public class ProdutoService{
         Produto produto = produtoRepository.findById(produtoDTO.id())
                 .orElseThrow(() -> new ProdutoNaoEncontradoException("O ID fornecido não condiz com nenhum produto em nosso estoque!"));;
 
-        produto.setNome(produtoDTO.nome());
         produto.setPreco(produtoDTO.preco());
         produto.setQuantidade(produtoDTO.quantidade());
-        produto.setCodigoProduto(produtoDTO.codigoProduto());
         produto.setDataEntrada(LocalDate.now());
         Produto produtoAtualizado = produtoRepository.save(produto);
 
