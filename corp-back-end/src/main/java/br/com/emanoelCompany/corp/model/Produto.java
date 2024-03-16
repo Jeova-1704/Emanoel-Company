@@ -32,7 +32,7 @@ public class Produto implements Serializable {
     @Column(name = "codigo_produto", nullable = false)
     private String codigoProduto;
 
-    @Column(name = "valor_total")
+    @Column(name = "valor_total", nullable = false)
     private Double precoTotal;
 
 
