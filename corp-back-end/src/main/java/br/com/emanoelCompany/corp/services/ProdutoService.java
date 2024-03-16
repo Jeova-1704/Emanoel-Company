@@ -54,11 +54,6 @@ public class ProdutoService{
         if (produto.codigoProduto() == null || produto.codigoProduto().isEmpty() || produto.codigoProduto().isBlank()) {
             throw new ProdutoDTOValidationException("O codigo do produto não pode ser nulo ou vazio");
         }
-        try {
-            LocalDate data = LocalDate.parse(produto.dataEntrada());
-        } catch (DateTimeParseException e) {
-            throw new ConversaoDataProdutoDTOExeption("Erro ao converter a data para localDate");
-        }
 
         Produto prod = new Produto(produto);
         prod.setPrecoTotal(prod.valorTotal(prod.getQuantidade(), prod.getPreco()));
