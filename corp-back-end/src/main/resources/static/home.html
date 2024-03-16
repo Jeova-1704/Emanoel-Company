@@ -285,40 +285,40 @@
             <div class="mb-3 row">
               <label for="nome" class="col-md-4 col-form-label">Id produto:</label>
               <div class="col-md-8">
-                <input type="text" class="form-control" id="produto_id" name="produto_id">
+                <input type="text" class="form-control" id="produto_id" name="produto_id" readonly>
               </div>
             </div>
             <div class="mb-3 row">
               <label for="nome" class="col-md-4 col-form-label">Nome do produto:</label>
               <div class="col-md-8">
-                <input type="text" class="form-control" id="nome" name="nome">
+                <input type="text" class="form-control" id="nomeedit" name="nome">
               </div>
             </div>
             <div class="mb-3 row">
               <label for="codigo_produto" class="col-md-4 col-form-label">cod. Produto:</label>
               <div class="col-md-8">
-                <input type="text" class="form-control" id="codigo_produto" name="codigo_produto">
+                <input type="text" class="form-control" id="codigo_produtoedit" name="codigo_produto">
               </div>
             </div>
 
             <div class="mb-3 row">
               <label for="data_entrada" class="col-md-4 col-form-label">Data de entrada:</label>
               <div class="col-md-8">
-                <input type="text" class="form-control" id="data_entrada" name="data_entrada">
+                <input type="text" class="form-control" id="data_entradaedit" name="data_entrada">
               </div>
             </div>
 
             <div class="mb-3 row">
               <label for="quantidade" class="col-md-4 col-form-label">Quantidade:</label>
               <div class="col-md-8">
-                <input type="number" class="form-control" id="quantidade" name="quantidade">
+                <input type="number" class="form-control" id="quantidadeedit" name="quantidade">
               </div>
             </div>
 
             <div class="mb-3 row">
               <label for="preco" class="col-md-4 col-form-label">Preço(Unidade):</label>
               <div class="col-md-8">
-                <input type="number" class="form-control" id="preco" name="preco" step="any"
+                <input type="number" class="form-control" id="precoedit" name="preco" step="any"
                   pattern="[0-9]+([\.,][0-9]+)?"
                   title="Use apenas números e um ponto ou vírgula como separador decimal">
               </div>
@@ -327,7 +327,7 @@
             <div class="mb-3 row">
               <label for="categoria" class="col-md-4 col-form-label">Categoria do produto:</label>
               <div class="col-md-8">
-                <select class="form-select" id="categoria" name="categoria">
+                <select class="form-select" id="categoriaedit" name="categoria">
                   <option selected>Escolha uma categoria...</option>
                   <option value="ELETRONICO">Eletrônico</option>
                   <option value="VESTUARIO">Vestuário</option>
@@ -369,7 +369,7 @@
     </form>
   </div>
 
-  <div id="toast" class="toast align-items-center text-white bg-success border-0" role="alert" aria-live="assertive"
+  <div id="toastEdit" class="toast align-items-center text-white bg-success border-0" role="alert" aria-live="assertive"
     aria-atomic="true" style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);">
     <div class="d-flex">
       <div class="toast-body">
@@ -378,7 +378,7 @@
       <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
     </div>
   </div>
-  <div id="toastErro" class="toast align-items-center text-white bg-danger border-0" role="alert" aria-live="assertive"
+  <div id="toastEditError" class="toast align-items-center text-white bg-danger border-0" role="alert" aria-live="assertive"
     aria-atomic="true" style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);">
     <div class="d-flex">
       <div class="toast-body">

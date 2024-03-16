@@ -169,32 +169,3 @@ function deletarProduto(id) {
     const confirmacaoModal = bootstrap.Modal.getInstance(document.getElementById('confirmacaoDelecaoModal'));
     confirmacaoModal.hide();
 }
-
-
-function buscarProdutoPeloId(id) {
-    const url = `http://localhost:8080/produto/buscarID/${id}`;
-    return fetch(url, {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    })
-        .then(response => {
-            console.log(response.nome)
-            return response.json();
-        })
-        .then(data => {
-            return data;
-        })
-        .catch(error => {
-            console.error('Erro na busca do produto:', error);
-            return undefined;
-        });
-}
-
-
-
-// editar produto
-function editarProduto(id) {
-    const confirmacaoModal = new bootstrap.Modal(document.getElementById('editarProdutoModal'));
-    confirmacaoModal.show();}
