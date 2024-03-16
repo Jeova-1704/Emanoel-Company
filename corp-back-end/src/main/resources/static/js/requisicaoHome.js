@@ -21,6 +21,7 @@ document.getElementById('produtoForm').addEventListener('submit', function (even
         categoria: categoria
     };
 
+
     fetch('http://localhost:8080/produto', {
         method: 'POST',
         headers: {
