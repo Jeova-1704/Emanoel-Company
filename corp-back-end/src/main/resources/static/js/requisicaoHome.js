@@ -207,11 +207,11 @@ function editarProduto(id) {
             console.log(produto);
             console.log(produto.nome)
             document.getElementById('produto_id').value = produto.id;
-            document.getElementsByClassName('nome').value = produto.nome;
-            document.getElementById('codigo_produto').innerText = produto.codigo_produto;
-            document.getElementsByName('data_entrada').value = produto.data_entrada;
-            document.getElementById('quantidade').value = produto.quantidade;
-            document.getElementsByClassName('preco').value = produto.preco;
+            document.getElementById('produto_nome').value = produto.nome;
+            document.getElementById('produto_codigo_produto').value = produto.codigo_produto;
+            document.getElementById('produto_data_entrada').value = produto.data_entrada;
+            document.getElementById('produto_quantidade').value = produto.quantidade;
+            document.getElementById('produto_preco').value = produto.preco;
 
             // Mostrar o modal
 
