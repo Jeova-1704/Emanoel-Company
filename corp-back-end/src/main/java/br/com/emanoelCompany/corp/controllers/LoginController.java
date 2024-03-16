@@ -14,6 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/login")
 public class LoginController {
 
+    String logado = "false";
+
+
     @Autowired
     private AdministratorService administratorService;
 
@@ -26,10 +29,11 @@ public class LoginController {
     public String login(String usuario, String senha, Model model) {
         if (usuario != null && !usuario.isEmpty() && senha != null && !senha.isEmpty()) {
             if (administratorService.administradorExiste(usuario, senha)) {
-                    return "redirect:home";
+                    model.addAttribute("true", logado);
+                    return "home";
             } else {
                 model.addAttribute("error", "Usuário ou senha inválidos");
-                return "home";
+                return "login";
             }
         } else {
             model.addAttribute("error", "Por favor, preencha todos os campos");
