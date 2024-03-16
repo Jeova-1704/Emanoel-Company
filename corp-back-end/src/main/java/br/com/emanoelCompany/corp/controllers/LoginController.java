@@ -26,7 +26,7 @@ public class LoginController {
     public String login(String usuario, String senha, Model model) {
         if (usuario != null && !usuario.isEmpty() && senha != null && !senha.isEmpty()) {
             if (administratorService.administradorExiste(usuario, senha)) {
-                    return "redirect:/home";
+                    return "redirect:home";
             } else {
                 model.addAttribute("error", "Usuário ou senha inválidos");
                 return "home";
