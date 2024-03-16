@@ -102,5 +102,23 @@ public class ProdutoService{
             throw new ProdutoNaoEncontradoException();
         }
     }
+    public ProdutoDTO atualizar(ProdutoDTO produtoDTO) {
+        if (produtoDTO.id() == null) {
+            throw new ProdutoDTOValidationException("Informe o ID do produto para atualizar!");
+        }
+
+        Produto produto = produtoRepository.findById(produtoDTO.id())
+                .orElseThrow(() -> new ProdutoNaoEncontradoException("O ID fornecido não condiz com nenhum produto em nosso estoque!"));;
+
+        produto.setNome(produtoDTO.nome());
+        produto.setPreco(produtoDTO.preco());
+        produto.setQuantidade(produtoDTO.quantidade());
+        produto.setCodigoProduto(produtoDTO.codigoProduto());
+        produto.setDataEntrada(LocalDate.now());
+        Produto produtoAtualizado = produtoRepository.save(produto);
+
+
+        return  convertToDTO(produtoAtualizado);
+    }
 
 }

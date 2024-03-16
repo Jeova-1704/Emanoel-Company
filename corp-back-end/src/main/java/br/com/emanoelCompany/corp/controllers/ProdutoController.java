@@ -17,34 +17,40 @@ public class ProdutoController {
     @Autowired
     private ProdutoService produtoService;
 
-    @PostMapping
+    @PostMapping("/cadastrar")
     public ResponseEntity<ProdutoDTO> cadastrar(@RequestBody ProdutoDTO produto){
         ProdutoDTO produtoSalvo = produtoService.salvar(produto);
         return new ResponseEntity<>(produtoSalvo, HttpStatus.CREATED);
     }
 
-    @GetMapping
+    @GetMapping("/listar")
     public ResponseEntity<List<ProdutoDTO>> listarProdutos(){
         List<ProdutoDTO> produtoList = produtoService.listarProdutos();
         return ResponseEntity.ok(produtoList);
 
     }
-    @GetMapping("/id/{id}")
+    @GetMapping("/buscarID/{id}")
     public ResponseEntity<ProdutoDTO> buscarID(@PathVariable Long id){
         ProdutoDTO produto = produtoService.buscarID(id);
         return ResponseEntity.ok(produto);
     }
-    @GetMapping("/nome/{nome}")
+    @GetMapping("/filtrar/{nome}")
     public ResponseEntity<List<ProdutoDTO>> filtrarNome(@PathVariable String nome){
         List<ProdutoDTO> listaNomes = produtoService.buscarNome(nome);
         return ResponseEntity.ok(listaNomes);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/deletar/{id}")
     public ResponseEntity<String> deletarID(@PathVariable Long id){
 
         produtoService.deletar(id);
         return ResponseEntity.ok("Produto deletado!");
+
+    }
+    @PostMapping("/atualizar")
+    public ResponseEntity<ProdutoDTO> atualizar(@RequestBody ProdutoDTO produto){
+        ProdutoDTO produtoAtualziado =produtoService.atualizar(produto);
+        return ResponseEntity.ok(produtoAtualziado);
 
     }
 }
