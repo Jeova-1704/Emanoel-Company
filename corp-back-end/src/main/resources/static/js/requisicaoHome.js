@@ -1,3 +1,4 @@
+// requisição cadastar produtos
 document.getElementById('produtoForm').addEventListener('submit', function (event) {
 
     event.preventDefault();
@@ -22,7 +23,7 @@ document.getElementById('produtoForm').addEventListener('submit', function (even
     };
 
 
-    fetch('http://localhost:8080/produto', {
+    fetch('http://localhost:8080/produto/cadastrar', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -66,3 +67,100 @@ document.getElementById('produtoForm').addEventListener('submit', function (even
             console.error('Erro:', error);
         });
 });
+
+
+document.addEventListener('DOMContentLoaded', function (event) {
+    document.querySelector('#listarProdutosModal').addEventListener('show.bs.modal', function (event) {
+        carregarProdutos();
+    });
+});
+
+function carregarProdutos() {
+    const tabelaCorpo = document.querySelector("#listarProdutosModal tbody");
+    tabelaCorpo.innerHTML = '';
+
+    fetch('http://localhost:8080/produto/listar')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            data.forEach((produto, index) => {
+                const linha = tabelaCorpo.insertRow();
+                const celulaId = linha.insertCell(0);
+                const celulaNome = linha.insertCell(1);
+                const celulaCodigo = linha.insertCell(2);
+                const celulaDataEntrada = linha.insertCell(3);
+                const celulaQuantidade = linha.insertCell(4);
+                const celulaPreco = linha.insertCell(5);
+                const celulaCategoria = linha.insertCell(6);
+                const celulaDeletar = linha.insertCell(7);
+                const celulaEditar = linha.insertCell(8);
+
+                celulaId.textContent = produto.id;
+                celulaNome.textContent = produto.nome;
+                celulaCodigo.textContent = produto.codigoProduto;
+                celulaDataEntrada.textContent = produto.dataEntrada;
+                celulaQuantidade.textContent = produto.quantidade;
+                celulaPreco.textContent = produto.preco.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+                celulaCategoria.textContent = produto.categoria;
+
+                // Botão Deletar
+                const btnDeletar = document.createElement('button');
+                btnDeletar.classList.add('btn', 'btn-danger');
+                btnDeletar.textContent = 'Deletar';
+                btnDeletar.onclick = function () { abrirModalDeDelecao(produto.id); };
+                celulaDeletar.appendChild(btnDeletar);
+
+                // Botão Editar
+                const btnEditar = document.createElement('button');
+                btnEditar.classList.add('btn', 'btn-primary');
+                btnEditar.textContent = 'Editar';
+                btnEditar.onclick = function () { editarProduto(produto.id); };
+                celulaEditar.appendChild(btnEditar);
+            });
+        })
+        .catch(error => console.error('Erro ao buscar produtos:', error));
+}
+
+function abrirModalDeDelecao(id) {
+    const confirmacaoModal = new bootstrap.Modal(document.getElementById('confirmacaoDelecaoModal'));
+    confirmacaoModal.show();
+
+    const btnConfirmar = document.getElementById('confirmarDelecao');
+    btnConfirmar.onclick = null;
+    btnConfirmar.addEventListener('click', function () {
+        deletarProduto(id);
+    });
+}
+
+function deletarProduto(id) {
+    const url = `http://localhost:8080/produto/deletar/${id}`;
+
+    fetch(url, {
+        method: 'DELETE',
+    }).then(data => {
+        console.log('Produto deletado:', data);
+        const toastElement = document.getElementById('toastDeletadoSucesso');
+        const toast = new bootstrap.Toast(toastElement);
+        toast.show();
+        setTimeout(() => {
+            toast.hide();
+        }, 2000);
+        carregarProdutos();
+    }).catch(error => {
+        console.error('Erro ao deletar produto:', error);
+        const toastElement = document.getElementById('toastErroDeletar');
+        const toast = new bootstrap.Toast(toastElement);
+        toast.show();
+
+        setTimeout(() => {
+            toast.hide();
+        }, 2000);
+    });
+
+    const confirmacaoModal = bootstrap.Modal.getInstance(document.getElementById('confirmacaoDelecaoModal'));
+    confirmacaoModal.hide();
+}
