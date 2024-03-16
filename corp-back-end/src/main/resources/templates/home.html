@@ -13,8 +13,8 @@
   <link href="images/logo.png" rel="apple-touch-icon">
 
   <link
-    href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
-    rel="stylesheet">
+          href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+          rel="stylesheet">
 
   <link href="vendor/aos/aos.css" rel="stylesheet">
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -29,305 +29,103 @@
 
 <body>
 
-  <header id="header" class="fixed-top">
-    <div class="container d-flex align-items-center justify-content-lg-between">
-      <h1 class="logo me-auto me-lg-0"><a href="emanoelcompany">Emanoel Company<span>.</span></a></h1>
-      <a href="login" class="get-started-btn scrollto">Sair do sistema</a>
-    </div>
-  </header>
-
-  <section id="hero" class="d-flex align-items-center justify-content-center">
-    <div class="container" data-aos="fade-up">
-      <div class="row justify-content-center" data-aos="fade-up" data-aos-delay="150">
-        <div class="col-xl-6 col-lg-8">
-          <h1>O melhor sistema de controle de estoque<span>.</span></h1>
-          <h2>Controle tudo de bom em sua vida</h2>
-        </div>
-      </div>
-      <div class="row gy-4 mt-5 justify-content-center" data-aos="zoom-in" data-aos-delay="250">
-        <div class="col-xl-2 col-md-4">
-          <div class="icon-box">
-            <i class="ri-store-line"></i>
-            <h3><a href="#" data-bs-toggle="modal" data-bs-target="#produtoModal">Cadastrar produto</a></h3>
-          </div>
-        </div>
-        <div class="col-xl-2 col-md-4">
-          <div class="icon-box">
-            <i class="ri-bar-chart-box-line"></i>
-            <h3><a href="#" data-bs-toggle="modal" data-bs-target="#listarProdutosModal">Listar produtos no estoque</a>
-            </h3>
-          </div>
-        </div>
-        <div class="col-xl-2 col-md-4">
-          <div class="icon-box">
-            <i class="ri-calendar-todo-line"></i>
-            <h3><a href="">Vender produtos</a></h3>
-          </div>
-        </div>
-      </div>
-    </div>
-    </div>
-  </section>
-
-  <!-- Modal cadastro produto-->
-  <div class="modal fade" id="produtoModal" tabindex="-1" aria-labelledby="produtoModalLabel" aria-hidden="true">
-    <form id="produtoForm">
-      <div class="modal-dialog">
-        <div class="modal-content bg-dark text-white">
-          <div class="modal-header">
-            <h5 class="modal-title" id="produtoModalLabel">Cadastrar Produto</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            <form>
-              <div class="mb-3">
-                <div class="alert alert-secondary text-center" role="alert">
-                  <h5>Preencha todos os dados abaixo</h5>
-                </div>
-              </div>
-              <div class="mb-3 row">
-                <label for="nome" class="col-md-4 col-form-label">Nome do produto:</label>
-                <div class="col-md-8">
-                  <input type="text" class="form-control" id="nome" name="nome">
-                </div>
-              </div>
-
-              <div class="mb-3 row">
-                <label for="codigo_produto" class="col-md-4 col-form-label">cod. Produto:</label>
-                <div class="col-md-8">
-                  <input type="text" class="form-control" id="codigo_produto" name="codigo_produto">
-                </div>
-              </div>
-
-              <div class="mb-3 row">
-                <label for="data_entrada" class="col-md-4 col-form-label">Data de entrada:</label>
-                <div class="col-md-8">
-                  <input type="text" class="form-control" id="data_entrada" name="data_entrada">
-                </div>
-              </div>
-
-              <div class="mb-3 row">
-                <label for="quantidade" class="col-md-4 col-form-label">Quantidade:</label>
-                <div class="col-md-8">
-                  <input type="number" class="form-control" id="quantidade" name="quantidade">
-                </div>
-              </div>
-
-              <div class="mb-3 row">
-                <label for="preco" class="col-md-4 col-form-label">Preço(Unidade):</label>
-                <div class="col-md-8">
-                  <input type="number" class="form-control" id="preco" name="preco" step="any"
-                    pattern="[0-9]+([\.,][0-9]+)?"
-                    title="Use apenas números e um ponto ou vírgula como separador decimal">
-                </div>
-              </div>
-
-              <div class="mb-3 row">
-                <label for="categoria" class="col-md-4 col-form-label">Categoria do produto:</label>
-                <div class="col-md-8">
-                  <select class="form-select" id="categoria" name="categoria">
-                    <option selected>Escolha uma categoria...</option>
-                    <option value="ELETRONICO">Eletrônico</option>
-                    <option value="VESTUARIO">Vestuário</option>
-                    <option value="ALIMENTICIO">Alimentício</option>
-                    <option value="HIGIENE">Higiene</option>
-                    <option value="BEBIDAS">Bebidas</option>
-                    <option value="COSMETICOS">Cosméticos</option>
-                    <option value="MOVEIS">Móveis</option>
-                    <option value="BRINQUEDOS">Brinquedos</option>
-                    <option value="LIVROS">Livros</option>
-                    <option value="FERRAMENTAS">Ferramentas</option>
-                    <option value="AUTOMOTIVO">Automotivo</option>
-                    <option value="JOIAS">Joias</option>
-                    <option value="PETSHOP">Petshop</option>
-                    <option value="ESPORTES">Esportes</option>
-                    <option value="ARTIGOS_DE_PAPELARIA">Artigos de Papelaria</option>
-                    <option value="ELETRODOMESTICOS">Eletrodomésticos</option>
-                    <option value="DECORACAO">Decoração</option>
-                    <option value="INFORMATICA">Informática</option>
-                    <option value="FOTOGRAFIA">Fotografia</option>
-                    <option value="FERRAGENS">Ferragens</option>
-                    <option value="SAUDE_E_FITNESS">Saúde e Fitness</option>
-                    <option value="INSTRUMENTOS_MUSICAI">Instrumentos Musicais</option>
-                    <option value="VIAGENS_E_TURISMO">Viagens e Turismo</option>
-                    <option value="ELETROPORTATEIS">Eletroportáteis</option>
-                    <option value="UTILIDADES_DOMESTICAS">Utilidades Domésticas</option>
-                    <option value="OUTROS">Outros</option>
-                  </select>
-                </div>
-              </div>
-
-              <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
-                <button type="submit" class="btn btn-success">Cadastrar</button>
-              </div>
-            </form>
-
-            <div id="toast" class="toast align-items-center text-white bg-success border-0" role="alert"
-              aria-live="assertive" aria-atomic="true"
-              style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);">
-              <div class="d-flex">
-                <div class="toast-body">
-                  Produto cadastrado com sucesso!
-                </div>
-                <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
-              </div>
-            </div>
-            <div id="toastErro" class="toast align-items-center text-white bg-danger border-0" role="alert"
-              aria-live="assertive" aria-atomic="true"
-              style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);">
-              <div class="d-flex">
-                <div class="toast-body">
-                  Erro ao cadastrar produto!
-                </div>
-                <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </form>
+<header id="header" class="fixed-top">
+  <div class="container d-flex align-items-center justify-content-lg-between">
+    <h1 class="logo me-auto me-lg-0"><a href="emanoelcompany">Emanoel Company<span>.</span></a></h1>
+    <a href="login" class="get-started-btn scrollto">Sair do sistema</a>
   </div>
+</header>
 
-  <!-- Modal de Listagem de Produtos -->
-  <div class="modal fade" id="listarProdutosModal" tabindex="-1" aria-labelledby="listarProdutosModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog modal-xl"> <!-- Modal grande -->
+<section id="hero" class="d-flex align-items-center justify-content-center">
+  <div class="container" data-aos="fade-up">
+    <div class="row justify-content-center" data-aos="fade-up" data-aos-delay="150">
+      <div class="col-xl-6 col-lg-8">
+        <h1>O melhor sistema de controle de estoque<span>.</span></h1>
+        <h2>Controle tudo de bom em sua vida</h2>
+      </div>
+    </div>
+    <div class="row gy-4 mt-5 justify-content-center" data-aos="zoom-in" data-aos-delay="250">
+      <div class="col-xl-2 col-md-4">
+        <div class="icon-box">
+          <i class="ri-store-line"></i>
+          <h3><a href="#" data-bs-toggle="modal" data-bs-target="#produtoModal">Cadastrar produto</a></h3>
+        </div>
+      </div>
+      <div class="col-xl-2 col-md-4">
+        <div class="icon-box">
+          <i class="ri-bar-chart-box-line"></i>
+          <h3><a href="#" data-bs-toggle="modal" data-bs-target="#listarProdutosModal">Listar produtos no estoque</a>
+          </h3>
+        </div>
+      </div>
+      <div class="col-xl-2 col-md-4">
+        <div class="icon-box">
+          <i class="ri-calendar-todo-line"></i>
+          <h3><a href="">Vender produtos</a></h3>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+</section>
+
+<!-- Modal cadastro produto-->
+<div class="modal fade" id="produtoModal" tabindex="-1" aria-labelledby="produtoModalLabel" aria-hidden="true">
+  <form id="produtoForm">
+    <div class="modal-dialog">
       <div class="modal-content bg-dark text-white">
         <div class="modal-header">
-          <h5 class="modal-title" id="listarProdutosModalLabel">Produtos no Estoque</h5>
-          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <table class="table table-striped table-dark">
-            <thead>
-              <tr>
-                <th scope="col">#ID</th>
-                <th scope="col">Nome</th>
-                <th scope="col">Código</th>
-                <th scope="col">Data de Entrada</th>
-                <th scope="col">Quantidade</th>
-                <th scope="col">Preço</th>
-                <th scope="col">Valor toral</th>
-                <th scope="col">Categoria</th>
-                <th scope="col">Deletar</th>
-                <th scope="col">Editar</th>
-              </tr>
-            </thead>
-            <tbody></tbody>
-          </table>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fechar</button>
-        </div>
-
-        <div id="toastDeletadoSucesso" class="toast align-items-center text-white bg-success border-0" role="alert"
-          aria-live="assertive" aria-atomic="true"
-          style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);">
-          <div class="d-flex">
-            <div class="toast-body">
-              Produto deletado com sucesso!
-            </div>
-            <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
-          </div>
-        </div>
-        <div id="toastErroDeletar" class="toast align-items-center text-white bg-danger border-0" role="alert"
-          aria-live="assertive" aria-atomic="true"
-          style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);">
-          <div class="d-flex">
-            <div class="toast-body">
-              Erro ao deletar produto!
-            </div>
-            <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Modal de Confirmação de Deleção -->
-  <div class="modal fade" id="confirmacaoDelecaoModal" tabindex="-1" aria-labelledby="confirmacaoDelecaoModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="confirmacaoDelecaoModalLabel">Confirmar Deleção</h5>
+          <h5 class="modal-title" id="produtoModalLabel">Cadastrar Produto</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          Tem certeza que deseja deletar este produto?
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-          <button type="button" class="btn btn-danger" id="confirmarDelecao">Deletar</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-
-  <!-- Modal edição produto-->
-  <div class="modal fade" id="editarProdutoModal" tabindex="-1" aria-labelledby="editarProdutoModalLabel"
-    aria-hidden="true">
-    <form id="editarProdutoForm">
-      <div class="modal-dialog">
-        <div class="modal-content bg-dark text-white">
-          <div class="modal-header">
-            <h5 class="modal-title" id="editarProdutoModalLabel">Editar Produto</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
+          <form>
             <div class="mb-3">
               <div class="alert alert-secondary text-center" role="alert">
-                <h5>Atualize os dados necessários</h5>
-              </div>
-            </div>
-            <div class="mb-3 row">
-              <label for="nome" class="col-md-4 col-form-label">Id produto:</label>
-              <div class="col-md-8">
-                <input type="text" class="form-control" id="produto_id" name="produto_id">
+                <h5>Preencha todos os dados abaixo</h5>
               </div>
             </div>
             <div class="mb-3 row">
               <label for="nome" class="col-md-4 col-form-label">Nome do produto:</label>
               <div class="col-md-8">
-                <input type="text" class="form-control" id="produto_nome" name="nome" disabled>
+                <input type="text" class="form-control" id="nome" name="nome">
               </div>
             </div>
+
             <div class="mb-3 row">
               <label for="codigo_produto" class="col-md-4 col-form-label">cod. Produto:</label>
               <div class="col-md-8">
-                <input type="text" class="form-control" id="produto_codigo_produto" name="codigo_produto" disabled>
+                <input type="text" class="form-control" id="codigo_produto" name="codigo_produto">
               </div>
             </div>
 
             <div class="mb-3 row">
               <label for="data_entrada" class="col-md-4 col-form-label">Data de entrada:</label>
               <div class="col-md-8">
-                <input type="text" class="form-control" id="produto_data_entrada" name="data_entrada">
+                <input type="text" class="form-control" id="data_entrada" name="data_entrada">
               </div>
             </div>
 
             <div class="mb-3 row">
               <label for="quantidade" class="col-md-4 col-form-label">Quantidade:</label>
               <div class="col-md-8">
-                <input type="number" class="form-control" id="produto_quantidade" name="quantidade">
+                <input type="number" class="form-control" id="quantidade" name="quantidade">
               </div>
             </div>
 
             <div class="mb-3 row">
               <label for="preco" class="col-md-4 col-form-label">Preço(Unidade):</label>
               <div class="col-md-8">
-                <input type="number" class="form-control" id="produto_preco" name="preco" step="any"
-                  pattern="[0-9]+([\.,][0-9]+)?"
-                  title="Use apenas números e um ponto ou vírgula como separador decimal">
+                <input type="number" class="form-control" id="preco" name="preco" step="any"
+                       pattern="[0-9]+([\.,][0-9]+)?"
+                       title="Use apenas números e um ponto ou vírgula como separador decimal">
               </div>
             </div>
 
             <div class="mb-3 row">
               <label for="categoria" class="col-md-4 col-form-label">Categoria do produto:</label>
               <div class="col-md-8">
-                <select class="form-select" id="produto_categoria" name="categoria">
+                <select class="form-select" id="categoria" name="categoria">
                   <option selected>Escolha uma categoria...</option>
                   <option value="ELETRONICO">Eletrônico</option>
                   <option value="VESTUARIO">Vestuário</option>
@@ -361,47 +159,249 @@
 
             <div class="modal-footer">
               <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
-              <button type="submit" class="btn btn-primary">Salvar Alterações</button>
+              <button type="submit" class="btn btn-success">Cadastrar</button>
+            </div>
+          </form>
+
+          <div id="toast" class="toast align-items-center text-white bg-success border-0" role="alert"
+               aria-live="assertive" aria-atomic="true"
+               style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+            <div class="d-flex">
+              <div class="toast-body">
+                Produto cadastrado com sucesso!
+              </div>
+              <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+          </div>
+          <div id="toastErro" class="toast align-items-center text-white bg-danger border-0" role="alert"
+               aria-live="assertive" aria-atomic="true"
+               style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+            <div class="d-flex">
+              <div class="toast-body">
+                Erro ao cadastrar produto!
+              </div>
+              <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
             </div>
           </div>
         </div>
       </div>
-    </form>
-  </div>
+    </div>
+  </form>
+</div>
 
-  <div id="toast" class="toast align-items-center text-white bg-success border-0" role="alert" aria-live="assertive"
-    aria-atomic="true" style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);">
-    <div class="d-flex">
-      <div class="toast-body">
-        Produto editado com sucesso!
+<!-- Modal de Listagem de Produtos -->
+<div class="modal fade" id="listarProdutosModal" tabindex="-1" aria-labelledby="listarProdutosModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-xl"> <!-- Modal grande -->
+    <div class="modal-content bg-dark text-white">
+      <div class="modal-header">
+        <h5 class="modal-title" id="listarProdutosModalLabel">Produtos no Estoque</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+      <div class="modal-body">
+        <table class="table table-striped table-dark">
+          <thead>
+          <tr>
+            <th scope="col">#ID</th>
+            <th scope="col">Nome</th>
+            <th scope="col">Código</th>
+            <th scope="col">Data de Entrada</th>
+            <th scope="col">Quantidade</th>
+            <th scope="col">Preço</th>
+            <th scope="col">Valor toral</th>
+            <th scope="col">Categoria</th>
+            <th scope="col">Deletar</th>
+            <th scope="col">Editar</th>
+          </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fechar</button>
+      </div>
+
+      <div id="toastDeletadoSucesso" class="toast align-items-center text-white bg-success border-0" role="alert"
+           aria-live="assertive" aria-atomic="true"
+           style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+        <div class="d-flex">
+          <div class="toast-body">
+            Produto deletado com sucesso!
+          </div>
+          <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+      </div>
+      <div id="toastErroDeletar" class="toast align-items-center text-white bg-danger border-0" role="alert"
+           aria-live="assertive" aria-atomic="true"
+           style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+        <div class="d-flex">
+          <div class="toast-body">
+            Erro ao deletar produto!
+          </div>
+          <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+      </div>
     </div>
   </div>
-  <div id="toastErro" class="toast align-items-center text-white bg-danger border-0" role="alert" aria-live="assertive"
-    aria-atomic="true" style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);">
-    <div class="d-flex">
-      <div class="toast-body">
-        Erro ao editar produto!
+</div>
+
+<!-- Modal de Confirmação de Deleção -->
+<div class="modal fade" id="confirmacaoDelecaoModal" tabindex="-1" aria-labelledby="confirmacaoDelecaoModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="confirmacaoDelecaoModalLabel">Confirmar Deleção</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+      <div class="modal-body">
+        Tem certeza que deseja deletar este produto?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-danger" id="confirmarDelecao">Deletar</button>
+      </div>
     </div>
   </div>
+</div>
+
+
+<!-- Modal edição produto-->
+<div class="modal fade" id="editarProdutoModal" tabindex="-1" aria-labelledby="editarProdutoModalLabel"
+     aria-hidden="true">
+  <form id="editarProdutoForm">
+    <div class="modal-dialog">
+      <div class="modal-content bg-dark text-white">
+        <div class="modal-header">
+          <h5 class="modal-title" id="editarProdutoModalLabel">Editar Produto</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="mb-3">
+            <div class="alert alert-secondary text-center" role="alert">
+              <h5>Atualize os dados necessários</h5>
+            </div>
+          </div>
+          <div class="mb-3 row">
+            <label for="nome" class="col-md-4 col-form-label">Id produto:</label>
+            <div class="col-md-8">
+              <input type="text" class="form-control" id="produto_id" name="produto_id">
+            </div>
+          </div>
+          <div class="mb-3 row">
+            <label for="nome" class="col-md-4 col-form-label">Nome do produto:</label>
+            <div class="col-md-8">
+              <input type="text" class="form-control" id="nome" name="nome" disabled>
+            </div>
+          </div>
+          <div class="mb-3 row">
+            <label for="codigo_produto" class="col-md-4 col-form-label">cod. Produto:</label>
+            <div class="col-md-8">
+              <input type="text" class="form-control" id="codigo_produto" name="codigo_produto" disabled>
+            </div>
+          </div>
+
+          <div class="mb-3 row">
+            <label for="data_entrada" class="col-md-4 col-form-label">Data de entrada:</label>
+            <div class="col-md-8">
+              <input type="text" class="form-control" id="data_entrada" name="data_entrada">
+            </div>
+          </div>
+
+          <div class="mb-3 row">
+            <label for="quantidade" class="col-md-4 col-form-label">Quantidade:</label>
+            <div class="col-md-8">
+              <input type="number" class="form-control" id="quantidade" name="quantidade">
+            </div>
+          </div>
+
+          <div class="mb-3 row">
+            <label for="preco" class="col-md-4 col-form-label">Preço(Unidadee):</label>
+            <div class="col-md-8">
+              <input type="number" class="form-control" id="preco" name="preco" step="any"
+                     pattern="[0-9]+([\.,][0-9]+)?"
+                     title="Use apenas números e um ponto ou vírgula como separador decimal">
+            </div>
+          </div>
+
+          <div class="mb-3 row">
+            <label for="categoria" class="col-md-4 col-form-label">Categoria do produto:</label>
+            <div class="col-md-8">
+              <select class="form-select" id="categoria" name="categoria">
+                <option selected>Escolha uma categoria...</option>
+                <option value="ELETRONICO">Eletrônico</option>
+                <option value="VESTUARIO">Vestuário</option>
+                <option value="ALIMENTICIO">Alimentício</option>
+                <option value="HIGIENE">Higiene</option>
+                <option value="BEBIDAS">Bebidas</option>
+                <option value="COSMETICOS">Cosméticos</option>
+                <option value="MOVEIS">Móveis</option>
+                <option value="BRINQUEDOS">Brinquedos</option>
+                <option value="LIVROS">Livros</option>
+                <option value="FERRAMENTAS">Ferramentas</option>
+                <option value="AUTOMOTIVO">Automotivo</option>
+                <option value="JOIAS">Joias</option>
+                <option value="PETSHOP">Petshop</option>
+                <option value="ESPORTES">Esportes</option>
+                <option value="ARTIGOS_DE_PAPELARIA">Artigos de Papelaria</option>
+                <option value="ELETRODOMESTICOS">Eletrodomésticos</option>
+                <option value="DECORACAO">Decoração</option>
+                <option value="INFORMATICA">Informática</option>
+                <option value="FOTOGRAFIA">Fotografia</option>
+                <option value="FERRAGENS">Ferragens</option>
+                <option value="SAUDE_E_FITNESS">Saúde e Fitness</option>
+                <option value="INSTRUMENTOS_MUSICAI">Instrumentos Musicais</option>
+                <option value="VIAGENS_E_TURISMO">Viagens e Turismo</option>
+                <option value="ELETROPORTATEIS">Eletroportáteis</option>
+                <option value="UTILIDADES_DOMESTICAS">Utilidades Domésticas</option>
+                <option value="OUTROS">Outros</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+            <button type="submit" class="btn btn-primary" id="salvarAlteracoes">Salvar Alterações</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+
+<div id="toastAtualizado" class="toast align-items-center text-white bg-success border-0" role="alert" aria-live="assertive"
+     aria-atomic="true" style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+  <div class="d-flex">
+    <div class="toast-body">
+      Produto editado com sucesso!
+    </div>
+    <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+  </div>
+</div>
+<div id="toastErroAtualizar" class="toast align-items-center text-white bg-danger border-0" role="alert" aria-live="assertive"
+     aria-atomic="true" style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+  <div class="d-flex">
+    <div class="toast-body">
+      Erro ao editar produto!
+    </div>
+    <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+  </div>
+</div>
 
 
 
 
 
-  <script src="vendor/purecounter/purecounter_vanilla.js"></script>
-  <script src="vendor/aos/aos.js"></script>
-  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="vendor/glightbox/js/glightbox.min.js"></script>
-  <script src="vendor/isotope-layout/isotope.pkgd.min.js"></script>
-  <script src="vendor/swiper/swiper-bundle.min.js"></script>
-  <script src="vendor/php-email-form/validate.js"></script>
+<script src="vendor/purecounter/purecounter_vanilla.js"></script>
+<script src="vendor/aos/aos.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="vendor/glightbox/js/glightbox.min.js"></script>
+<script src="vendor/isotope-layout/isotope.pkgd.min.js"></script>
+<script src="vendor/swiper/swiper-bundle.min.js"></script>
+<script src="vendor/php-email-form/validate.js"></script>
 
-  <script src="js/main.js"></script>
-  <script src="js/requisicaoHome.js"></script>
+<script src="js/main.js"></script>
+<script src="js/requisicaoHome.js"></script>
 
 </body>
 
