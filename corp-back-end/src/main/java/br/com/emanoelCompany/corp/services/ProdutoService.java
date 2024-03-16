@@ -1,13 +1,19 @@
 package br.com.emanoelCompany.corp.services;
 
-import br.com.emanoelCompany.corp.exceptions.ProdutoNaoEncontrado;
+import br.com.emanoelCompany.corp.DTO.ProdutoDTO;
+import br.com.emanoelCompany.corp.exceptions.ConversaoDataProdutoDTOExeption;
+import br.com.emanoelCompany.corp.exceptions.ProdutoDTOValidationException;
+import br.com.emanoelCompany.corp.exceptions.ProdutoNaoEncontradoException;
 import br.com.emanoelCompany.corp.model.Produto;
 import br.com.emanoelCompany.corp.repository.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class ProdutoService{
@@ -15,46 +21,86 @@ public class ProdutoService{
     @Autowired
     private ProdutoRepository produtoRepository;
 
-    public Produto salvar(Produto produto) {
-        return produtoRepository.save(produto);
+    private ProdutoDTO convertToDTO(Produto produto) {
+        return new ProdutoDTO(
+                produto.getId(),
+                produto.getNome(),
+                produto.getPreco(),
+                produto.getCategoria(),
+                produto.getQuantidade(),
+                produto.getDataEntrada().toString(),
+                produto.getCodigoProduto()
+        );
     }
 
-    public List<Produto> listarProdutos() {
-        return produtoRepository.findAll();
+    public ProdutoDTO salvar(ProdutoDTO produto) {
+        if (produto.nome() == null || produto.nome().isEmpty() || produto.nome().isBlank()) {
+            throw new ProdutoDTOValidationException("Nome do produto não pode ser nulo ou vazio");
+        }
+        if (produto.preco() == null) {
+            throw new ProdutoDTOValidationException("Preço do produto não pode ser nulo");
+        }
+        if (produto.categoria() == null || produto.categoria().isEmpty() || produto.categoria().isBlank()) {
+            throw new ProdutoDTOValidationException("Categoria do produto não pode ser nula ou vazia");
+        }
+        if (produto.quantidade() == null) {
+            throw new ProdutoDTOValidationException("Preço do produto não pode ser nulo");
+        }
+        if (produto.dataEntrada() == null || produto.dataEntrada().isEmpty() || produto.dataEntrada().isBlank()) {
+            throw new ProdutoDTOValidationException("Categoria do produto não pode ser nula ou vazia");
+        }
+        if (produto.codigoProduto() == null || produto.codigoProduto().isEmpty() || produto.codigoProduto().isBlank()) {
+            throw new ProdutoDTOValidationException("Categoria do produto não pode ser nula ou vazia");
+        }
+        try {
+            LocalDate data = LocalDate.parse(produto.dataEntrada());
+        } catch (DateTimeParseException e) {
+            throw new ConversaoDataProdutoDTOExeption("Erro ao converter a data para localDate");
+        }
+
+        Produto prod = new Produto(produto);
+        Produto produtoSalvo = produtoRepository.save(prod);
+
+        return convertToDTO(produtoSalvo);
     }
 
-    public Produto buscarID(Long idProduto){
+    public List<ProdutoDTO> listarProdutos() {
+        List<Produto> produtoList = produtoRepository.findAll();
+        List<ProdutoDTO> produtoDTOList = produtoList.stream()
+                .map(this::convertToDTO)
+                .collect(Collectors.toList());
+        return produtoDTOList;
+    }
 
-        if (produtoRepository.findById(idProduto).isPresent()){
-            return produtoRepository.findById(idProduto).get();
+    public ProdutoDTO buscarID(Long idProduto){
+        if (produtoRepository.findById(idProduto).isPresent()) {
+            Produto produto = produtoRepository.findById(idProduto).get();
+            return convertToDTO(produto);
         } else {
-            throw new ProdutoNaoEncontrado();
+            throw new ProdutoNaoEncontradoException();
         }
     }
-    public List<Produto> buscarNome(String nome){
-
+    public List<ProdutoDTO> buscarNome(String nome){
         List<Produto> produtoList = produtoRepository.buscarNome(nome.trim().toUpperCase());
 
-        if(produtoList.isEmpty()){
-            throw new ProdutoNaoEncontrado();
-        }else{
-            return produtoList;
+        if(produtoList.isEmpty()) {
+            throw new ProdutoNaoEncontradoException();
+        }else {
+            List<ProdutoDTO> produtoDTOList = produtoList.stream()
+                    .map(this::convertToDTO)
+                    .collect(Collectors.toList());
+            return produtoDTOList;
         }
-
-
     }
 
     public boolean deletar(Long id){
         Optional<Produto> produtoOptional = produtoRepository.findById(id);
-
         if(produtoOptional.isPresent()){
             produtoRepository.delete(produtoOptional.get());
             return true;
         }else {
-            throw new ProdutoNaoEncontrado();
+            throw new ProdutoNaoEncontradoException();
         }
     }
-
-
 
 }
