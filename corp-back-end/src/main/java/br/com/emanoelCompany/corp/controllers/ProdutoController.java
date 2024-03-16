@@ -29,7 +29,7 @@ public class ProdutoController {
         return ResponseEntity.ok(produtoList);
 
     }
-    @GetMapping("/buscarID/{id}")
+    @GetMapping("/buscarid/{id}")
     public ResponseEntity<ProdutoDTO> buscarID(@PathVariable Long id){
         ProdutoDTO produto = produtoService.buscarID(id);
         return ResponseEntity.ok(produto);

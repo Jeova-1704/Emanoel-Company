@@ -75,6 +75,7 @@ document.addEventListener('DOMContentLoaded', function (event) {
     });
 });
 
+//Listar produtos
 function carregarProdutos() {
     const tabelaCorpo = document.querySelector("#listarProdutosModal tbody");
     tabelaCorpo.innerHTML = '';
@@ -95,9 +96,10 @@ function carregarProdutos() {
                 const celulaDataEntrada = linha.insertCell(3);
                 const celulaQuantidade = linha.insertCell(4);
                 const celulaPreco = linha.insertCell(5);
-                const celulaCategoria = linha.insertCell(6);
-                const celulaDeletar = linha.insertCell(7);
-                const celulaEditar = linha.insertCell(8);
+                const celulaValorToral = linha.insertCell(6);
+                const celulaCategoria = linha.insertCell(7);
+                const celulaDeletar = linha.insertCell(8);
+                const celulaEditar = linha.insertCell(9);
 
                 celulaId.textContent = produto.id;
                 celulaNome.textContent = produto.nome;
@@ -105,6 +107,7 @@ function carregarProdutos() {
                 celulaDataEntrada.textContent = produto.dataEntrada;
                 celulaQuantidade.textContent = produto.quantidade;
                 celulaPreco.textContent = produto.preco.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+                celulaValorToral.textContent = produto.precoTotal.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
                 celulaCategoria.textContent = produto.categoria;
 
                 // Botão Deletar
@@ -125,6 +128,7 @@ function carregarProdutos() {
         .catch(error => console.error('Erro ao buscar produtos:', error));
 }
 
+//Abrir modal de confirmação para deletar
 function abrirModalDeDelecao(id) {
     const confirmacaoModal = new bootstrap.Modal(document.getElementById('confirmacaoDelecaoModal'));
     confirmacaoModal.show();
@@ -136,6 +140,7 @@ function abrirModalDeDelecao(id) {
     });
 }
 
+//requisição para deletar
 function deletarProduto(id) {
     const url = `http://localhost:8080/produto/deletar/${id}`;
 
@@ -163,4 +168,43 @@ function deletarProduto(id) {
 
     const confirmacaoModal = bootstrap.Modal.getInstance(document.getElementById('confirmacaoDelecaoModal'));
     confirmacaoModal.hide();
+}
+
+
+function buscarProdutoPeloId(id) {
+    const url = `http://localhost:8080/produto/buscarid/${id}`;
+    return fetch(url, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+        .then(response => {
+            console.log(response.nome)
+            return response.json();
+        })
+        .then(data => {
+            return data;
+        })
+        .catch(error => {
+            console.error('Erro na busca do produto:', error);
+            return undefined;
+        });
+}
+
+
+
+// editar produto
+function formatarDataEntrada(dataEntrada) {
+    const partesData = dataEntrada.split('-');
+    if (partesData.length === 3) {
+        return `${partesData[2]}/${partesData[1]}/${partesData[0]}`;
+    }
+    return dataEntrada;
+}
+function editarProduto(id) {
+    const confirmacaoModal = new bootstrap.Modal(document.getElementById('editarProdutoModal'));
+    confirmacaoModal.show();
+    const produto = buscarProdutoPeloId(id);
+    console.log(produto.nome)
 }
