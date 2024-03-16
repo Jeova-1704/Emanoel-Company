@@ -42,22 +42,24 @@ document.getElementById('produtoForm').addEventListener('submit', function (even
                 const toastElement = document.getElementById('toast');
                 const toast = new bootstrap.Toast(toastElement);
                 toast.show();
-            
+
                 setTimeout(() => {
                     toast.hide();
                 }, 2000);
 
             } else {
+                response.json().then(data => {
+                    console.error('Falha ao cadastrar o produto.', data);
+                    const toastErroElement = document.getElementById('toastErro');
+                    const toastErroBody = toastErroElement.querySelector('.toast-body');
+                    toastErroBody.textContent = `Erro ao cadastrar produto! Erro: ${data.message}`;
+                    const toastErro = new bootstrap.Toast(toastErroElement);
+                    toastErro.show();
 
-                console.error('Falha ao cadastrar o produto.', response.json, response.statusText, response.status);
-                const toastErroElement = document.getElementById('toastErro');
-                const toastErro = new bootstrap.Toast(toastErroElement);
-                toastErro.show();
-            
-                setTimeout(() => {
-                    toastErro.hide();
-                }, 2000);
-
+                    setTimeout(() => {
+                        toastErro.hide();
+                    }, 2000);
+                });
             }
         })
         .catch(error => {
