@@ -23,7 +23,7 @@ document.getElementById('produtoForm').addEventListener('submit', function (even
     };
 
 
-    fetch('http://localhost:8080/produto/cadastrar', {
+    fetch('http://localhost:8080/produto/', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -80,7 +80,7 @@ function carregarProdutos() {
     const tabelaCorpo = document.querySelector("#listarProdutosModal tbody");
     tabelaCorpo.innerHTML = '';
 
-    fetch('http://localhost:8080/produto/listar')
+    fetch('http://localhost:8080/produto/')
         .then(response => {
             if (!response.ok) {
                 throw new Error('Network response was not ok');
@@ -142,7 +142,7 @@ function abrirModalDeDelecao(id) {
 
 //requisição para deletar
 function deletarProduto(id) {
-    const url = `http://localhost:8080/produto/deletar/${id}`;
+    const url = `http://localhost:8080/produto/${id}`;
 
     fetch(url, {
         method: 'DELETE',
@@ -172,7 +172,7 @@ function deletarProduto(id) {
 
 
 function buscarProdutoPeloId(id) {
-    const url = `http://localhost:8080/produto/buscarid/${id}`;
+    const url = `http://localhost:8080/produto/id/${id}`;
     return fetch(url, {
         method: 'GET',
         headers: {
@@ -203,8 +203,5 @@ function formatarDataEntrada(dataEntrada) {
     return dataEntrada;
 }
 function editarProduto(id) {
-    const confirmacaoModal = new bootstrap.Modal(document.getElementById('editarProdutoModal'));
-    confirmacaoModal.show();
-    const produto = buscarProdutoPeloId(id);
-    console.log(produto.nome)
+
 }

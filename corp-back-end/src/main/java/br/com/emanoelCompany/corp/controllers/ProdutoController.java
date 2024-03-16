@@ -17,31 +17,31 @@ public class ProdutoController {
     @Autowired
     private ProdutoService produtoService;
 
-    @PostMapping("")
+    @PostMapping
     public ResponseEntity<ProdutoDTO> cadastrar(@RequestBody ProdutoDTO produto){
         ProdutoDTO produtoSalvo = produtoService.salvar(produto);
         return new ResponseEntity<>(produtoSalvo, HttpStatus.CREATED);
     }
 
-    @GetMapping("")
+    @GetMapping
     public ResponseEntity<List<ProdutoDTO>> listarProdutos(){
         List<ProdutoDTO> produtoList = produtoService.listarProdutos();
         return ResponseEntity.ok(produtoList);
 
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/id/{id}")
     public ResponseEntity<ProdutoDTO> buscarID(@PathVariable @RequestParam Long id){
         ProdutoDTO produto = produtoService.buscarID(id);
         return ResponseEntity.ok(produto);
     }
-    @GetMapping("/{nome}")
+    @GetMapping("/nome/{nome}")
     public ResponseEntity<List<ProdutoDTO>> filtrarNome(@PathVariable @RequestParam String nome){
         List<ProdutoDTO> listaNomes = produtoService.buscarNome(nome);
         return ResponseEntity.ok(listaNomes);
     }
 
-    @GetMapping("/{categoria}")
+    @GetMapping("/categoria/{categoria}")
     public ResponseEntity<List<ProdutoDTO>> buscarCategoria(@PathVariable @RequestParam String categoria){
         List<ProdutoDTO> listaProdutos = produtoService.buscarCategoria(categoria);
         return ResponseEntity.ok(listaProdutos);
