@@ -169,3 +169,53 @@ function deletarProduto(id) {
     const confirmacaoModal = bootstrap.Modal.getInstance(document.getElementById('confirmacaoDelecaoModal'));
     confirmacaoModal.hide();
 }
+
+
+function buscarProdutoPeloId(id) {
+    const url = `http://localhost:8080/produto/buscarID/${id}`;
+    return fetch(url, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+        .then(response => {
+            console.log(response.nome)
+            return response.json();
+        })
+        .then(data => {
+            return data;
+        })
+        .catch(error => {
+            console.error('Erro na busca do produto:', error);
+            return undefined;
+        });
+}
+
+
+
+// editar produto
+function editarProduto(id) {
+    console.log(id);
+    const confirmacaoModal = new bootstrap.Modal(document.getElementById('editarProdutoModal'));
+    fetch(`http://localhost:8080/produto/buscarID/${id}`)
+        .then(response => {
+            console.log(response);
+            return response.json();
+        })
+        .then(produto => {
+            console.log(produto);
+            console.log(produto.nome)
+            document.getElementById('produto_id').value = produto.id;
+            document.getElementsByClassName('nome').value = produto.nome;
+            document.getElementById('codigo_produto').innerText = produto.codigo_produto;
+            document.getElementsByName('data_entrada').value = produto.data_entrada;
+            document.getElementById('quantidade').value = produto.quantidade;
+            document.getElementsByClassName('preco').value = produto.preco;
+
+            // Mostrar o modal
+
+            confirmacaoModal.show();
+        })
+        .catch(error => console.error('Erro ao carregar dados do produto:', error));
+}
