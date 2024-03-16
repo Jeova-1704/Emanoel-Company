@@ -1,6 +1,6 @@
-INSERT INTO Adm_User (email, senha) VALUES
-    ('jeova@example.com', 'senha1'),
-    ('arthur@example.com', 'senha2'),
-    ('pierre@example.com', 'senha3'),
-    ('emerson@example.com', 'senha4'),
-    ('admin@admin.com', 'admin');
+INSERT INTO administradores (nome, usuario, senha) VALUES
+    ('admin', 'admin', 'admin'),
+    ('jeova', 'jeova', 'senha_jeova'),
+    ('pierre', 'pierre', 'senha_pierre'),
+    ('arthur', 'arthur', 'senha_arthur'),
+    ('emerson', 'emerson', 'senha_emerson');
