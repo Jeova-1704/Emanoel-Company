@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -19,6 +19,11 @@
 
             <h4 class="font-bold leading-9 mt-10 text-center text-gray-200 text-xl tracking-tight">Faça login no sistema</h4>
 
+            <!-- Adicione esta área para exibir mensagens de erro -->
+            <div th:if="${error != null}">
+                <p class="text-center text-red-500 mt-2" th:text="${error}"></p>
+            </div>
+            <!-- Fim da área de mensagens de erro -->
 
             <div>
                 <label class="block text-sm font-medium leading-6 text-gray-200" for="usuario">Nome de usuário</label>
