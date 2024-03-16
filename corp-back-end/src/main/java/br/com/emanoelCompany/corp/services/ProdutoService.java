@@ -1,5 +1,6 @@
 package br.com.emanoelCompany.corp.services;
 
+import br.com.emanoelCompany.corp.exceptions.ProdutoNaoEncontrado;
 import br.com.emanoelCompany.corp.model.Produto;
 import br.com.emanoelCompany.corp.repository.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,12 @@ public class ProdutoService{
     }
 
     public Produto buscarID(Long idProduto){
-        return produtoRepository.findById(idProduto).get();
+
+        if (produtoRepository.findById(idProduto).isPresent()){
+            return produtoRepository.findById(idProduto).get();
+        } else {
+            throw new ProdutoNaoEncontrado();
+        }
     }
     public List<Produto> buscarNome(String nome){
         return produtoRepository.buscarNome(nome.trim().toUpperCase());
@@ -31,11 +37,12 @@ public class ProdutoService{
 
     public boolean deletar(Long id){
         Optional<Produto> produtoOptional = produtoRepository.findById(id);
+
         if(produtoOptional.isPresent()){
             produtoRepository.delete(produtoOptional.get());
             return true;
         }else {
-            return false;
+            throw new ProdutoNaoEncontrado();
         }
     }
 
