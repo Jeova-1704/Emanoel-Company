@@ -1,8 +1,9 @@
 package br.com.emanoelCompany.corp.services;
 
 import br.com.emanoelCompany.corp.DTO.ProdutoDTO;
-import br.com.emanoelCompany.corp.infra.ConversaoDataProdutoDTOExeption;
-import br.com.emanoelCompany.corp.infra.ProdutoDTOValidationException;
+import br.com.emanoelCompany.corp.exceptions.ConversaoDataProdutoDTOExeption;
+import br.com.emanoelCompany.corp.exceptions.ProdutoDTOValidationException;
+import br.com.emanoelCompany.corp.exceptions.ProdutoNaoEncontradoException;
 import br.com.emanoelCompany.corp.model.Produto;
 import br.com.emanoelCompany.corp.repository.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,18 @@ public class ProdutoService{
 
     @Autowired
     private ProdutoRepository produtoRepository;
+
+    private ProdutoDTO convertToDTO(Produto produto) {
+        return new ProdutoDTO(
+                produto.getId(),
+                produto.getNome(),
+                produto.getPreco(),
+                produto.getCategoria(),
+                produto.getQuantidade(),
+                produto.getDataEntrada().toString(),
+                produto.getCodigoProduto()
+        );
+    }
 
     public ProdutoDTO salvar(ProdutoDTO produto) {
         if (produto.nome() == null || produto.nome().isEmpty() || produto.nome().isBlank()) {
@@ -60,37 +73,34 @@ public class ProdutoService{
     }
 
     public ProdutoDTO buscarID(Long idProduto){
-        Produto produto = produtoRepository.findById(idProduto).get();
-        return convertToDTO(produto);
+        if (produtoRepository.findById(idProduto).isPresent()) {
+            Produto produto = produtoRepository.findById(idProduto).get();
+            return convertToDTO(produto);
+        } else {
+            throw new ProdutoNaoEncontradoException();
+        }
     }
     public List<ProdutoDTO> buscarNome(String nome){
         List<Produto> produtoList = produtoRepository.buscarNome(nome.trim().toUpperCase());
-        List<ProdutoDTO> produtoDTOList = produtoList.stream()
-                .map(this::convertToDTO)
-                .collect(Collectors.toList());
-        return produtoDTOList;
-    }
 
-    public boolean deletar(Long id){
-        Optional<Produto> produto = produtoRepository.findById(id);
-        ProdutoDTO produtoOptional = convertToDTO(produto.get());
-        if(produtoOptional != null){
-            produtoRepository.delete(produto.get());
-            return true;
+        if(produtoList.isEmpty()) {
+            throw new ProdutoNaoEncontradoException();
         }else {
-            return false;
+            List<ProdutoDTO> produtoDTOList = produtoList.stream()
+                    .map(this::convertToDTO)
+                    .collect(Collectors.toList());
+            return produtoDTOList;
         }
     }
 
-    private ProdutoDTO convertToDTO(Produto produto) {
-        return new ProdutoDTO(
-                produto.getId(),
-                produto.getNome(),
-                produto.getPreco(),
-                produto.getCategoria(),
-                produto.getQuantidade(),
-                produto.getDataEntrada().toString(),
-                produto.getCodigoProduto()
-        );
+    public boolean deletar(Long id){
+        Optional<Produto> produtoOptional = produtoRepository.findById(id);
+        if(produtoOptional.isPresent()){
+            produtoRepository.delete(produtoOptional.get());
+            return true;
+        }else {
+            throw new ProdutoNaoEncontradoException();
+        }
     }
+
 }

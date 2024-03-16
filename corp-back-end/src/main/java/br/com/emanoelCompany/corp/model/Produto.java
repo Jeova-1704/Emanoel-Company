@@ -107,4 +107,5 @@ public class Produto implements Serializable {
     public void setCodigoProduto(String codigoProduto) {
         this.codigoProduto = codigoProduto;
     }
+
 }
