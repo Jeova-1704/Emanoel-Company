@@ -6,6 +6,7 @@ import br.com.emanoelCompany.corp.exceptions.ProdutoDTOValidationException;
 import br.com.emanoelCompany.corp.exceptions.ProdutoNaoEncontradoException;
 import br.com.emanoelCompany.corp.model.Produto;
 import br.com.emanoelCompany.corp.repository.ProdutoRepository;
+import org.hibernate.StaleObjectStateException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,7 +30,8 @@ public class ProdutoService{
                 produto.getCategoria().toString(),
                 produto.getQuantidade(),
                 produto.getDataEntrada().toString(),
-                produto.getCodigoProduto()
+                produto.getCodigoProduto(),
+                produto.getPrecoTotal()
         );
     }
 
@@ -59,6 +61,7 @@ public class ProdutoService{
         }
 
         Produto prod = new Produto(produto);
+        prod.setPrecoTotal(prod.valorTotal(prod.getQuantidade(), prod.getPreco()));
         Produto produtoSalvo = produtoRepository.save(prod);
 
         return convertToDTO(produtoSalvo);
@@ -106,7 +109,11 @@ public class ProdutoService{
     public boolean deletar(Long id){
         Optional<Produto> produtoOptional = produtoRepository.findById(id);
         if(produtoOptional.isPresent()){
-            produtoRepository.delete(produtoOptional.get());
+            try {
+                produtoRepository.delete(produtoOptional.get());
+            } catch (StaleObjectStateException e) {
+                throw new ProdutoNaoEncontradoException("O produto foi atualizado ou excluído por outra transação.");
+            }
             return true;
         }else {
             throw new ProdutoNaoEncontradoException();
@@ -118,11 +125,12 @@ public class ProdutoService{
         }
 
         Produto produto = produtoRepository.findById(produtoDTO.id())
-                .orElseThrow(() -> new ProdutoNaoEncontradoException("O ID fornecido não condiz com nenhum produto em nosso estoque!"));;
+                .orElseThrow(() -> new ProdutoNaoEncontradoException("O ID fornecido não condiz com nenhum produto em nosso estoque!"));
 
         produto.setPreco(produtoDTO.preco());
         produto.setQuantidade(produtoDTO.quantidade());
         produto.setDataEntrada(LocalDate.now());
+        produto.setPrecoTotal(produto.valorTotal(produtoDTO.quantidade(), produtoDTO.preco()));
         Produto produtoAtualizado = produtoRepository.save(produto);
 
 
