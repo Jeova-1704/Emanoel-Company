@@ -3,7 +3,7 @@ package br.com.emanoelCompany.corp.model;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "administradores")
+@Table(name = "Administrador")
 public class Administrador {
 
     @Id

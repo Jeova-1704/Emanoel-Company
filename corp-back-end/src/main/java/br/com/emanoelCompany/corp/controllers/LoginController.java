@@ -16,6 +16,7 @@ public class LoginController {
 
     String logado = "false";
 
+
     @Autowired
     private AdministratorService administratorService;
 
@@ -29,10 +30,10 @@ public class LoginController {
         if (usuario != null && !usuario.isEmpty() && senha != null && !senha.isEmpty()) {
             if (administratorService.administradorExiste(usuario, senha)) {
                     model.addAttribute("true", logado);
-                    return "redirect:home";
+                    return "home";
             } else {
                 model.addAttribute("error", "Usuário ou senha inválidos");
-                return "home";
+                return "login";
             }
         } else {
             model.addAttribute("error", "Por favor, preencha todos os campos");
