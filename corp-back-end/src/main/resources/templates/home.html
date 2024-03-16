@@ -31,7 +31,7 @@
 
 <header id="header" class="fixed-top">
   <div class="container d-flex align-items-center justify-content-lg-between">
-    <h1 class="logo me-auto me-lg-0"><a href="home.html">Emanoel Company<span>.</span></a></h1>
+    <h1 class="logo me-auto me-lg-0"><a href="emanoelcompany">Emanoel Company<span>.</span></a></h1>
     <a href="login" class="get-started-btn scrollto">Sair do sistema</a>
   </div>
 </header>
@@ -281,8 +281,12 @@
               <h5>Atualize os dados necessários</h5>
             </div>
           </div>
-          <!-- Campo oculto para o ID do produto -->
-          <input type="hidden" id="produto_id" name="produto_id">
+          <div class="mb-3 row">
+            <label for="nome" class="col-md-4 col-form-label">Id produto:</label>
+            <div class="col-md-8">
+              <input type="text" class="form-control" id="produto_id" name="produto_id" >
+            </div>
+          </div>
           <div class="mb-3 row">
             <label for="nome" class="col-md-4 col-form-label">Nome do produto:</label>
             <div class="col-md-8">
