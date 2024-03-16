@@ -26,7 +26,7 @@ public class ProdutoService{
                 produto.getId(),
                 produto.getNome(),
                 produto.getPreco(),
-                produto.getCategoria(),
+                produto.getCategoria().toString(),
                 produto.getQuantidade(),
                 produto.getDataEntrada().toString(),
                 produto.getCodigoProduto(),
@@ -68,10 +68,9 @@ public class ProdutoService{
 
     public List<ProdutoDTO> listarProdutos() {
         List<Produto> produtoList = produtoRepository.findAll();
-        List<ProdutoDTO> produtoDTOList = produtoList.stream()
+        return produtoList.stream()
                 .map(this::convertToDTO)
                 .collect(Collectors.toList());
-        return produtoDTOList;
     }
 
     public ProdutoDTO buscarID(Long idProduto){
@@ -88,10 +87,21 @@ public class ProdutoService{
         if(produtoList.isEmpty()) {
             throw new ProdutoNaoEncontradoException();
         }else {
-            List<ProdutoDTO> produtoDTOList = produtoList.stream()
+            return produtoList.stream()
                     .map(this::convertToDTO)
                     .collect(Collectors.toList());
-            return produtoDTOList;
+        }
+    }
+
+    public List<ProdutoDTO> buscarCategoria(String categoria){
+        List<Produto> produtoList = produtoRepository.findProdutoByCategoria(categoria.trim().toUpperCase());
+
+        if (produtoList.isEmpty()) {
+            throw new ProdutoNaoEncontradoException();
+        } else {
+            return produtoList.stream()
+                    .map(this::convertToDTO)
+                    .collect(Collectors.toList());
         }
     }
 

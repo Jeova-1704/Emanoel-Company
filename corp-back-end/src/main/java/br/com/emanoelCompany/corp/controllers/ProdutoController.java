@@ -40,6 +40,12 @@ public class ProdutoController {
         return ResponseEntity.ok(listaNomes);
     }
 
+    @GetMapping("/buscarCat/{categoria}")
+    public ResponseEntity<List<ProdutoDTO>> buscarCategoria(@PathVariable String categoria){
+        List<ProdutoDTO> listaProdutos = produtoService.buscarCategoria(categoria);
+        return ResponseEntity.ok(listaProdutos);
+    }
+
     @DeleteMapping("/deletar/{id}")
     public ResponseEntity<String> deletarID(@PathVariable Long id){
 
