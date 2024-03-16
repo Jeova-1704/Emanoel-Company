@@ -1,5 +1,6 @@
 package br.com.emanoelCompany.corp.model;
 
+import br.com.emanoelCompany.corp.DTO.ProdutoDTO;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -14,15 +15,15 @@ public class Produto implements Serializable {
     @GeneratedValue(strategy =  GenerationType.SEQUENCE)
     private Long id;
     @Column(nullable = false)
-    private Double preco;
+    private String nome;
 
     @Column(nullable = false)
-    private String nome;
+    private Double preco;
 
     private String categoria;
 
     @Column(nullable = false)
-    private int quantidade;
+    private Integer quantidade;
 
     @Column(name = "data_entrada", nullable = false)
     private LocalDate dataEntrada;
@@ -41,6 +42,15 @@ public class Produto implements Serializable {
     }
 
     public Produto() {}
+
+    public Produto(ProdutoDTO data) {
+        this.nome = data.nome();
+        this.preco = data.preco();
+        this.categoria = data.categoria();
+        this.quantidade = data.quantidade();
+        this.dataEntrada = LocalDate.parse(data.dataEntrada());
+        this.codigoProduto = data.codigoProduto();
+    }
 
     public Long getId() {
         return id;
