@@ -54,7 +54,7 @@
         <div class="col-xl-2 col-md-4">
           <div class="icon-box">
             <i class="ri-bar-chart-box-line"></i>
-            <h3><a href="">Listar produtos no estoque</a></h3>
+            <h3><a href="#" data-bs-toggle="modal" data-bs-target="#listarProdutosModal">Listar produtos no estoque</a></h3>
           </div>
         </div>
         <div class="col-xl-2 col-md-4">
@@ -68,7 +68,7 @@
     </div>
   </section>
 
-  <!-- Modal -->
+  <!-- Modal cadastro produto-->
   <div class="modal fade" id="produtoModal" tabindex="-1" aria-labelledby="produtoModalLabel" aria-hidden="true">
     <form id="produtoForm">
       <div class="modal-dialog">
@@ -83,7 +83,7 @@
                 <div class="alert alert-secondary text-center" role="alert">
                   <h5>Preencha todos os dados abaixo</h5>
                 </div>
-              </div>
+              </div>              
               <div class="mb-3 row">
                 <label for="nome" class="col-md-4 col-form-label">Nome do produto:</label>
                 <div class="col-md-8">
@@ -92,7 +92,7 @@
               </div>
 
               <div class="mb-3 row">
-                <label for="codigo_produto" class="col-md-4 col-form-label">Código do produto:</label>
+                <label for="codigo_produto" class="col-md-4 col-form-label">cod. Produto:</label>
                 <div class="col-md-8">
                   <input type="text" class="form-control" id="codigo_produto" name="codigo_produto">
                 </div>
@@ -115,12 +115,12 @@
               <div class="mb-3 row">
                 <label for="preco" class="col-md-4 col-form-label">Preço(Unidade):</label>
                 <div class="col-md-8">
-                  <input type="number" class="form-control" id="preco" name="preco" step="any" pattern="[0-9]+([\.,][0-9]+)?" title="Use apenas números e um ponto ou vírgula como separador decimal">
+                    <input type="number" class="form-control" id="preco" name="preco" step="any" pattern="[0-9]+([\.,][0-9]+)?" title="Use apenas números e um ponto ou vírgula como separador decimal">
                 </div>
-              </div>
+            </div>
 
               <div class="mb-3 row">
-                <label for="categoria" class="col-md-4 col-form-label">Categoria do produto:</label>
+                <label for="categoria" class="col-md-4 col-form-label">Categ. do produto:</label>
                 <div class="col-md-8">
                   <input type="text" class="form-control" id="categoria" name="categoria">
                 </div>
@@ -133,8 +133,8 @@
             </form>
 
             <div id="toast" class="toast align-items-center text-white bg-success border-0" role="alert"
-                 aria-live="assertive" aria-atomic="true"
-                 style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+              aria-live="assertive" aria-atomic="true"
+              style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);">
               <div class="d-flex">
                 <div class="toast-body">
                   Produto cadastrado com sucesso!
@@ -143,8 +143,8 @@
               </div>
             </div>
             <div id="toastErro" class="toast align-items-center text-white bg-danger border-0" role="alert"
-                 aria-live="assertive" aria-atomic="true"
-                 style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+              aria-live="assertive" aria-atomic="true"
+              style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);">
               <div class="d-flex">
                 <div class="toast-body">
                   Erro ao cadastrar produto!
@@ -158,6 +158,48 @@
       </div>
     </form>
   </div>
+
+
+
+<!-- Modal de Listagem de Produtos -->
+<div class="modal fade" id="listarProdutosModal" tabindex="-1" aria-labelledby="listarProdutosModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl"> <!-- Modal grande -->
+    <div class="modal-content bg-dark text-white">
+      <div class="modal-header">
+        <h5 class="modal-title" id="listarProdutosModalLabel">Produtos no Estoque</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <table class="table table-striped table-dark">
+          <thead>
+            <tr>
+              <th scope="col">#ID</th>
+              <th scope="col">Nome</th>
+              <th scope="col">Código</th>
+              <th scope="col">Data de Entrada</th>
+              <th scope="col">Quantidade</th>
+              <th scope="col">Preço</th>
+              <th scope="col">Categoria</th>
+              <th scope="col">Deletar</th>
+              <th scope="col">Editar</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Os dados dos produtos devem ser inseridos aqui -->
+          </tbody>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fechar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
 
   <script src="vendor/purecounter/purecounter_vanilla.js"></script>
   <script src="vendor/aos/aos.js"></script>

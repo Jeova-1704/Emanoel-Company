@@ -6,6 +6,7 @@ import br.com.emanoelCompany.corp.exceptions.ProdutoDTOValidationException;
 import br.com.emanoelCompany.corp.exceptions.ProdutoNaoEncontradoException;
 import br.com.emanoelCompany.corp.model.Produto;
 import br.com.emanoelCompany.corp.repository.ProdutoRepository;
+import org.hibernate.StaleObjectStateException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -96,7 +97,11 @@ public class ProdutoService{
     public boolean deletar(Long id){
         Optional<Produto> produtoOptional = produtoRepository.findById(id);
         if(produtoOptional.isPresent()){
-            produtoRepository.delete(produtoOptional.get());
+            try {
+                produtoRepository.delete(produtoOptional.get());
+            } catch (StaleObjectStateException e) {
+                throw new ProdutoNaoEncontradoException("O produto foi atualizado ou excluído por outra transação.");
+            }
             return true;
         }else {
             throw new ProdutoNaoEncontradoException();
