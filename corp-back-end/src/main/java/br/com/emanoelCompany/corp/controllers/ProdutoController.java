@@ -53,7 +53,7 @@ public class ProdutoController {
         return ResponseEntity.ok("Produto deletado!");
 
     }
-    @PostMapping("/atualizar")
+    @PutMapping("/atualizar")
     public ResponseEntity<ProdutoDTO> atualizar(@RequestBody ProdutoDTO produto){
         ProdutoDTO produtoAtualziado =produtoService.atualizar(produto);
         return ResponseEntity.ok(produtoAtualziado);
