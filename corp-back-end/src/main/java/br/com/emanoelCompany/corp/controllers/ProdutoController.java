@@ -8,7 +8,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/produto")
@@ -48,15 +50,25 @@ public class ProdutoController {
 
     @DeleteMapping("/deletar/{id}")
     public ResponseEntity<String> deletarID(@PathVariable Long id){
-
         produtoService.deletar(id);
         return ResponseEntity.ok("Produto deletado!");
 
     }
     @PutMapping("/atualizar")
     public ResponseEntity<ProdutoDTO> atualizar(@RequestBody ProdutoDTO produto){
-        ProdutoDTO produtoAtualizado =produtoService.atualizar(produto);
-        return ResponseEntity.ok(produtoAtualizado);
 
+        ProdutoDTO produtoAtualizado =produtoService.atualizar(produto);
+
+        return ResponseEntity.ok(produtoAtualizado);
     }
+
+    @PostMapping("/vender")
+    public ResponseEntity<String> vender(@RequestBody Map<Long,Integer> vendaMap ){
+
+        produtoService.vender(vendaMap);
+
+        return ResponseEntity.ok("Produto vendido com sucesso!");
+    }
+
+
 }

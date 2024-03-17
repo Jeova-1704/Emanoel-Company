@@ -4,6 +4,7 @@ import br.com.emanoelCompany.corp.DTO.ProdutoDTO;
 import br.com.emanoelCompany.corp.exceptions.ConversaoDataProdutoDTOExeption;
 import br.com.emanoelCompany.corp.exceptions.ProdutoDTOValidationException;
 import br.com.emanoelCompany.corp.exceptions.ProdutoNaoEncontradoException;
+import br.com.emanoelCompany.corp.exceptions.QuantidadeInsuficienteException;
 import br.com.emanoelCompany.corp.model.Produto;
 import br.com.emanoelCompany.corp.repository.ProdutoRepository;
 import org.hibernate.StaleObjectStateException;
@@ -12,7 +13,9 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -101,7 +104,7 @@ public class ProdutoService{
         }
     }
 
-    public boolean deletar(Long id){
+    public void deletar(Long id){
         Optional<Produto> produtoOptional = produtoRepository.findById(id);
         if(produtoOptional.isPresent()){
             try {
@@ -109,7 +112,6 @@ public class ProdutoService{
             } catch (StaleObjectStateException e) {
                 throw new ProdutoNaoEncontradoException("O produto foi atualizado ou excluído por outra transação.");
             }
-            return true;
         }else {
             throw new ProdutoNaoEncontradoException();
         }
@@ -140,13 +142,32 @@ public class ProdutoService{
 
         produto.setNome(produtoDTO.nome());
         produto.setCodigoProduto(produtoDTO.codigoProduto());
-        produto.setDataEntrada(LocalDate.now());
-        produto.setQuantidade(produtoDTO.quantidade());
         produto.setPreco(produtoDTO.preco());
+        produto.setQuantidade(produtoDTO.quantidade());
+        produto.setDataEntrada(LocalDate.now());
         produto.setCategoria(produtoDTO.categoria());
         produto.setPrecoTotal(produto.valorTotal(produtoDTO.quantidade(), produtoDTO.preco()));
         Produto produtoAtualizado = produtoRepository.save(produto);
+
         return  convertToDTO(produtoAtualizado);
     }
+    public void vender(Map<Long,Integer> vendaMap){
+
+        for (Long id : vendaMap.keySet()){
+            int quantidade = vendaMap.get(id);
+            Produto produto = produtoRepository.findById(id)
+                    .orElseThrow(() -> new ProdutoNaoEncontradoException("O ID fornecido não condiz com nenhum produto em estoque "));
+
+            int quantidadeAtualizada =  (produto.getQuantidade()-quantidade);
+            if(quantidadeAtualizada < 0){
+                throw new QuantidadeInsuficienteException();
+            }
+
+            produto.setQuantidade(quantidadeAtualizada);
+            produtoRepository.save(produto);
+        }
+    }
+
+
 
 }
