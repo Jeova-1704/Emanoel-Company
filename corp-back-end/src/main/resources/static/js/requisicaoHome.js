@@ -322,5 +322,3 @@ function listagemVendaProduto() {
         })
         .catch(error => console.error('Erro ao buscar produtos:', error));
 }
-
-
