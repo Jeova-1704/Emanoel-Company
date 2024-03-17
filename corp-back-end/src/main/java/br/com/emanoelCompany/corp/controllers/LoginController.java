@@ -51,7 +51,7 @@ public class LoginController {
     @GetMapping("/logout")
     public String logout(HttpServletResponse response) {
         CookieService.setCookie(response, "usuarioId", "", 0);
-        return "redirect:/login";
+        return "redirect:/login" ;
     }
 }
 
