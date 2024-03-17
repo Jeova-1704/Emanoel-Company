@@ -56,17 +56,13 @@ public class ProdutoController {
     }
     @PutMapping("/atualizar")
     public ResponseEntity<ProdutoDTO> atualizar(@RequestBody ProdutoDTO produto){
-
         ProdutoDTO produtoAtualizado =produtoService.atualizar(produto);
-
         return ResponseEntity.ok(produtoAtualizado);
     }
 
     @PutMapping ("/vender")
     public ResponseEntity<String> vender(@RequestBody Map<Long,Integer> vendaMap ){
-
         produtoService.vender(vendaMap);
-
         return ResponseEntity.ok("Produto vendido com sucesso!");
     }
 
