@@ -210,13 +210,20 @@ function editarProduto(id) {
             return response.json();
         })
         .then(produto => {
+            console.log(produto.categoria);
             console.log(produto.id);
+            console.log(produto.nome);
+            console.log(produto.codigoProduto);
+            console.log(produto.dataEntrada);
+            console.log(produto.quantidade);
+            console.log(produto.preco);
             document.getElementById('produto_id').value = produto.id;
             document.getElementById('produto_nome').value = produto.nome;
             document.getElementById('produto_codigo_produto').value = produto.codigoProduto;
             document.getElementById('produto_data_entrada').value = converterData(produto.dataEntrada);
             document.getElementById('produto_quantidade').value = produto.quantidade;
             document.getElementById('produto_preco').value = produto.preco;
+            document.getElementById('produto_categoria').value = produto.categoria;
 
             confirmacaoModal.show();
         })
@@ -282,6 +289,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 const confirmacaoModal = bootstrap.Modal.getInstance(document
                     .getElementById('editarProdutoModal'));
                 confirmacaoModal.hide();
+                carregarProdutos();
             })
             .catch(error => {
                 console.error('Erro:', error);

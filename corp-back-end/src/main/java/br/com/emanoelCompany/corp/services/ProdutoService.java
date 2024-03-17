@@ -27,7 +27,7 @@ public class ProdutoService{
                 produto.getId(),
                 produto.getNome(),
                 produto.getPreco(),
-                produto.getCategoria().toString(),
+                produto.getCategoria(),
                 produto.getQuantidade(),
                 produto.getDataEntrada().toString(),
                 produto.getCodigoProduto(),
@@ -118,17 +118,34 @@ public class ProdutoService{
         if (produtoDTO.id() == null) {
             throw new ProdutoDTOValidationException("Informe o ID do produto para atualizar!");
         }
+        if (produtoDTO.nome() == null || produtoDTO.nome().isEmpty() || produtoDTO.nome().isBlank()) {
+            throw new ProdutoDTOValidationException("Nome do produto não pode ser nulo ou vazio");
+        }
+        if (produtoDTO.preco() == null) {
+            throw new ProdutoDTOValidationException("Preço do produto não pode ser nulo");
+        }
+        if (produtoDTO.categoria() == null || produtoDTO.categoria().isEmpty() || produtoDTO.categoria().isBlank()) {
+            throw new ProdutoDTOValidationException("Categoria do produto não pode ser nula ou vazia");
+        }
+        if (produtoDTO.quantidade() == null) {
+            throw new ProdutoDTOValidationException("A quantidade do produto não pode ser nula");
+        }
+        if (produtoDTO.dataEntrada() == null || produtoDTO.dataEntrada().isEmpty() || produtoDTO.dataEntrada().isBlank()) {
+            throw new ProdutoDTOValidationException("A data de entrada não pode ser nula");
+        }
+        if (produtoDTO.codigoProduto() == null || produtoDTO.codigoProduto().isEmpty() || produtoDTO.codigoProduto().isBlank()) {
+            throw new ProdutoDTOValidationException("O codigo do produto não pode ser nulo ou vazio");
+        }
+        Produto produto = produtoRepository.findById(produtoDTO.id()).orElseThrow(() -> new ProdutoNaoEncontradoException("O ID fornecido não condiz com nenhum produto em nosso estoque!"));
 
-        Produto produto = produtoRepository.findById(produtoDTO.id())
-                .orElseThrow(() -> new ProdutoNaoEncontradoException("O ID fornecido não condiz com nenhum produto em nosso estoque!"));
-
-        produto.setPreco(produtoDTO.preco());
-        produto.setQuantidade(produtoDTO.quantidade());
+        produto.setNome(produtoDTO.nome());
+        produto.setCodigoProduto(produtoDTO.codigoProduto());
         produto.setDataEntrada(LocalDate.now());
+        produto.setQuantidade(produtoDTO.quantidade());
+        produto.setPreco(produtoDTO.preco());
+        produto.setCategoria(produtoDTO.categoria());
         produto.setPrecoTotal(produto.valorTotal(produtoDTO.quantidade(), produtoDTO.preco()));
         Produto produtoAtualizado = produtoRepository.save(produto);
-
-
         return  convertToDTO(produtoAtualizado);
     }
 
