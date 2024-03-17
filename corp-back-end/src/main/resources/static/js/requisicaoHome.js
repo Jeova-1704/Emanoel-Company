@@ -324,3 +324,25 @@ function listagemVendaProduto() {
         })
         .catch(error => console.error('Erro ao buscar produtos:', error));
 }
+
+
+function pesquisarPorNome() {
+    var nome = document.querySelector('input[name="nomepesquisa"]').value.toLowerCase();
+    var linhas = document.querySelectorAll('#listarProdutosModal tbody tr');
+
+    linhas.forEach(function(linha) {
+        var nomeProduto = linha.querySelector('td:nth-child(2)').textContent.toLowerCase();
+
+        if (nomeProduto.includes(nome)) {
+            linha.style.display = 'table-row';
+
+        } else {
+            linha.style.display = 'none';
+        }
+    });
+}
+
+document.querySelector('form').addEventListener('submit', function(event) {
+    event.preventDefault();
+    pesquisarPorNome();
+});
