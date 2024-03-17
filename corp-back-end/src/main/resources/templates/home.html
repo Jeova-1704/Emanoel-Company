@@ -162,60 +162,45 @@
 </div>
 
 <!-- Modal de Listagem de Produtos -->
-<div class="modal fade" id="listarProdutosModal" tabindex="-1" aria-labelledby="listarProdutosModalLabel"
-     aria-hidden="true">
-  <div class="modal-dialog modal-xl"> <!-- Modal grande -->
+<div class="modal fade" id="listarProdutosModal" tabindex="-1" aria-labelledby="listarProdutosModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
     <div class="modal-content bg-dark text-white">
       <div class="modal-header">
         <h5 class="modal-title" id="listarProdutosModalLabel">Produtos no Estoque</h5>
         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <table class="table table-striped table-dark">
-          <thead>
-          <tr>
-            <th scope="col">#ID</th>
-            <th scope="col">Nome</th>
-            <th scope="col">Código</th>
-            <th scope="col">Data de Entrada</th>
-            <th scope="col">Quantidade</th>
-            <th scope="col">Preço</th>
-            <th scope="col">Valor toral</th>
-            <th scope="col">Categoria</th>
-            <th scope="col">Deletar</th>
-            <th scope="col">Editar</th>
-          </tr>
-          </thead>
-          <tbody></tbody>
-        </table>
+        <div style="max-height: 500px; overflow-y: auto;">
+          <table class="table table-striped table-dark">
+            <thead>
+            <tr>
+              <th scope="col">#ID</th>
+              <th scope="col">Nome</th>
+              <th scope="col">Código</th>
+              <th scope="col">Data de Entrada</th>
+              <th scope="col">Quantidade</th>
+              <th scope="col">Preço</th>
+              <th scope="col">Valor toral</th>
+              <th scope="col">Categoria</th>
+              <th scope="col">Deletar</th>
+              <th scope="col">Editar</th>
+            </tr>
+            </thead>
+            <tbody>
+            <!-- Conteúdo da tabela aqui -->
+            </tbody>
+          </table>
+        </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fechar</button>
       </div>
 
-      <div id="toastDeletadoSucesso" class="toast align-items-center text-white bg-success border-0" role="alert"
-           aria-live="assertive" aria-atomic="true"
-           style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);">
-        <div class="d-flex">
-          <div class="toast-body">
-            Produto deletado com sucesso!
-          </div>
-          <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
-        </div>
-      </div>
-      <div id="toastErroDeletar" class="toast align-items-center text-white bg-danger border-0" role="alert"
-           aria-live="assertive" aria-atomic="true"
-           style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);">
-        <div class="d-flex">
-          <div class="toast-body">
-            Erro ao deletar produto!
-          </div>
-          <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
-        </div>
-      </div>
+      <!-- Toasts aqui -->
     </div>
   </div>
 </div>
+
 
 <!-- Modal de Confirmação de Deleção -->
 <div class="modal fade" id="confirmacaoDelecaoModal" tabindex="-1" aria-labelledby="confirmacaoDelecaoModalLabel"
