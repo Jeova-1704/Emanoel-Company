@@ -130,11 +130,26 @@
             </div>
 
             <div class="mb-3 row">
-              <label for="data_entrada" class="col-md-4 col-form-label">Categoria:</label>
+              <label for="categoria" class="col-md-4 col-form-label">Categoria:</label>
               <div class="col-md-8">
-                <input type="text" class="form-control" id="categoria" name="data_entrada" oninput="this.value = this.value.toUpperCase()">
+                <select class="form-control" name="categoria" id="categoria" onchange="document.getElementById('categoria').value=this.value">
+                  <option value="">Selecione uma opção</option>
+                  <option value="ELETRÔNICOS">ELETRÔNICOS</option>
+                  <option value="VESTUARIO E MODA">VESTUARIO E MODA</option>
+                  <option value="ALIMENTOS E BEBIDAS">ALIMENTOS E BEBIDAS</option>
+                  <option value="CASA E DECORAÇÃO">CASA E DECORAÇÃO</option>
+                  <option value="SAÚDE E BELEZA">SAÚDE E BELEZA</option>
+                  <option value="ESPORTES E FITNESS">ESPORTES E FITNESS</option>
+                  <option value="LIVROS E MATERIAIS DE ESCRITÓRIO">LIVROS E MATERIAIS DE ESCRITÓRIO</option>
+                  <option value="BRINQUEDOS">BRINQUEDOS</option>
+                  <option value="JOGOS">JOGOS</option>
+                  <option value="AUTOMOTIVO">AUTOMOTIVO</option>
+                  <option value="FERRAMENTAS E EQUIPAMENTOS">FERRAMENTAS E EQUIPAMENTOS</option>
+                  <option value="OUTROS">OUTROS</option>
+                </select>
               </div>
             </div>
+
 
             <div class="modal-footer">
               <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
@@ -179,7 +194,11 @@
         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <label for="searchInput"></label><input type="text" id="searchInput" class="form-control mb-3" placeholder="Pesquisar produto...">
+        <form action="" method="post">
+          <label>Pesquisar por nome:</label>
+          <input name="nomepesquisa" type="text" > <!-- Adicionei type="text" para garantir que seja um campo de texto -->
+          <button type="submit" class="bg-gray text-black">Buscar</button> <!-- Troquei o input para button -->
+        </form>
         <div style="max-height: 500px; overflow-y: auto;">
           <table class="table table-striped table-dark">
             <thead>
@@ -415,11 +434,7 @@
                   </div>
                   <div class="col">
                     <label for="produto_id">ID:</label>
-<<<<<<< HEAD
                     <input type="text" class="form-control" name="produto_id">
-=======
-                    <input type="text" class="form-control" name="produto_id" readonly="readonly">
->>>>>>> 99d4a7413102b22dc3064ef525be89f614a92b69
                   </div>
                 </div>
               </div>
@@ -456,24 +471,15 @@
           </div>
 
           <script>
-<<<<<<< HEAD
                         document.getElementById("add-row").addEventListener("click", function () {
                             var container = document.getElementById("inputs-container");
                             var newRow = document.createElement("div");
                             newRow.classList.add("row", "input-row", "mt-3");
                             newRow.innerHTML = `
-=======
-            document.getElementById("add-row").addEventListener("click", function () {
-              var container = document.getElementById("inputs-container");
-              var newRow = document.createElement("div");
-              newRow.classList.add("row", "input-row", "mt-3");
-              newRow.innerHTML = `
->>>>>>> 99d4a7413102b22dc3064ef525be89f614a92b69
         <div class="col">
             <input type="number" class="form-control" name="quantidade">
         </div>
         <div class="col">
-<<<<<<< HEAD
             <input type="text" class="form-control" name="produto_id">
         </div>
     `;
@@ -493,26 +499,6 @@
                             }
                         };
                     </script>
-
-            <input type="text" class="form-control" name="produto_id" readonly="readonly">
-        </div>
-    `;
-              container.appendChild(newRow);
-            });
-
-            document.getElementById("remove-row").onclick = function () {
-              var container = document.getElementById("inputs-container");
-              var rows = container.getElementsByClassName("input-row");
-
-              // Verifica se há mais de uma linha antes de permitir a remoção
-              if (rows.length > 1) {
-                // Remove a última linha criada
-                container.removeChild(container.lastChild);
-              } else {
-                alert("Pelo menos uma linha deve ser mantida visível.");
-              }
-            };
-          </script>
 
         </div>
       </div>

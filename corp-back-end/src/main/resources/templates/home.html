@@ -130,11 +130,26 @@
                         </div>
 
                         <div class="mb-3 row">
-                            <label for="data_entrada" class="col-md-4 col-form-label">Categoria:</label>
+                            <label for="categoria" class="col-md-4 col-form-label">Categoria:</label>
                             <div class="col-md-8">
-                                <input type="text" class="form-control" id="categoria" name="data_entrada" oninput="this.value = this.value.toUpperCase()">
+                                <select class="form-control" name="categoria" id="categoria" onchange="document.getElementById('categoria').value=this.value">
+                                    <option value="">Selecione uma opção</option>
+                                    <option value="ELETRÔNICOS">ELETRÔNICOS</option>
+                                    <option value="VESTUARIO E MODA">VESTUARIO E MODA</option>
+                                    <option value="ALIMENTOS E BEBIDAS">ALIMENTOS E BEBIDAS</option>
+                                    <option value="CASA E DECORAÇÃO">CASA E DECORAÇÃO</option>
+                                    <option value="SAÚDE E BELEZA">SAÚDE E BELEZA</option>
+                                    <option value="ESPORTES E FITNESS">ESPORTES E FITNESS</option>
+                                    <option value="LIVROS E MATERIAIS DE ESCRITÓRIO">LIVROS E MATERIAIS DE ESCRITÓRIO</option>
+                                    <option value="BRINQUEDOS">BRINQUEDOS</option>
+                                    <option value="JOGOS">JOGOS</option>
+                                    <option value="AUTOMOTIVO">AUTOMOTIVO</option>
+                                    <option value="FERRAMENTAS E EQUIPAMENTOS">FERRAMENTAS E EQUIPAMENTOS</option>
+                                    <option value="OUTROS">OUTROS</option>
+                                </select>
                             </div>
                         </div>
+
 
                         <div class="modal-footer">
                             <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
