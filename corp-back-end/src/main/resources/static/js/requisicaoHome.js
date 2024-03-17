@@ -285,9 +285,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-
 // função vender produto
-
 
 document.addEventListener('DOMContentLoaded', function (event) {
     document.querySelector('#venderProdutoModal').addEventListener('show.bs.modal', function (event) {
