@@ -70,5 +70,4 @@ public class ProdutoController {
         return ResponseEntity.ok("Produto vendido com sucesso!");
     }
 
-
 }

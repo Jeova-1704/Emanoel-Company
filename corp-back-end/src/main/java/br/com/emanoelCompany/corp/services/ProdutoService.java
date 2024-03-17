@@ -36,7 +36,8 @@ public class ProdutoService{
     }
     private final Set<String> categoriasValidas = new HashSet<>(Arrays.asList("ELETRÔNICOS", "VESTUARIO E MODA", "ALIMENTOS E BEBIDAS",
             "CASA E DECORAÇÃO", "SAÚDE E BELEZA", "ESPORTES E FITNESS",
-            "LIVROS E MATERIAIS DE ESCRITÓRIO", "BRINQUEDOS E JOGOS", "AUTOMOTIVO", "FERRAMENTAS E EQUIPAMENTOS"));
+            "LIVROS E MATERIAIS DE ESCRITÓRIO", "BRINQUEDOS E JOGOS", "AUTOMOTIVO", "FERRAMENTAS E EQUIPAMENTOS"
+    , "OUTROS"));
     public ProdutoDTO salvar(ProdutoDTO produto) {
 
         if (produto.nome() == null || produto.nome().isEmpty() || produto.nome().isBlank()) {
@@ -180,8 +181,5 @@ public class ProdutoService{
             produtoRepository.save(produto);
         }
     }
-
-
-
 
 }
