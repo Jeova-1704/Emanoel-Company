@@ -42,11 +42,20 @@ public class ProdutoService{
         if (produto.preco() == null) {
             throw new ProdutoDTOValidationException("Preço do produto não pode ser nulo");
         }
+        if(produto.preco() < 0){
+            throw new ProdutoDTOValidationException("Preço do produto não pode ser negativo");
+        }
+        if(produto.preco() == 0){
+            throw new ProdutoDTOValidationException("Preço do produto não pode ser zero");
+        }
         if (produto.categoria() == null || produto.categoria().isEmpty() || produto.categoria().isBlank()) {
             throw new ProdutoDTOValidationException("Categoria do produto não pode ser nula ou vazia");
         }
         if (produto.quantidade() == null) {
             throw new ProdutoDTOValidationException("A quantidade do produto não pode ser nula");
+        }
+        if (produto.quantidade() < 0) {
+            throw new ProdutoDTOValidationException("A quantidade do produto não pode ser negativa");
         }
         if (produto.dataEntrada() == null || produto.dataEntrada().isEmpty() || produto.dataEntrada().isBlank()) {
             throw new ProdutoDTOValidationException("A data de entrada não pode ser nula");
@@ -123,6 +132,16 @@ public class ProdutoService{
         if (produtoDTO.id() == null) {
             throw new ProdutoDTOValidationException("Informe o ID do produto para atualizar!");
         }
+        if (produtoDTO.preco() == 0){
+            throw new ProdutoDTOValidationException("O preço do produto não pode ser zero");
+        }
+        if (produtoDTO.preco() < 0){
+            throw new ProdutoDTOValidationException("O preço do produto não pode ser negativo");
+        }
+        if (produtoDTO.quantidade() < 0){
+            throw new ProdutoDTOValidationException("A quantidade do produto não pode ser negativo");
+        }
+
 
         Produto produto = produtoRepository.findById(produtoDTO.id())
                 .orElseThrow(() -> new ProdutoNaoEncontradoException("O ID fornecido não condiz com nenhum produto em nosso estoque!"));
