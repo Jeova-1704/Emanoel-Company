@@ -47,26 +47,26 @@
     <div class="row gy-4 mt-5 justify-content-center" data-aos="zoom-in" data-aos-delay="250">
       <div class="col-xl-2 col-md-4">
         <div class="icon-box">
-          <i class="ri-store-line"></i>
+          <i class="ri-add-box-line"></i>
           <h3><a href="#" data-bs-toggle="modal" data-bs-target="#produtoModal">Cadastrar produto</a></h3>
         </div>
       </div>
       <div class="col-xl-2 col-md-4">
         <div class="icon-box">
-          <i class="ri-bar-chart-box-line"></i>
+          <i class="ri-list-check"></i>
           <h3><a href="#" data-bs-toggle="modal" data-bs-target="#listarProdutosModal">Listar produtos no estoque</a>
           </h3>
         </div>
       </div>
       <div class="col-xl-2 col-md-4">
         <div class="icon-box">
-          <i class="ri-calendar-todo-line"></i>
+          <i class="ri-shopping-bag-line"></i>
           <h3><a href="#" data-bs-toggle="modal" data-bs-target="#venderProdutoModal">Vender produtos</a></h3>
         </div>
       </div>
       <div class="col-xl-2 col-md-4">
         <div class="icon-box">
-          <i class="ri-bank-line"></i>
+          <i class="ri-money-dollar-circle-line"></i>
           <h3><a href="#" dat a-bs-toggle="modal" data-bs-target="#listarcategorias">Controle de caixa</a>
           </h3>
         </div>
@@ -191,13 +191,13 @@
     <div class="modal-content bg-dark text-white">
       <div class="modal-header">
         <h5 class="modal-title" id="listarProdutosModalLabel">Produtos no Estoque</h5>
-        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        <button type="submit" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
       </div>
       <div class="modal-body">
         <form action="" method="post">
           <label>Pesquisar por nome:</label>
-          <input name="nomepesquisa" type="text" > <!-- Adicionei type="text" para garantir que seja um campo de texto -->
-          <button type="submit" class="bg-gray text-black">Buscar</button> <!-- Troquei o input para button -->
+          <input name="nomepesquisa" type="text" >
+          <button type="button" class="bg-gray text-black" onclick="pesquisarPorNome()">Buscar</button>
         </form>
         <div style="max-height: 500px; overflow-y: auto;">
           <table class="table table-striped table-dark">
@@ -229,6 +229,7 @@
     </div>
   </div>
 </div>
+
 
 <!-- Modal de Confirmação de Deleção -->
 <div class="modal fade" id="confirmacaoDelecaoModal" tabindex="-1" aria-labelledby="confirmacaoDelecaoModalLabel"
@@ -418,12 +419,17 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
+
           <div class="mb-3">
             <div class="alert alert-secondary text-center" role="alert">
               <h5>Preencha os dados necessários</h5>
             </div>
           </div>
-
+          <form action="" method="post">
+            <label>Pesquisar por nome:</label>
+            <input name="nomepesquisa" type="text" >
+            <button type="button" class="bg-gray text-black" onclick="pesquisarPorNome()">Buscar</button>
+          </form>
           <div class="flex">
             <div class="w-1/2 p-4">
               <div id="inputs-container">
@@ -471,11 +477,11 @@
           </div>
 
           <script>
-                        document.getElementById("add-row").addEventListener("click", function () {
-                            var container = document.getElementById("inputs-container");
-                            var newRow = document.createElement("div");
-                            newRow.classList.add("row", "input-row", "mt-3");
-                            newRow.innerHTML = `
+            document.getElementById("add-row").addEventListener("click", function () {
+              var container = document.getElementById("inputs-container");
+              var newRow = document.createElement("div");
+              newRow.classList.add("row", "input-row", "mt-3");
+              newRow.innerHTML = `
         <div class="col">
             <input type="number" class="form-control" name="quantidade">
         </div>
@@ -483,22 +489,22 @@
             <input type="text" class="form-control" name="produto_id">
         </div>
     `;
-                            container.appendChild(newRow);
-                        });
+              container.appendChild(newRow);
+            });
 
-                        document.getElementById("remove-row").onclick = function () {
-                            var container = document.getElementById("inputs-container");
-                            var rows = container.getElementsByClassName("input-row");
+            document.getElementById("remove-row").onclick = function () {
+              var container = document.getElementById("inputs-container");
+              var rows = container.getElementsByClassName("input-row");
 
-                            // Verifica se há mais de uma linha antes de permitir a remoção
-                            if (rows.length > 1) {
-                                // Remove a última linha criada
-                                container.removeChild(container.lastChild);
-                            } else {
-                                alert("Pelo menos uma linha deve ser mantida visível.");
-                            }
-                        };
-                    </script>
+              // Verifica se há mais de uma linha antes de permitir a remoção
+              if (rows.length > 1) {
+                // Remove a última linha criada
+                container.removeChild(container.lastChild);
+              } else {
+                alert("Pelo menos uma linha deve ser mantida visível.");
+              }
+            };
+          </script>
 
         </div>
       </div>
