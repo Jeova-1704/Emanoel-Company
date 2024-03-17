@@ -6,6 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" href="images/logo.png" type="image/png">
 </head>
 
 <body class=" bg-[url('../img/hero-bg.jpg')] bg-gray-800 bg-blend-multiply">
@@ -34,10 +35,27 @@
 
             <div>
                 <label class="block text-sm font-medium leading-6 text-gray-200 py-0" for="senha">Senha</label>
-                <div class="mblock mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                    <input class="focus:outline-none bg-gray-50 text-gray-900 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 placeholder:text-gray-400 sm:text-sm sm:leading-6" id="senha" name="senha" type="password" placeholder="•••••••">
+                <div class="mt-2 relative">
+                    <input class="focus:outline-none bg-gray-700 text-gray-900 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 placeholder:text-gray-400 sm:text-sm sm:leading-6" id="senha" name="senha" type="password" placeholder="Insira sua senha">
+                    <div class="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5 text-gray-400 cursor-pointer" onclick="togglePasswordVisibility()">
+                        <svg class="h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 12s3-8 8-8 8 8 8 8-3 8-8 8-8-8-8-8z"/>
+                        </svg>
+                    </div>
                 </div>
             </div>
+
+            <script>
+                function togglePasswordVisibility() {
+                    var senhaInput = document.getElementById('senha');
+                    if (senhaInput.type === 'password') {
+                        senhaInput.type = 'text';
+                    } else {
+                        senhaInput.type = 'password';
+                    }
+                }
+            </script>
 
             <div>
                 <input class="w-full text-yellow-700 hover:text-white border border-yellow-700 hover:bg-yellow-800 focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-yellow-400 dark:text-yellow-400 dark:hover:text-white dark:hover:bg-yellow-500 dark:focus:ring-yellow-900" type="submit" value="Entrar">
