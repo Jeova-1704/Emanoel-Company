@@ -67,8 +67,7 @@
       <div class="col-xl-2 col-md-4">
         <div class="icon-box">
           <i class="ri-money-dollar-circle-line"></i>
-          <h3><a href="#" dat a-bs-toggle="modal" data-bs-target="#listarcategorias">Controle de caixa</a>
-          </h3>
+          <h3><a href="#" data-bs-toggle="modal" data-bs-target="#controleCaixaModal">Controle de caixa</a></h3>
         </div>
       </div>
     </div>
@@ -340,60 +339,29 @@
 </div>
 </div>
 
-<!-- Modal de categoria-->
-<div class="modal fade" id="listarcategorias" tabindex="-1" aria-labelledby="listarProdutosModalLabel" aria-hidden="true">
+<!-- Modal controle de caixa -->
+<div class="modal fade" id="controleCaixaModal" tabindex="-1" aria-labelledby="controleCaixaModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-xl">
     <div class="modal-content bg-dark text-white">
       <div class="modal-header">
-        <h5 class="modal-title" id="listarcategorias">Categorias de produto</h5>
+        <h5 class="modal-title" id="controleCaixaModalLabel">Controle de caixa</h5>
         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <div style="max-height: 500px; overflow-y: auto;">
           <table class="table table-striped table-dark">
-            <thead>
-            <tr>
-              <th scope="col">Categorias</th>
-            </tr>
-            </thead>
             <tbody>
-            Aqui estão listadas todas as categorias dos produtos fornecidos em nossa empresa!
-            <!-- Conteúdo da tabela aqui -->
             <tr>
-              <td>ELETRÔNICOS</td>
+              <td>Total em estoque:</td>
+              <td><input type="text" id="totalEstoque" readonly></td>
             </tr>
             <tr>
-              <td>VESTUARIO E MODA</td>
+              <td>Total vendido:</td>
+              <td><input type="text" id="totalVendido" readonly></td>
             </tr>
             <tr>
-              <td>ALIMENTOS E BEBIDAS</td>
-            </tr>
-            <tr>
-              <td>CASA E DECORAÇÃO</td>
-            </tr>
-            <tr>
-              <td>SAÚDE E BELEZA</td>
-            </tr>
-            <tr>
-              <td>ESPORTES E FITNESS</td>
-            </tr>
-            <tr>
-              <td>LIVROS E MATERIAIS DE ESCRITÓRIO</td>
-            </tr>
-            <tr>
-              <td>BRINQUEDOS</td>
-            </tr>
-            <tr>
-              <td>JOGOS</td>
-            </tr>
-            <tr>
-              <td>AUTOMOTIVO</td>
-            </tr>
-            <tr>
-              <td>FERRAMENTAS E EQUIPAMENTOS</td>
-            </tr>
-            <tr>
-              <td>OUTROS</td>
+              <td>Total adicionado no sistema:</td>
+              <td><input type="text" id="totalAdicionado" readonly></td>
             </tr>
             </tbody>
           </table>
@@ -402,11 +370,10 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fechar</button>
       </div>
-
-      <!-- Toasts aqui -->
     </div>
   </div>
 </div>
+
 
 <!-- Modal vender produto-->
 <div class="modal fade" id="venderProdutoModal" tabindex="-1" aria-labelledby="venderProdutoModalLabel"
