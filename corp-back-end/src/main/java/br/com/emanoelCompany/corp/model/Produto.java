@@ -36,7 +36,7 @@ public class Produto implements Serializable {
     private Double precoTotal;
 
 
-    public Produto(Long id, Double preco, String nome, String categoria, int quantidade, LocalDate dataEntrada
+    public Produto(Long id, Double preco, String nome, String categoria, Integer quantidade, LocalDate dataEntrada
             , String codigoProduto, Double precoTotal) {
 
         this.id = id;

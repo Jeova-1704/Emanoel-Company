@@ -166,20 +166,18 @@ public class ProdutoService{
         return  convertToDTO(produtoAtualizado);
     }
    public void vender(Map<Long,Integer> vendaMap){
-
+        List<Produto> listaProdutosParaVender = new ArrayList<>();
         for (Long id : vendaMap.keySet()){
             int quantidade = vendaMap.get(id);
-            Produto produto = produtoRepository.findById(id)
-                    .orElseThrow(() -> new ProdutoNaoEncontradoException("O ID fornecido não condiz com nenhum produto em estoque "));
-
+            Produto produto = produtoRepository.findById(id).orElseThrow(() -> new ProdutoNaoEncontradoException("O ID fornecido não condiz com nenhum produto em estoque "));
             int quantidadeAtualizada =  (produto.getQuantidade()-quantidade);
-            if(quantidadeAtualizada < 0){
-                throw new QuantidadeInsuficienteException();
+            if(quantidadeAtualizada >= 0){
+                produto.setQuantidade(quantidadeAtualizada);
+                listaProdutosParaVender.add(produto);
+            } else {
+                throw new QuantidadeInsuficienteException("Quantidade insuficiente no estoque para realizar a venda.");
             }
-
-            produto.setQuantidade(quantidadeAtualizada);
-            produtoRepository.save(produto);
         }
+        produtoRepository.saveAll(listaProdutosParaVender);
     }
-
 }
