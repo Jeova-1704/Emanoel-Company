@@ -346,3 +346,56 @@ document.querySelector('form').addEventListener('submit', function(event) {
     event.preventDefault();
     pesquisarPorNome();
 });
+
+document.getElementById("add-row").addEventListener("click", function () {
+    var container = document.getElementById("inputs-container");
+    var newRow = document.createElement("div");
+    newRow.classList.add("row", "input-row", "mt-3");
+    newRow.innerHTML = `
+        <div class="col">
+            <input type="number" class="form-control" name="quantidade">
+        </div>
+        <div class="col">
+            <input type="text" class="form-control" name="produto_id">
+        </div>
+    `;
+    container.appendChild(newRow);
+});
+
+document.getElementById("remove-row").onclick = function () {
+    var container = document.getElementById("inputs-container");
+    var rows = container.getElementsByClassName("input-row");
+
+    if (rows.length > 1) {
+        container.removeChild(container.lastChild);
+    } else {
+        alert("Pelo menos uma linha deve ser mantida visível.");
+    }
+};
+
+document.getElementById("buscar").onclick = function () {
+
+    var nome = document.querySelector('input[name="nomepesquisa"]').value.toLowerCase();
+    var linhas = document.querySelectorAll('#listarProdutosModal tbody tr');
+
+    linhas.forEach(function(linha) {
+        var nomeProduto = linha.querySelector('td:nth-child(2)').textContent.toLowerCase();
+
+        if (nomeProduto.includes(nome)) {
+            linha.style.display = 'table-row';
+
+        } else {
+            linha.style.display = 'none';
+        }
+    });
+};
+
+document.getElementById("venderProdutoForm").onsubmit = function (event) {
+    event.preventDefault(); // Evita o envio padrão do formulário
+
+    // Aqui você pode implementar a lógica para enviar o formulário de venda
+    // Por exemplo, você pode fazer uma requisição AJAX para um servidor
+    // ou processar os dados diretamente no cliente
+    // Por enquanto, vamos apenas exibir um alerta confirmando o envio
+    alert("Formulário de venda enviado com sucesso!");
+};

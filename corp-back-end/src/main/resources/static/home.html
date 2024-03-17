@@ -428,7 +428,7 @@
           <form action="" method="post">
             <label>Pesquisar por nome:</label>
             <input name="nomepesquisa" type="text" >
-            <button type="button" class="bg-gray text-black" onclick="pesquisarPorNome()">Buscar</button>
+            <button type="button" class="bg-gray text-black" id="buscar">Buscar</button>
           </form>
           <div class="flex">
             <div class="w-1/2 p-4">
@@ -475,37 +475,6 @@
               </div>
             </div>
           </div>
-
-          <script>
-            document.getElementById("add-row").addEventListener("click", function () {
-              var container = document.getElementById("inputs-container");
-              var newRow = document.createElement("div");
-              newRow.classList.add("row", "input-row", "mt-3");
-              newRow.innerHTML = `
-        <div class="col">
-            <input type="number" class="form-control" name="quantidade">
-        </div>
-        <div class="col">
-            <input type="text" class="form-control" name="produto_id">
-        </div>
-    `;
-              container.appendChild(newRow);
-            });
-
-            document.getElementById("remove-row").onclick = function () {
-              var container = document.getElementById("inputs-container");
-              var rows = container.getElementsByClassName("input-row");
-
-              // Verifica se há mais de uma linha antes de permitir a remoção
-              if (rows.length > 1) {
-                // Remove a última linha criada
-                container.removeChild(container.lastChild);
-              } else {
-                alert("Pelo menos uma linha deve ser mantida visível.");
-              }
-            };
-          </script>
-
         </div>
       </div>
     </div>
