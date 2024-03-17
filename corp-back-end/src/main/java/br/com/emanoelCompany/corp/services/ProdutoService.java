@@ -13,10 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -37,26 +34,36 @@ public class ProdutoService{
                 produto.getPrecoTotal()
         );
     }
-
+    private final Set<String> categoriasValidas = new HashSet<>(Arrays.asList("ELETRÔNICOS", "VESTUARIO E MODA", "ALIMENTOS E BEBIDAS",
+            "CASA E DECORAÇÃO", "SAÚDE E BELEZA", "ESPORTES E FITNESS",
+            "LIVROS E MATERIAIS DE ESCRITÓRIO", "BRINQUEDOS E JOGOS", "AUTOMOTIVO", "FERRAMENTAS E EQUIPAMENTOS"));
     public ProdutoDTO salvar(ProdutoDTO produto) {
+
         if (produto.nome() == null || produto.nome().isEmpty() || produto.nome().isBlank()) {
             throw new ProdutoDTOValidationException("Nome do produto não pode ser nulo ou vazio");
         }
-        if (produto.preco() == null) {
-            throw new ProdutoDTOValidationException("Preço do produto não pode ser nulo");
+        if (produto.preco() == null || produto.preco() <= 0) {
+            throw new ProdutoDTOValidationException("Preço do produto não pode ser nulo, negativo ou zero");
         }
+
         if (produto.categoria() == null || produto.categoria().isEmpty() || produto.categoria().isBlank()) {
             throw new ProdutoDTOValidationException("Categoria do produto não pode ser nula ou vazia");
         }
-        if (produto.quantidade() == null) {
-            throw new ProdutoDTOValidationException("A quantidade do produto não pode ser nula");
+        if (!categoriasValidas.contains(produto.categoria().toUpperCase())){
+            throw new ProdutoDTOValidationException("Insira uma categoria válida!");
         }
+
+            if (produto.quantidade() == null || produto.quantidade() <= 0) {
+            throw new ProdutoDTOValidationException("A quantidade do produto não pode ser nula, negativa ou zero");
+        }
+
         if (produto.dataEntrada() == null || produto.dataEntrada().isEmpty() || produto.dataEntrada().isBlank()) {
             throw new ProdutoDTOValidationException("A data de entrada não pode ser nula");
         }
         if (produto.codigoProduto() == null || produto.codigoProduto().isEmpty() || produto.codigoProduto().isBlank()) {
             throw new ProdutoDTOValidationException("O codigo do produto não pode ser nulo ou vazio");
         }
+
 
         Produto prod = new Produto(produto);
         prod.setPrecoTotal(prod.valorTotal(prod.getQuantidade(), prod.getPreco()));
@@ -120,17 +127,22 @@ public class ProdutoService{
         if (produtoDTO.id() == null) {
             throw new ProdutoDTOValidationException("Informe o ID do produto para atualizar!");
         }
+
+        if (produtoDTO.quantidade() == null || produtoDTO.quantidade() <= 0){
+            throw new ProdutoDTOValidationException("A quantidade do produto não pode ser nulo, negativo ou zero");
+        }
+
         if (produtoDTO.nome() == null || produtoDTO.nome().isEmpty() || produtoDTO.nome().isBlank()) {
             throw new ProdutoDTOValidationException("Nome do produto não pode ser nulo ou vazio");
         }
-        if (produtoDTO.preco() == null) {
-            throw new ProdutoDTOValidationException("Preço do produto não pode ser nulo");
+        if (produtoDTO.preco() == null || produtoDTO.preco() <= 0) {
+            throw new ProdutoDTOValidationException("Preço do produto não pode ser nulo, negativo ou zero ");
         }
         if (produtoDTO.categoria() == null || produtoDTO.categoria().isEmpty() || produtoDTO.categoria().isBlank()) {
-            throw new ProdutoDTOValidationException("Categoria do produto não pode ser nula ou vazia");
+            throw new ProdutoDTOValidationException("Categoria do produto não pode ser nula, vazia, negativa ou zero");
         }
-        if (produtoDTO.quantidade() == null) {
-            throw new ProdutoDTOValidationException("A quantidade do produto não pode ser nula");
+        if (!categoriasValidas.contains(produtoDTO.categoria().toUpperCase())){
+            throw new ProdutoDTOValidationException("Insira uma categoria válida!");
         }
         if (produtoDTO.dataEntrada() == null || produtoDTO.dataEntrada().isEmpty() || produtoDTO.dataEntrada().isBlank()) {
             throw new ProdutoDTOValidationException("A data de entrada não pode ser nula");
@@ -139,6 +151,7 @@ public class ProdutoService{
             throw new ProdutoDTOValidationException("O codigo do produto não pode ser nulo ou vazio");
         }
         Produto produto = produtoRepository.findById(produtoDTO.id()).orElseThrow(() -> new ProdutoNaoEncontradoException("O ID fornecido não condiz com nenhum produto em nosso estoque!"));
+
 
         produto.setNome(produtoDTO.nome());
         produto.setCodigoProduto(produtoDTO.codigoProduto());
