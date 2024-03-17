@@ -22,6 +22,11 @@ public class LoginController {
     @Autowired
     private AdministratorService administratorService;
 
+    @GetMapping("/")
+    public String returnLogin() {
+        return "redirect:/login";
+    }
+
     @GetMapping("/login")
     public String showLoginPage() {
         return "login";
