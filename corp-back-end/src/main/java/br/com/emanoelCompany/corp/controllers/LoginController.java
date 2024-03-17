@@ -16,25 +16,24 @@ import java.io.UnsupportedEncodingException;
 
 
 @Controller
-@RequestMapping("/login")
+@RequestMapping()
 public class LoginController {
 
     @Autowired
     private AdministratorService administratorService;
 
-    @GetMapping()
+    @GetMapping("/login")
     public String showLoginPage() {
         return "login";
     }
 
-    @PostMapping()
+    @PostMapping("/login")
     public String login(Administrador adm, String usuario,
                         String senha, Model model, HttpServletResponse response) throws UnsupportedEncodingException {
         if (usuario != null && !usuario.isEmpty() && senha != null && !senha.isEmpty()) {
 
             if (administratorService.administradorExiste(usuario, senha)) {
                 CookieService.setCookie(response, "usuarioId", String.valueOf(adm.getId()), 1200);
-                CookieService.setCookie(response, "nomeUsuario", String.valueOf(adm.getNome()), 1200);
                 return "redirect:/emanoelcompany";
 
             } else {
@@ -48,5 +47,7 @@ public class LoginController {
         }
 
     }
+
+
 }
 
