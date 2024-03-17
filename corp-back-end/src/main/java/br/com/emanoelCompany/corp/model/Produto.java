@@ -132,4 +132,5 @@ public class Produto implements Serializable {
         this.precoTotal = quantidade * preco;
         return precoTotal;
     }
+
 }

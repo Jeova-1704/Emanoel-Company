@@ -62,7 +62,7 @@ public class ProdutoController {
         return ResponseEntity.ok(produtoAtualizado);
     }
 
-    @PostMapping("/vender")
+    @PutMapping ("/vender")
     public ResponseEntity<String> vender(@RequestBody Map<Long,Integer> vendaMap ){
 
         produtoService.vender(vendaMap);

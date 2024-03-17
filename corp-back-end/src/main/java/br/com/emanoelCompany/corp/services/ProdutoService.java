@@ -164,7 +164,7 @@ public class ProdutoService{
 
         return  convertToDTO(produtoAtualizado);
     }
-    public void vender(Map<Long,Integer> vendaMap){
+   public void vender(Map<Long,Integer> vendaMap){
 
         for (Long id : vendaMap.keySet()){
             int quantidade = vendaMap.get(id);
@@ -180,6 +180,7 @@ public class ProdutoService{
             produtoRepository.save(produto);
         }
     }
+
 
 
 

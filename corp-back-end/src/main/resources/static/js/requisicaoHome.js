@@ -75,6 +75,8 @@ document.addEventListener('DOMContentLoaded', function (event) {
     });
 });
 
+
+
 //Listar produtos
 function carregarProdutos() {
     const tabelaCorpo = document.querySelector("#listarProdutosModal tbody");
