@@ -13,10 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -37,8 +34,11 @@ public class ProdutoService{
                 produto.getPrecoTotal()
         );
     }
-
+    private final Set<String> categoriasValidas = new HashSet<>(Arrays.asList("ELETRÔNICOS", "VESTUARIO E MODA", "ALIMENTOS E BEBIDAS",
+            "CASA E DECORAÇÃO", "SAÚDE E BELEZA", "ESPORTES E FITNESS",
+            "LIVROS E MATERIAIS DE ESCRITÓRIO", "BRINQUEDOS E JOGOS", "AUTOMOTIVO", "FERRAMENTAS E EQUIPAMENTOS"));
     public ProdutoDTO salvar(ProdutoDTO produto) {
+
         if (produto.nome() == null || produto.nome().isEmpty() || produto.nome().isBlank()) {
             throw new ProdutoDTOValidationException("Nome do produto não pode ser nulo ou vazio");
         }
@@ -49,7 +49,11 @@ public class ProdutoService{
         if (produto.categoria() == null || produto.categoria().isEmpty() || produto.categoria().isBlank()) {
             throw new ProdutoDTOValidationException("Categoria do produto não pode ser nula ou vazia");
         }
-        if (produto.quantidade() == null || produto.quantidade() <= 0) {
+        if (!categoriasValidas.contains(produto.categoria().toUpperCase())){
+            throw new ProdutoDTOValidationException("Insira uma categoria válida!");
+        }
+
+            if (produto.quantidade() == null || produto.quantidade() <= 0) {
             throw new ProdutoDTOValidationException("A quantidade do produto não pode ser nula, negativa ou zero");
         }
 
@@ -59,6 +63,7 @@ public class ProdutoService{
         if (produto.codigoProduto() == null || produto.codigoProduto().isEmpty() || produto.codigoProduto().isBlank()) {
             throw new ProdutoDTOValidationException("O codigo do produto não pode ser nulo ou vazio");
         }
+
 
         Produto prod = new Produto(produto);
         prod.setPrecoTotal(prod.valorTotal(prod.getQuantidade(), prod.getPreco()));
@@ -135,6 +140,9 @@ public class ProdutoService{
         }
         if (produtoDTO.categoria() == null || produtoDTO.categoria().isEmpty() || produtoDTO.categoria().isBlank()) {
             throw new ProdutoDTOValidationException("Categoria do produto não pode ser nula, vazia, negativa ou zero");
+        }
+        if (!categoriasValidas.contains(produtoDTO.categoria().toUpperCase())){
+            throw new ProdutoDTOValidationException("Insira uma categoria válida!");
         }
         if (produtoDTO.dataEntrada() == null || produtoDTO.dataEntrada().isEmpty() || produtoDTO.dataEntrada().isBlank()) {
             throw new ProdutoDTOValidationException("A data de entrada não pode ser nula");
