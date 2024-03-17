@@ -134,10 +134,11 @@ function abrirModalDeDelecao(id) {
     confirmacaoModal.show();
 
     const btnConfirmar = document.getElementById('confirmarDelecao');
-    btnConfirmar.onclick = null;
-    btnConfirmar.addEventListener('click', function () {
+    // Limpa o evento onclick anterior para evitar múltiplas chamadas
+    btnConfirmar.onclick = null; // Remove qualquer manipulador anterior
+    btnConfirmar.onclick = function () {
         deletarProduto(id);
-    });
+    };
 }
 
 //requisição para deletar
@@ -148,22 +149,9 @@ function deletarProduto(id) {
         method: 'DELETE',
     }).then(data => {
         console.log('Produto deletado:', data);
-        const toastElement = document.getElementById('toastDeletadoSucesso');
-        const toast = new bootstrap.Toast(toastElement);
-        toast.show();
-        setTimeout(() => {
-            toast.hide();
-        }, 2000);
         carregarProdutos();
     }).catch(error => {
         console.error('Erro ao deletar produto:', error);
-        const toastElement = document.getElementById('toastErroDeletar');
-        const toast = new bootstrap.Toast(toastElement);
-        toast.show();
-
-        setTimeout(() => {
-            toast.hide();
-        }, 2000);
     });
 
     const confirmacaoModal = bootstrap.Modal.getInstance(document.getElementById('confirmacaoDelecaoModal'));
