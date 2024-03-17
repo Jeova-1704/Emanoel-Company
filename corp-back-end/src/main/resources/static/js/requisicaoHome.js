@@ -297,3 +297,42 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
+
+// função vender produto
+
+
+document.addEventListener('DOMContentLoaded', function (event) {
+    document.querySelector('#venderProdutoModal').addEventListener('show.bs.modal', function (event) {
+        listagemVendaProduto();
+    });
+});
+
+//Listar produtos
+function listagemVendaProduto() {
+    const tabelaCorpo = document.querySelector("#venderProdutoModal tbody");
+    tabelaCorpo.innerHTML = '';
+
+    fetch('http://localhost:8080/produto/listar')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            data.forEach((produto, index) => {
+                const linha = tabelaCorpo.insertRow();
+                const celulaId = linha.insertCell(0);
+                const celulaNome = linha.insertCell(1);
+                const celulaQuantidade = linha.insertCell(2);
+                const celulaPreco = linha.insertCell(3);
+
+                celulaId.textContent = produto.id;
+                celulaNome.textContent = produto.nome;
+                celulaQuantidade.textContent = produto.quantidade;
+                celulaPreco.textContent = produto.preco.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+
+            });
+        })
+        .catch(error => console.error('Erro ao buscar produtos:', error));
+}
