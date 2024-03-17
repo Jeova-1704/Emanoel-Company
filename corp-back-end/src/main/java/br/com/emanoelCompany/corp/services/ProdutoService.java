@@ -36,7 +36,7 @@ public class ProdutoService{
     }
     private final Set<String> categoriasValidas = new HashSet<>(Arrays.asList("ELETRÔNICOS", "VESTUARIO E MODA", "ALIMENTOS E BEBIDAS",
             "CASA E DECORAÇÃO", "SAÚDE E BELEZA", "ESPORTES E FITNESS",
-            "LIVROS E MATERIAIS DE ESCRITÓRIO", "BRINQUEDOS E JOGOS", "AUTOMOTIVO", "FERRAMENTAS E EQUIPAMENTOS"
+            "LIVROS E MATERIAIS DE ESCRITÓRIO", "BRINQUEDOS", "JOGOS", "AUTOMOTIVO", "FERRAMENTAS E EQUIPAMENTOS"
     , "OUTROS"));
     public ProdutoDTO salvar(ProdutoDTO produto) {
 
@@ -54,7 +54,7 @@ public class ProdutoService{
             throw new ProdutoDTOValidationException("Insira uma categoria válida!");
         }
 
-            if (produto.quantidade() == null || produto.quantidade() <= 0) {
+        if (produto.quantidade() == null || produto.quantidade() <= 0) {
             throw new ProdutoDTOValidationException("A quantidade do produto não pode ser nula, negativa ou zero");
         }
 
