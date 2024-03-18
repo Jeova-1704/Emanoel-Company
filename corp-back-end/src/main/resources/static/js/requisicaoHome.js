@@ -448,4 +448,23 @@ document.getElementById("venderProdutoForm").onsubmit = function (event) {
             });
     });
 });
+function pesquisarPorCategoria() {
+    var categoria = document.querySelector('select[name="nomecategoria"]').value.toUpperCase();
+    var linhas = document.querySelectorAll('#listarProdutosModal tbody tr');
 
+    linhas.forEach(function(linha) {
+        var nomeCategoria = linha.querySelector('td:nth-child(8)').textContent.toUpperCase();
+
+        if (nomeCategoria.includes(categoria)) {
+            linha.style.display = 'table-row';
+
+        } else {
+            linha.style.display = 'none';
+        }
+    });
+}
+
+document.querySelector('form').addEventListener('submit', function(event) {
+    event.preventDefault();
+    pesquisarPorCategoria();
+});
