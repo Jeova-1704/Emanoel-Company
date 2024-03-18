@@ -225,7 +225,51 @@
             </div>
 
             <!-- Toasts aqui -->
-        </div>
+            <div id="toastDeletar" class="toast align-items-center text-white bg-success border-0" role="alert"
+                 aria-live="assertive" aria-atomic="true"
+                 style="position: relative; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+                <div class="d-flex">
+                    <div class="toast-body">
+                        Produto deletado com sucesso!
+                    </div>
+                    <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+            </div>
+
+            <div id="toastErroDeletar" class="toast align-items-center text-white bg-danger border-0" role="alert"
+                 aria-live="assertive" aria-atomic="true"
+                 style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+                <div class="d-flex">
+                    <div class="toast-body">
+                        Erro ao cadastrar produto!
+                    </div>
+                    <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+            </div>
+
+            <div  id="toastAtualizado" class="toast align-items-center text-white bg-success border-0" role="alert"
+                  aria-live="assertive" aria-atomic="true"
+                  style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+                <div class="d-flex">
+                    <div class="toast-body">
+                        Produto editado com sucesso!
+                    </div>
+                    <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+            </div>
+
+            <div id="toastErroAtualizar" class="toast align-items-center text-white bg-danger border-0" role="alert"
+                 aria-live="assertive" aria-atomic="true"
+                 style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+                <div class="d-flex">
+                    <div class="toast-body">
+                        Erro ao cadastrar produto!
+                    </div>
+                    <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+            </div>
+
+
     </div>
 </div>
 
@@ -316,27 +360,17 @@
                         </div>
                     </div>
 
-
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
                         <button type="submit" class="btn btn-primary" id="salvarAlteracoes">Salvar Alterações</button>
                     </div>
+
                 </div>
             </div>
         </div>
     </form>
 </div>
 
-<div id="toastAtualizado" class="toast align-items-center text-white bg-success border-0" role="alert"
-     aria-live="assertive" aria-atomic="true"
-     style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);">
-    <div class="d-flex">
-        <div class="toast-body">
-            Produto editado com sucesso!
-        </div>
-        <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
-    </div>
-</div>
 </div>
 
 <!-- Modal controle de caixa -->
