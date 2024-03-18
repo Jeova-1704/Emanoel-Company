@@ -516,27 +516,28 @@ document.getElementById("venderProdutoForm").onsubmit = function (event) {
     event.preventDefault();
 };
 
-    //Função para listar produtos controle de caixa
-    document.addEventListener('DOMContentLoaded', function () {
-    const modal = document.getElementById('controleCaixaModal');
-    modal.addEventListener('show.bs.modal', function (event) {
-        fetch('http://localhost:8080/estoque')
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Erro ao obter os dados do estoque');
-                }
-                return response.json();
-            })
-            .then(data => {
-                document.getElementById('totalEstoque').value = data.totalDinheiroEstoque.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });;
-                document.getElementById('totalProduto').value = data.totalProdutos;
-                document.getElementById('totalUnitario').value = data.totalUnitario;
-            })
-            .catch(error => {
-                console.error(error);
-            });
-    });
+//Função para listar produtos controle de caixa
+document.addEventListener('DOMContentLoaded', function () {
+const modal = document.getElementById('controleCaixaModal');
+modal.addEventListener('show.bs.modal', async function (event) {
+    fetch('http://localhost:8080/estoque')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Erro ao obter os dados do estoque');
+            }
+            return response.json();
+        })
+        .then(data => {
+            document.getElementById('totalEstoque').value = data.totalDinheiroEstoque.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });;
+            document.getElementById('totalProduto').value = data.totalProdutos;
+            document.getElementById('totalUnitario').value = data.totalUnitario;
+        })
+        .catch(error => {
+            console.error(error);
+        });
 });
+});
+
 function pesquisarPorCategoria() {
     var categoria = document.querySelector('select[name="nomecategoria"]').value.toUpperCase();
     var linhas = document.querySelectorAll('#listarProdutosModal tbody tr');
