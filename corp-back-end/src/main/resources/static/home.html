@@ -70,6 +70,12 @@
           <h3><a href="#" data-bs-toggle="modal" data-bs-target="#controleCaixaModal">Controle de caixa</a></h3>
         </div>
       </div>
+      <div class="col-xl-2 col-md-4">
+        <div class="icon-box">
+          <i class="ri-bar-chart-grouped-line"></i>
+          <h3><a href="#" data-bs-toggle="modal" data-bs-target="#emitirNotaEstoque">Emitir nota fiscal do estoque</a></h3>
+        </div>
+      </div>
     </div>
   </div>
   </div>
@@ -179,7 +185,7 @@
 
           <div id="toast" class="toast align-items-center text-white bg-success border-0" role="alert"
                aria-live="assertive" aria-atomic="true"
-               style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+               style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 9999">
             <div class="d-flex">
               <div class="toast-body">
                 Produto cadastrado com sucesso!
@@ -189,7 +195,7 @@
           </div>
           <div id="toastErro" class="toast align-items-center text-white bg-danger border-0" role="alert"
                aria-live="assertive" aria-atomic="true"
-               style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+               style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 9999">
             <div class="d-flex">
               <div class="toast-body">
                 Erro ao cadastrar produto!
@@ -300,7 +306,7 @@
       <!-- Toasts aqui -->
       <div id="toastDeletar" class="toast align-items-center text-white bg-success border-0" role="alert"
            aria-live="assertive" aria-atomic="true"
-           style="position: relative; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+           style="position: relative; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 9999">
         <div class="d-flex">
           <div class="toast-body">
             Produto deletado com sucesso!
@@ -311,7 +317,7 @@
 
       <div id="toastErroDeletar" class="toast align-items-center text-white bg-danger border-0" role="alert"
            aria-live="assertive" aria-atomic="true"
-           style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+           style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 9999">
         <div class="d-flex">
           <div class="toast-body">
             Erro ao cadastrar produto!
@@ -322,7 +328,7 @@
 
       <div  id="toastAtualizado" class="toast align-items-center text-white bg-success border-0" role="alert"
             aria-live="assertive" aria-atomic="true"
-            style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+            style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 9999">
         <div class="d-flex">
           <div class="toast-body">
             Produto editado com sucesso!
@@ -462,7 +468,7 @@
 
             <div id="toastErroAtualizar" class="toast align-items-center text-white bg-danger border-0" role="alert"
                  aria-live="assertive" aria-atomic="true"
-                 style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+                 style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 9999">
               <div class="d-flex">
                 <div class="toast-body">
                   Erro ao editar produto!
@@ -475,9 +481,6 @@
               <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
               <button type="submit" class="btn btn-primary" id="salvarAlteracoes">Salvar Alterações</button>
             </div>
-
-
-
           </div>
         </div>
       </div>
@@ -539,22 +542,57 @@
               <h5>Preencha os dados necessários</h5>
             </div>
           </div>
+
+          <div id="mensagemVendaProduto" class="toast align-items-center text-white border-0" role="alert"
+               aria-live="assertive" aria-atomic="true"
+               style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 9999">
+            <div class="d-flex text-bg-success">
+              <div class="toast-body ">
+                Venda realizada com sucesso !
+              </div>
+              <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+          </div>
+
+          <div id="vendaDadosInsuficiente" class="toast align-items-center text-white border-0" role="alert"
+               aria-live="assertive" aria-atomic="true"
+               style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 9999">
+            <div class="d-flex text-bg-danger">
+              <div class="toast-body ">
+                Venda não realizada : Dados Insuficiente !
+              </div>
+              <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+          </div>
+
+          <div id="mensagemErroVendaProduto" class="toast align-items-center text-white bg-danger border-0" role="alert"
+               aria-live="assertive" aria-atomic="true"
+               style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 9999">
+            <div class="d-flex">
+              <div class="toast-body">
+                Erro ao vender produto!
+              </div>
+              <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+          </div>
+
           <form action="" method="post">
-            <label>Pesquisar por nome:</label>
-            <input name="nomepesquisa" type="text" >
-            <button type="button" class="bg-gray text-black" id="buscar">Buscar</button>
+            <label >Pesquisar por nome:</label>
+            <input name="pesquisaVender" type="text" >
+            <button type="button" class="bg-gray text-black" onclick="pesquisarPorNomeVender()">Buscar</button>
           </form>
+
           <div class="flex">
             <div class="w-1/2 p-4">
               <div id="inputs-container">
                 <div class="row input-row">
                   <div class="col">
                     <label for="quantidade">Quantidade:</label>
-                    <input type="number" class="form-control" name="quantidade">
+                    <input type="number" class="form-control" id="quantidade_venda" name="quantidade">
                   </div>
                   <div class="col">
                     <label for="produto_id">ID:</label>
-                    <input type="text" class="form-control" name="produto_id">
+                    <input type="text" class="form-control"  id="id_venda" name="produto_id">
                   </div>
                 </div>
               </div>
