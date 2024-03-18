@@ -103,14 +103,16 @@ function carregarProdutos() {
                 const celulaPreco = linha.insertCell(5);
                 const celulaValorToral = linha.insertCell(6);
                 const celulaCategoria = linha.insertCell(7);
-                const celulaDeletar = linha.insertCell(8);
-                const celulaEditar = linha.insertCell(9);
+                const celulaFornecedor = linha.insertCell(8);
+                const celulaDeletar = linha.insertCell(9);
+                const celulaEditar = linha.insertCell(10);
 
                 celulaId.textContent = produto.id;
                 celulaNome.textContent = produto.nome;
                 celulaCodigo.textContent = produto.codigoProduto;
                 celulaDataEntrada.textContent = produto.dataEntrada;
                 celulaQuantidade.textContent = produto.quantidade;
+                celulaFornecedor.textContent = produto.fornecedor;
                 celulaPreco.textContent = produto.preco.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
                 celulaValorToral.textContent = produto.precoTotal.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
                 celulaCategoria.textContent = produto.categoria;
