@@ -3,6 +3,7 @@ package br.com.emanoelCompany.corp.infra;
 import br.com.emanoelCompany.corp.exceptions.ConversaoDataProdutoDTOExeption;
 import br.com.emanoelCompany.corp.exceptions.ProdutoDTOValidationException;
 import br.com.emanoelCompany.corp.exceptions.ProdutoNaoEncontradoException;
+import br.com.emanoelCompany.corp.exceptions.QuantidadeInsuficienteException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -33,4 +34,11 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
         ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(),ex.getMessage(),request.getDescription(false));
         return new ResponseEntity<>(exceptionResponse,HttpStatus.NOT_FOUND);
     }
+
+    @ExceptionHandler(QuantidadeInsuficienteException.class)
+    private ResponseEntity<ExceptionResponse> quantidadeInsuficienteExceptionHandle(QuantidadeInsuficienteException ex,WebRequest request){
+        ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(),ex.getMessage(),request.getDescription(false));
+        return new ResponseEntity<>(exceptionResponse,HttpStatus.NOT_FOUND);
+    }
+
 }
