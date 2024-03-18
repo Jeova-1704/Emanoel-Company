@@ -192,6 +192,7 @@ public class ProdutoService{
             int quantidadeAtualizada =  (produto.getQuantidade()-quantidade);
             if(quantidadeAtualizada >= 0){
                 produto.setQuantidade(quantidadeAtualizada);
+                produto.setPrecoTotal(produto.valorTotal(produto.getQuantidade(), produto.getPreco()));
                 listaProdutosParaVender.add(produto);
             } else {
                 throw new QuantidadeInsuficienteException("Quantidade insuficiente no estoque para realizar a venda.");
