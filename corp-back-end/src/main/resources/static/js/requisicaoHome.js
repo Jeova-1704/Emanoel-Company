@@ -227,6 +227,7 @@ function editarProduto(id) {
             console.log(produto.dataEntrada);
             console.log(produto.quantidade);
             console.log(produto.preco);
+            console.log(produto.fornecedor);
             document.getElementById('produto_id').value = produto.id;
             document.getElementById('produto_nome').value = produto.nome;
             document.getElementById('produto_codigo_produto').value = produto.codigoProduto;
@@ -234,6 +235,7 @@ function editarProduto(id) {
             document.getElementById('produto_quantidade').value = produto.quantidade;
             document.getElementById('produto_preco').value = produto.preco;
             document.getElementById('produto_categoria').value = produto.categoria;
+            document.getElementById('produto_fornecedor').value = produto.fornecedor;
 
             confirmacaoModal.show();
         })
@@ -255,9 +257,10 @@ document.addEventListener('DOMContentLoaded', function() {
         const quantidadeElement = document.getElementById('produto_quantidade');
         const precoElement = document.getElementById('produto_preco');
         const categoriaElement = document.getElementById('produto_categoria');
+        const fornecedorElement = document.getElementById('produto_fornecedor');
 
         if (!idProdutoElement || !nomeProdutoElement || !codigoProdutoElement || !dataEntradaElement
-            || !quantidadeElement || !precoElement || !categoriaElement) {
+            || !quantidadeElement || !precoElement || !categoriaElement || !fornecedorElement) {
             console.error('Um ou mais elementos do formulário não foram encontrados.');
             return;
         }
@@ -269,6 +272,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const quantidade = quantidadeElement.value;
         const preco = precoElement.value;
         const categoria = categoriaElement.value;
+        const fornecedor = fornecedorElement.value;
 
         const dadosProduto = {
             id: idProduto,
@@ -277,7 +281,8 @@ document.addEventListener('DOMContentLoaded', function() {
             dataEntrada: dataEntrada,
             quantidade: parseInt(quantidade),
             preco: parseFloat(preco),
-            categoria: categoria
+            categoria: categoria,
+            fornecedor: fornecedor
         };
 
         // Envia a requisição PUT
