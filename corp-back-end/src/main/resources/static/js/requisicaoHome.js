@@ -165,8 +165,6 @@ function deletarProduto(id) {
     }).catch(error => {
 
         const toastErroElement = document.getElementById('toastErroDeletar');
-        const toastErroBody = toastErroElement.querySelector('.toast-body');
-        toastErroBody.textContent = `Erro ao cadastrar produto! Erro: ${data.message}`;
         const toastErro = new bootstrap.Toast(toastErroElement);
         toastErro.show();
 
@@ -310,8 +308,6 @@ document.addEventListener('DOMContentLoaded', function() {
             .catch(error => {
 
                 const toastErroElement = document.getElementById('toastErroAtualizar');
-                const toastErroBody = toastErroElement.querySelector('.toast-body');
-                toastErroBody.textContent = `Erro ao cadastrar produto! Erro: ${data.message}`;
                 const toastErro = new bootstrap.Toast(toastErroElement);
                 toastErro.show();
 
