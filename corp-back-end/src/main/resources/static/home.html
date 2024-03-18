@@ -73,7 +73,7 @@
       <div class="col-xl-2 col-md-4">
         <div class="icon-box">
           <i class="ri-bar-chart-grouped-line"></i>
-          <h3><a href="#" data-bs-toggle="modal" data-bs-target="#emitirNotaEstoque">Emitir nota fiscal do estoque</a></h3>
+          <h3><a href="#" data-bs-toggle="modal" data-bs-target="#emitirNotaEstoque">Emitir relatório do estoque</a></h3>
         </div>
       </div>
     </div>
@@ -100,37 +100,37 @@
             <div class="mb-3 row">
               <label for="nome" class="col-md-4 col-form-label">Nome do produto:</label>
               <div class="col-md-8">
-                <input type="text" class="form-control" id="nome" name="nome">
+                <input type="text" class="form-control" id="nome" name="nome" placeholder="Insira o nome">
               </div>
             </div>
 
             <div class="mb-3 row">
-              <label for="codigo_produto" class="col-md-4 col-form-label">cod. Produto:</label>
+              <label for="codigo_produto" class="col-md-4 col-form-label">Cód. Produto:</label>
               <div class="col-md-8">
-                <input type="text" class="form-control" id="codigo_produto" name="codigo_produto" oninput="this.value = this.value.toUpperCase()">
+                <input type="text" class="form-control" id="codigo_produto" name="codigo_produto" placeholder="Insira o código do produto" oninput="this.value = this.value.toUpperCase()">
               </div>
             </div>
 
             <div class="mb-3 row">
               <label for="data_entrada" class="col-md-4 col-form-label">Data de entrada:</label>
               <div class="col-md-8">
-                <input type="text" class="form-control" id="data_entrada" name="data_entrada">
+                <input type="text" class="form-control" id="data_entrada" name="data_entrada" placeholder="Insira da data de entrada">
               </div>
             </div>
 
             <div class="mb-3 row">
               <label for="quantidade" class="col-md-4 col-form-label">Quantidade:</label>
               <div class="col-md-8">
-                <input type="number" class="form-control" id="quantidade" name="quantidade">
+                <input type="number" class="form-control" id="quantidade" name="quantidade" placeholder="Insira a quantidade">
               </div>
             </div>
 
             <div class="mb-3 row">
-              <label for="preco" class="col-md-4 col-form-label">Preço(Unidade):</label>
+              <label for="preco" class="col-md-4 col-form-label">Preço (Unidade):</label>
               <div class="col-md-8">
                 <input type="number" class="form-control" id="preco" name="preco" step="any"
                        pattern="[0-9]+([\.,][0-9]+)?"
-                       title="Use apenas números e um ponto ou vírgula como separador decimal">
+                       title="Use apenas números e um ponto ou vírgula como separador decimal" placeholder="Insira o preço">
               </div>
             </div>
 
@@ -225,8 +225,8 @@
             <div class="row mb-3">
               <!-- Pesquisar por nome -->
               <div class="col-4 d-flex align-items-center justify-content-between">
-                <label class="label-control mr-1">Nome:</label>
-                <input name="nomepesquisa" type="text" class="form-control mr-1">
+                <label class="label-control mr-1">Nome: </label>
+                <input name="nomepesquisa" type="text" class="form-control mr-1" placeholder="Insira o nome">
                 <button type="button" class="btn btn-secondary" onclick="pesquisarPorNome()">Buscar</button>
               </div>
               <!-- Pesquisar por categoria -->
@@ -510,7 +510,7 @@
               <td><input type="text" id="totalProduto" readonly></td>
             </tr>
             <tr>
-              <td>Total de unitário de produtos:</td>
+              <td>Total unitário de produtos:</td>
               <td><input type="text" id="totalUnitario" readonly></td>
             </tr>
             </tbody>
@@ -578,7 +578,7 @@
 
           <form action="" method="post">
             <label >Pesquisar por nome:</label>
-            <input name="pesquisaVender" type="text" >
+            <input name="pesquisaVender" type="text" placeholder="Insira o nome">
             <button type="button" class="bg-gray text-black" onclick="pesquisarPorNomeVender()">Buscar</button>
           </form>
 
@@ -588,11 +588,11 @@
                 <div class="row input-row">
                   <div class="col">
                     <label for="quantidade">Quantidade:</label>
-                    <input type="number" class="form-control" id="quantidade_venda" name="quantidade">
+                    <input type="number" class="form-control" id="quantidade_venda" name="quantidade" placeholder="Insira a quantidade">
                   </div>
                   <div class="col">
                     <label for="produto_id">ID:</label>
-                    <input type="text" class="form-control"  id="id_venda" name="produto_id">
+                    <input type="text" class="form-control"  id="id_venda" name="produto_id" placeholder="Insira o ID do produto">
                   </div>
                 </div>
               </div>
