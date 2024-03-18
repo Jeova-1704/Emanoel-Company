@@ -135,15 +135,12 @@ function abrirModalDeDelecao(id) {
     const confirmacaoModal = new bootstrap.Modal(document.getElementById('confirmacaoDelecaoModal'));
     confirmacaoModal.show();
 
-
     const btnConfirmar = document.getElementById('confirmarDelecao');
     // Limpa o evento onclick anterior para evitar múltiplas chamadas
     btnConfirmar.onclick = null; // Remove qualquer manipulador anterior
     btnConfirmar.onclick = function () {
         deletarProduto(id);
     };
-
-
 }
 
 //requisição para deletar
@@ -154,22 +151,8 @@ function deletarProduto(id) {
         method: 'DELETE',
     }).then(data => {
         console.log('Produto deletado:', data);
-        const toastElement = document.getElementById('toastDeletar');
-        const toast = new bootstrap.Toast(toastElement);
-        toast.show();
-
-        setTimeout(() => {
-            toast.hide();
-        }, 2000);
         carregarProdutos();
     }).catch(error => {
-
-        const toastErroElement = document.getElementById('toastErroDeletar');
-        const toastErroBody = toastErroElement.querySelector('.toast-body');
-        toastErroBody.textContent = `Erro ao cadastrar produto! Erro: ${data.message}`;
-        const toastErro = new bootstrap.Toast(toastErroElement);
-        toastErro.show();
-
         console.error('Erro ao deletar produto:', error);
     });
 
@@ -296,25 +279,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 const confirmacaoModal = bootstrap.Modal.getInstance(document
                     .getElementById('editarProdutoModal'));
                 confirmacaoModal.hide();
-
-                const toastElement = document.getElementById('toastAtualizado');
-                const toast = new bootstrap.Toast(toastElement);
-                toast.show();
-
-                setTimeout(() => {
-                    toast.hide();
-                }, 2000);
-
                 carregarProdutos();
             })
             .catch(error => {
-
-                const toastErroElement = document.getElementById('toastErroAtualizar');
-                const toastErroBody = toastErroElement.querySelector('.toast-body');
-                toastErroBody.textContent = `Erro ao cadastrar produto! Erro: ${data.message}`;
-                const toastErro = new bootstrap.Toast(toastErroElement);
-                toastErro.show();
-
                 console.error('Erro:', error);
             });
     });
@@ -432,4 +399,3 @@ document.getElementById("venderProdutoForm").onsubmit = function (event) {
     // Por enquanto, vamos apenas exibir um alerta confirmando o envio
     alert("Formulário de venda enviado com sucesso!");
 };
-

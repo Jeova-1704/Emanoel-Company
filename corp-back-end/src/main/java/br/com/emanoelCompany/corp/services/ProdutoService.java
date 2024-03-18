@@ -1,7 +1,6 @@
 package br.com.emanoelCompany.corp.services;
 
 import br.com.emanoelCompany.corp.DTO.ProdutoDTO;
-import br.com.emanoelCompany.corp.exceptions.ConversaoDataProdutoDTOExeption;
 import br.com.emanoelCompany.corp.exceptions.ProdutoDTOValidationException;
 import br.com.emanoelCompany.corp.exceptions.ProdutoNaoEncontradoException;
 import br.com.emanoelCompany.corp.exceptions.QuantidadeInsuficienteException;
@@ -12,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
 import java.util.*;
 import java.util.stream.Collectors;
 
