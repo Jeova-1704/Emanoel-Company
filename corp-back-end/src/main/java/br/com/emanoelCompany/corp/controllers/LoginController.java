@@ -38,7 +38,7 @@ public class LoginController {
         if (usuario != null && !usuario.isEmpty() && senha != null && !senha.isEmpty()) {
 
             if (administratorService.administradorExiste(usuario, senha)) {
-                CookieService.setCookie(response, "usuarioId", String.valueOf(adm.getId()), 1200);
+                CookieService.setCookie(response, "usuarioId", String.valueOf(adm.getId()), 12000);
                 return "redirect:/emanoelcompany";
 
             } else {
