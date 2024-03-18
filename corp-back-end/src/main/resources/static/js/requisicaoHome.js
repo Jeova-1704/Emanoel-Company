@@ -576,3 +576,35 @@ function pesquisarPorNomeVender() {
         }
     });
 }
+
+document.addEventListener("DOMContentLoaded", function() {
+    var link = document.querySelector('a[data-bs-toggle="modal"][data-bs-target="#emitirNotaEstoque"]');
+    link.addEventListener("click", function(event) {
+        event.preventDefault();
+
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', 'http://localhost:8080/estoque/emitir-relatorio', true);
+        xhr.responseType = 'blob';
+
+        xhr.onload = function() {
+            if (xhr.status === 200) {
+
+                var url = window.URL.createObjectURL(xhr.response);
+
+                var linkDownload = document.createElement('a');
+                linkDownload.href = url;
+                linkDownload.download = 'relatorio_produtos.txt';
+                document.body.appendChild(linkDownload);
+                linkDownload.click();
+
+                setTimeout(function() {
+                    document.body.removeChild(linkDownload);
+                    window.URL.revokeObjectURL(url);
+                }, 0);
+            } else {
+                console.error('Erro ao fazer a requisição:', xhr.statusText);
+            }
+        };
+        xhr.send();
+    });
+});
