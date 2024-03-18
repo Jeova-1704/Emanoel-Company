@@ -416,7 +416,6 @@ document.addEventListener('DOMContentLoaded', function () {
             })
             .catch(error => {
                 console.error(error);
-                // Aqui você pode lidar com o erro, por exemplo, exibir uma mensagem para o usuário
             });
     });
 });
