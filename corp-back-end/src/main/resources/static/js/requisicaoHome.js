@@ -524,4 +524,25 @@ document.querySelector('form').addEventListener('submit', function(event) {
     pesquisarPorCategoria();
 });
 
+function pesquisarPorFornecedor() {
+    var fornecedor = document.querySelector('select[name="fornecedores"]').value.toUpperCase();
+    var linhas = document.querySelectorAll('#listarProdutosModal tbody tr');
+
+    linhas.forEach(function(linha) {
+        var nomeFornecedor = linha.querySelector('td:nth-child(9)').textContent.toUpperCase();
+
+        if (nomeFornecedor.includes(fornecedor)) {
+            linha.style.display = 'table-row';
+
+        } else {
+            linha.style.display = 'none';
+        }
+    });
+}
+
+document.querySelector('form').addEventListener('submit', function(event) {
+    event.preventDefault();
+    pesquisarPorFornecedor();
+});
+
 
