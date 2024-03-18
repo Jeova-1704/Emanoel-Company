@@ -391,11 +391,32 @@ document.getElementById("buscar").onclick = function () {
 };
 
 document.getElementById("venderProdutoForm").onsubmit = function (event) {
-    event.preventDefault(); // Evita o envio padrão do formulário
-
-    // Aqui você pode implementar a lógica para enviar o formulário de venda
-    // Por exemplo, você pode fazer uma requisição AJAX para um servidor
-    // ou processar os dados diretamente no cliente
-    // Por enquanto, vamos apenas exibir um alerta confirmando o envio
+    event.preventDefault();
     alert("Formulário de venda enviado com sucesso!");
 };
+
+
+
+
+//Função para listar produtos controle de caixa
+document.addEventListener('DOMContentLoaded', function () {
+    const modal = document.getElementById('controleCaixaModal');
+    modal.addEventListener('show.bs.modal', function (event) {
+        fetch('http://localhost:8080/estoque')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Erro ao obter os dados do estoque');
+                }
+                return response.json();
+            })
+            .then(data => {
+                document.getElementById('totalEstoque').value = data.totalDinheiroEstoque.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });;
+                document.getElementById('totalProduto').value = data.totalProdutos;
+                document.getElementById('totalUnitario').value = data.totalUnitario;
+            })
+            .catch(error => {
+                console.error(error);
+                // Aqui você pode lidar com o erro, por exemplo, exibir uma mensagem para o usuário
+            });
+    });
+});
