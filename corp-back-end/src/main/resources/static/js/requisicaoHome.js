@@ -324,6 +324,51 @@ document.addEventListener('DOMContentLoaded', function (event) {
     });
 });
 
+document.getElementById("vender_salvarAlteracoes").addEventListener("click", function() {
+    var rows = document.getElementsByClassName("input-row");
+    var dataToSend = {};
+
+    // Itera sobre todas as linhas de entrada
+    for (var i = 0; i < rows.length; i++) {
+        var quantidade = rows[i].querySelector('input[name="quantidade"]').value;
+        var produto_id = rows[i].querySelector('input[name="produto_id"]').value;
+
+        // Verifica se ambos os campos possuem valores
+        if (quantidade && produto_id) {
+            // Adiciona os valores ao objeto dataToSend
+            dataToSend[parseInt(produto_id)] = parseInt(quantidade);
+        }
+    }
+
+    // Verifica se há dados para enviar
+    if (Object.keys(dataToSend).length > 0) {
+        alert(dataToSend);
+        // Envia os dados para o backend como JSON
+        fetch(`http://localhost:8080/produto/vender`, {
+            method: 'PUT', // Alterado para PUT
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(dataToSend),
+        })
+            .then(response => {
+                if (response.ok) {
+                    // Faça algo se a requisição for bem-sucedida
+                    console.log("Dados enviados com sucesso!");
+                } else {
+                    // Faça algo se a requisição falhar
+                    console.error("Erro ao enviar dados para o backend");
+                }
+            })
+            .catch(error => {
+                console.error("Erro ao enviar dados para o backend:", error);
+            });
+    } else {
+        alert("Por favor, preencha pelo menos uma linha de dados.");
+    }
+});
+
+
 //Listar produtos
 function listagemVendaProduto() {
     const tabelaCorpo = document.querySelector("#venderProdutoModal tbody");
