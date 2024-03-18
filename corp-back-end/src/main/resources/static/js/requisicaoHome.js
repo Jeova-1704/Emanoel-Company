@@ -345,17 +345,16 @@ document.getElementById("vender_salvarAlteracoes").addEventListener("click", fun
 
         // Verifica se ambos os campos possuem valores
         if (quantidade && produto_id) {
-            // Adiciona os valores ao objeto dataToSend
+
             dataToSend[parseInt(produto_id)] = parseInt(quantidade);
         }
     }
 
     // Verifica se há dados para enviar
     if (Object.keys(dataToSend).length > 0) {
-        alert(dataToSend);
-        // Envia os dados para o backend como JSON
+
         fetch(`http://localhost:8080/produto/vender`, {
-            method: 'PUT', // Alterado para PUT
+            method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
             },
@@ -363,11 +362,32 @@ document.getElementById("vender_salvarAlteracoes").addEventListener("click", fun
         })
             .then(response => {
                 if (response.ok) {
-                    // Faça algo se a requisição for bem-sucedida
-                    console.log("Dados enviados com sucesso!");
+
+                    const toastElement = document.getElementById('mensagemVendaProduto');
+                    const toast = new bootstrap.Toast(toastElement);
+                    toast.show();
+
+                    setTimeout(() => {
+                        toast.hide();
+                    }, 2000);
+
+                    listagemVendaProduto()
                 } else {
-                    // Faça algo se a requisição falhar
-                    console.error("Erro ao enviar dados para o backend");
+                    response.json().then(data => {
+                        console.error('Falha ao vender o produto.', data);
+                        const toastErroElement = document.getElementById('mensagemErroVendaProduto');
+                        const toastErroBody = toastErroElement.querySelector('.toast-body');
+                        toastErroBody.textContent = `Erro ao cadastrar produto! Erro: ${data.message}`;
+                        const toastErro = new bootstrap.Toast(toastErroElement);
+                        toastErro.show();
+
+                        setTimeout(() => {
+                            toastErro.hide();
+                            }, 2000);
+
+                    }).catch(error => {
+                        console.error("Erro ao fazer parsing json" ,  error);
+                    })
                 }
             })
             .catch(error => {
@@ -454,6 +474,8 @@ document.getElementById("remove-row").onclick = function () {
         container.removeChild(container.lastChild);
     } else {
         alert("Pelo menos uma linha deve ser mantida visível.");
+
+
     }
 };
 
@@ -476,11 +498,7 @@ document.getElementById("buscar").onclick = function () {
 
 document.getElementById("venderProdutoForm").onsubmit = function (event) {
     event.preventDefault();
-    alert("Formulário de venda enviado com sucesso!");
 };
-
-
-
 
     //Função para listar produtos controle de caixa
     document.addEventListener('DOMContentLoaded', function () {
