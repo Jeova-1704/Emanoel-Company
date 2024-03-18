@@ -1,4 +1,4 @@
-// requisição cadastar produtos
+// FUNCAO MODAL CADASTRAR PRODUTO
 document.getElementById('produtoForm').addEventListener('submit', function (event) {
 
     event.preventDefault();
@@ -78,9 +78,9 @@ document.addEventListener('DOMContentLoaded', function (event) {
     });
 });
 
+// FIM MODAL CADASTRAR PRODUTO
 
-
-//Listar produtos
+// INICIO MODAL LISTAR PRODUTOS
 function carregarProdutos() {
     const tabelaCorpo = document.querySelector("#listarProdutosModal tbody");
     tabelaCorpo.innerHTML = '';
@@ -142,13 +142,11 @@ function abrirModalDeDelecao(id) {
 
 
     const btnConfirmar = document.getElementById('confirmarDelecao');
-    // Limpa o evento onclick anterior para evitar múltiplas chamadas
-    btnConfirmar.onclick = null; // Remove qualquer manipulador anterior
+
+    btnConfirmar.onclick = null;
     btnConfirmar.onclick = function () {
         deletarProduto(id);
     };
-
-
 }
 
 //requisição para deletar
@@ -158,7 +156,6 @@ function deletarProduto(id) {
     fetch(url, {
         method: 'DELETE',
     }).then(data => {
-        console.log('Produto deletado:', data);
         const toastElement = document.getElementById('toastDeletar');
         const toast = new bootstrap.Toast(toastElement);
         toast.show();
@@ -190,7 +187,6 @@ function buscarProdutoPeloId(id) {
         }
     })
         .then(response => {
-            console.log(response.nome)
             return response.json();
         })
         .then(data => {
@@ -216,18 +212,9 @@ function editarProduto(id) {
     const confirmacaoModal = new bootstrap.Modal(document.getElementById('editarProdutoModal'));
     fetch(`http://localhost:8080/produto/buscarID/${id}`)
         .then(response => {
-            console.log(response);
             return response.json();
         })
         .then(produto => {
-            console.log(produto.categoria);
-            console.log(produto.id);
-            console.log(produto.nome);
-            console.log(produto.codigoProduto);
-            console.log(produto.dataEntrada);
-            console.log(produto.quantidade);
-            console.log(produto.preco);
-            console.log(produto.fornecedor);
             document.getElementById('produto_id').value = produto.id;
             document.getElementById('produto_nome').value = produto.nome;
             document.getElementById('produto_codigo_produto').value = produto.codigoProduto;
@@ -300,7 +287,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 return response.json();
             })
             .then(data => {
-                console.log('Sucesso:', data);
                 const confirmacaoModal = bootstrap.Modal.getInstance(document
                     .getElementById('editarProdutoModal'));
                 confirmacaoModal.hide();
@@ -326,7 +312,52 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-// função vender produto
+
+function pesquisarPorCategoria() {
+    var categoria = document.querySelector('select[name="nomecategoria"]').value.toUpperCase();
+    var linhas = document.querySelectorAll('#listarProdutosModal tbody tr');
+
+    linhas.forEach(function(linha) {
+        var nomeCategoria = linha.querySelector('td:nth-child(8)').textContent.toUpperCase();
+
+        if (nomeCategoria.includes(categoria)) {
+            linha.style.display = 'table-row';
+
+        } else {
+            linha.style.display = 'none';
+        }
+    });
+}
+
+document.querySelector('form').addEventListener('submit', function(event) {
+    event.preventDefault();
+    pesquisarPorCategoria();
+});
+
+function pesquisarPorFornecedor() {
+    var fornecedor = document.querySelector('select[name="fornecedores"]').value.toUpperCase();
+    var linhas = document.querySelectorAll('#listarProdutosModal tbody tr');
+
+    linhas.forEach(function(linha) {
+        var nomeFornecedor = linha.querySelector('td:nth-child(9)').textContent.toUpperCase();
+
+        if (nomeFornecedor.includes(fornecedor)) {
+            linha.style.display = 'table-row';
+
+        } else {
+            linha.style.display = 'none';
+        }
+    });
+}
+
+document.querySelector('form').addEventListener('submit', function(event) {
+    event.preventDefault();
+    pesquisarPorFornecedor();
+});
+
+// FIM MODAL LISTAR PRODUTOS
+
+// FUNCAO MODAL VENDER PRODUTO
 
 document.addEventListener('DOMContentLoaded', function (event) {
     document.querySelector('#venderProdutoModal').addEventListener('show.bs.modal', function (event) {
@@ -334,12 +365,11 @@ document.addEventListener('DOMContentLoaded', function (event) {
     });
 });
 document.getElementById("vender_salvarAlteracoes").addEventListener("click", function(event) {
-    event.preventDefault(); // Prevenindo o comportamento padrão do formulário
+    event.preventDefault();
 
     var rows = document.getElementsByClassName("input-row");
     var dataToSend = {};
 
-    // Itera sobre todas as linhas de entrada
     for (var i = 0; i < rows.length; i++) {
         var quantidade = rows[i].querySelector('input[name="quantidade"]').value;
         var produto_id = rows[i].querySelector('input[name="produto_id"]').value;
@@ -417,9 +447,22 @@ document.getElementById("vender_salvarAlteracoes").addEventListener("click", fun
     }
 });
 
+function pesquisarPorNomeVender() {
+    var nome = document.querySelector('input[name="pesquisaVender"]').value.toLowerCase();
+    var linhas = document.querySelectorAll('#venderProdutoModal tbody tr');
+
+    linhas.forEach(function(linha) {
+        var nomeProduto = linha.querySelector('td:nth-child(2)').textContent.toLowerCase();
+
+        if (nomeProduto.includes(nome)) {
+            linha.style.display = 'table-row';
+        } else {
+            linha.style.display = 'none';
+        }
+    });
+}
 
 
-//Listar produtos
 function listagemVendaProduto() {
     const tabelaCorpo = document.querySelector("#venderProdutoModal tbody");
     tabelaCorpo.innerHTML = '';
@@ -499,8 +542,10 @@ document.getElementById("venderProdutoForm").onsubmit = function (event) {
     event.preventDefault();
 };
 
-    //Função para listar produtos controle de caixa
-    document.addEventListener('DOMContentLoaded', function () {
+// FIM DA FUNÇÃO MODAL VENDER PRODUTO
+
+// INICIO MODAL CONTROLE DE CAIXA
+document.addEventListener('DOMContentLoaded', function () {
     const modal = document.getElementById('controleCaixaModal');
     modal.addEventListener('show.bs.modal', function (event) {
         fetch('http://localhost:8080/estoque')
@@ -520,63 +565,9 @@ document.getElementById("venderProdutoForm").onsubmit = function (event) {
             });
     });
 });
-function pesquisarPorCategoria() {
-    var categoria = document.querySelector('select[name="nomecategoria"]').value.toUpperCase();
-    var linhas = document.querySelectorAll('#listarProdutosModal tbody tr');
+// FIM MODAL CONTROLE DE CAIXA
 
-    linhas.forEach(function(linha) {
-        var nomeCategoria = linha.querySelector('td:nth-child(8)').textContent.toUpperCase();
-
-        if (nomeCategoria.includes(categoria)) {
-            linha.style.display = 'table-row';
-
-        } else {
-            linha.style.display = 'none';
-        }
-    });
-}
-
-document.querySelector('form').addEventListener('submit', function(event) {
-    event.preventDefault();
-    pesquisarPorCategoria();
-});
-
-function pesquisarPorFornecedor() {
-    var fornecedor = document.querySelector('select[name="fornecedores"]').value.toUpperCase();
-    var linhas = document.querySelectorAll('#listarProdutosModal tbody tr');
-
-    linhas.forEach(function(linha) {
-        var nomeFornecedor = linha.querySelector('td:nth-child(9)').textContent.toUpperCase();
-
-        if (nomeFornecedor.includes(fornecedor)) {
-            linha.style.display = 'table-row';
-
-        } else {
-            linha.style.display = 'none';
-        }
-    });
-}
-
-document.querySelector('form').addEventListener('submit', function(event) {
-    event.preventDefault();
-    pesquisarPorFornecedor();
-});
-
-function pesquisarPorNomeVender() {
-    var nome = document.querySelector('input[name="pesquisaVender"]').value.toLowerCase();
-    var linhas = document.querySelectorAll('#venderProdutoModal tbody tr');
-
-    linhas.forEach(function(linha) {
-        var nomeProduto = linha.querySelector('td:nth-child(2)').textContent.toLowerCase();
-
-        if (nomeProduto.includes(nome)) {
-            linha.style.display = 'table-row';
-        } else {
-            linha.style.display = 'none';
-        }
-    });
-}
-
+//Inicio modal de emitir nota fiscal
 document.addEventListener("DOMContentLoaded", function() {
     var link = document.querySelector('a[data-bs-toggle="modal"][data-bs-target="#emitirNotaEstoque"]');
     link.addEventListener("click", function(event) {
