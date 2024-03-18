@@ -141,10 +141,9 @@ public class ProdutoService{
             throw new ProdutoDTOValidationException("Informe o ID do produto para atualizar!");
         }
 
-        if (produtoDTO.quantidade() == null || produtoDTO.quantidade() <= 0){
-            throw new ProdutoDTOValidationException("A quantidade do produto não pode ser nulo, negativo ou zero");
+        if (produtoDTO.quantidade() == null || produtoDTO.quantidade() < 0){
+            throw new ProdutoDTOValidationException("A quantidade do produto não pode ser nula ou negativa");
         }
-
         if (produtoDTO.nome() == null || produtoDTO.nome().isEmpty() || produtoDTO.nome().isBlank()) {
             throw new ProdutoDTOValidationException("Nome do produto não pode ser nulo ou vazio");
         }
