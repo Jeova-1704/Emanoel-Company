@@ -475,9 +475,6 @@
                             <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
                             <button type="submit" class="btn btn-primary" id="salvarAlteracoes">Salvar Alterações</button>
                         </div>
-
-
-
                     </div>
                 </div>
             </div>
@@ -551,6 +548,17 @@
                         </div>
                     </div>
 
+                    <div id="vendaDadosInsuficiente" class="toast align-items-center text-white border-0" role="alert"
+                         aria-live="assertive" aria-atomic="true"
+                         style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+                        <div class="d-flex text-bg-danger">
+                            <div class="toast-body ">
+                                Venda não realizada : Dados Insuficiente !
+                            </div>
+                            <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                        </div>
+                    </div>
+
                     <div id="mensagemErroVendaProduto" class="toast align-items-center text-white bg-danger border-0" role="alert"
                          aria-live="assertive" aria-atomic="true"
                          style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);">
@@ -562,23 +570,23 @@
                         </div>
                     </div>
 
-
                     <form action="" method="post">
-                        <label>Pesquisar por nome:</label>
-                        <input name="nomepesquisa" type="text" >
-                        <button type="button" class="bg-gray text-black" id="buscar">Buscar</button>
+                        <label >Pesquisar por nome:</label>
+                        <input name="pesquisaVender" type="text" >
+                        <button type="button" class="bg-gray text-black" onclick="pesquisarPorNomeVender()">Buscar</button>
                     </form>
+
                     <div class="flex">
                         <div class="w-1/2 p-4">
                             <div id="inputs-container">
                                 <div class="row input-row">
                                     <div class="col">
                                         <label for="quantidade">Quantidade:</label>
-                                        <input type="number" class="form-control" name="quantidade">
+                                        <input type="number" class="form-control" id="quantidade_venda" name="quantidade">
                                     </div>
                                     <div class="col">
                                         <label for="produto_id">ID:</label>
-                                        <input type="text" class="form-control" name="produto_id">
+                                        <input type="text" class="form-control"  id="id_venda" name="produto_id">
                                     </div>
                                 </div>
                             </div>
