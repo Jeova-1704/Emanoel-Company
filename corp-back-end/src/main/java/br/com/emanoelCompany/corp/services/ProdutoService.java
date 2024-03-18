@@ -188,6 +188,9 @@ public class ProdutoService{
         List<Produto> listaProdutosParaVender = new ArrayList<>();
         for (Long id : vendaMap.keySet()){
             int quantidade = vendaMap.get(id);
+            if (quantidade <= 0) {
+                throw new QuantidadeInsuficienteException("Venda não realizada, a quantidade não pode ser nula e nem negativa");
+            }
             Produto produto = produtoRepository.findById(id).orElseThrow(() -> new ProdutoNaoEncontradoException("O ID fornecido não condiz com nenhum produto em estoque "));
             int quantidadeAtualizada =  (produto.getQuantidade()-quantidade);
             if(quantidadeAtualizada >= 0){
