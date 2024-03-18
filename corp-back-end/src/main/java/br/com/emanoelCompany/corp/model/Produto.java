@@ -32,12 +32,14 @@ public class Produto implements Serializable {
     @Column(name = "codigo_produto", nullable = false)
     private String codigoProduto;
 
+    @Column(name = "fornecedor", nullable = false)
+    private String fornecedor;
     @Column(name = "valor_total", nullable = false)
     private Double precoTotal;
 
 
     public Produto(Long id, Double preco, String nome, String categoria, Integer quantidade, LocalDate dataEntrada
-            , String codigoProduto, Double precoTotal) {
+            , String codigoProduto, Double precoTotal, String fornecedor) {
 
         this.id = id;
         this.preco = preco;
@@ -47,6 +49,7 @@ public class Produto implements Serializable {
         this.dataEntrada = dataEntrada;
         this.codigoProduto = codigoProduto;
         this.precoTotal = precoTotal;
+        this.fornecedor = fornecedor;
     }
 
     public Produto() {}
@@ -59,6 +62,7 @@ public class Produto implements Serializable {
         this.dataEntrada = LocalDate.parse(data.dataEntrada());
         this.codigoProduto = data.codigoProduto();
         this.precoTotal = data.precoTotal();
+        this.fornecedor = data.fornecedor();
     }
 
     public Long getId() {
@@ -123,6 +127,14 @@ public class Produto implements Serializable {
 
     public Double getPrecoTotal() {
         return precoTotal;
+    }
+
+    public String getFornecedor() {
+        return fornecedor;
+    }
+
+    public void setFornecedor(String fornecedor) {
+        this.fornecedor = fornecedor;
     }
 
     public void setPrecoTotal(Double precoTotal) {

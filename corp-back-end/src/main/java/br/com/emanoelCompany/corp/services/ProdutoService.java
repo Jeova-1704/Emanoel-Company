@@ -29,13 +29,21 @@ public class ProdutoService{
                 produto.getQuantidade(),
                 produto.getDataEntrada().toString(),
                 produto.getCodigoProduto(),
-                produto.getPrecoTotal()
+                produto.getPrecoTotal(),
+                produto.getFornecedor()
         );
     }
     private final Set<String> categoriasValidas = new HashSet<>(Arrays.asList("ELETRÔNICOS", "VESTUARIO E MODA", "ALIMENTOS E BEBIDAS",
             "CASA E DECORAÇÃO", "SAÚDE E BELEZA", "ESPORTES E FITNESS",
             "LIVROS E MATERIAIS DE ESCRITÓRIO", "BRINQUEDOS", "JOGOS", "AUTOMOTIVO", "FERRAMENTAS E EQUIPAMENTOS"
     , "OUTROS"));
+
+    private final Set<String> fornecedores = new HashSet<>(Arrays.asList(
+            "ELECTROBRASIL", "MODABRASIL", "SABORES DO BRASIL",
+            "DECORAÇÃO NACIONAL", "BELEZA BRASILEIRA", "ESPORTE E SAÚDE DO BRASIL",
+            "LIVRARIA BRASILEIRA", "BRINQUEDOS NACIONAIS", "JOGOS DO BRASIL",
+            "AUTO BRASIL", "FERRAMENTAS NACIONAIS", "SUPRIMENTOS NACIONAIS"));
+
     public ProdutoDTO salvar(ProdutoDTO produto) {
 
         if (produto.nome() == null || produto.nome().isEmpty() || produto.nome().isBlank()) {
@@ -50,6 +58,12 @@ public class ProdutoService{
         }
         if (!categoriasValidas.contains(produto.categoria().toUpperCase())){
             throw new ProdutoDTOValidationException("Insira uma categoria válida!");
+        }
+        if (produto.fornecedor() == null || produto.fornecedor().isEmpty() || produto.fornecedor().isBlank()) {
+            throw new ProdutoDTOValidationException("O fornecedor do produto não pode ser nulo ou vazio");
+        }
+        if (!fornecedores.contains(produto.fornecedor().toUpperCase())){
+            throw new ProdutoDTOValidationException("Insira uma fornecedor válido!");
         }
 
         if (produto.quantidade() == null || produto.quantidade() <= 0) {
@@ -138,13 +152,19 @@ public class ProdutoService{
             throw new ProdutoDTOValidationException("Preço do produto não pode ser nulo, negativo ou zero ");
         }
         if (produtoDTO.categoria() == null || produtoDTO.categoria().isEmpty() || produtoDTO.categoria().isBlank()) {
-            throw new ProdutoDTOValidationException("Categoria do produto não pode ser nula, vazia, negativa ou zero");
+            throw new ProdutoDTOValidationException("Categoria do produto não pode ser nula ou vazia");
         }
         if (!categoriasValidas.contains(produtoDTO.categoria().toUpperCase())){
             throw new ProdutoDTOValidationException("Insira uma categoria válida!");
         }
+        if (produtoDTO.fornecedor() == null || produtoDTO.fornecedor().isEmpty() || produtoDTO.fornecedor().isBlank()) {
+            throw new ProdutoDTOValidationException("O fornecedor do produto não pode ser nulo, ou vazio");
+        }
+        if (!fornecedores.contains(produtoDTO.fornecedor().toUpperCase())){
+            throw new ProdutoDTOValidationException("Insira um fornecedor válido!");
+        }
         if (produtoDTO.dataEntrada() == null || produtoDTO.dataEntrada().isEmpty() || produtoDTO.dataEntrada().isBlank()) {
-            throw new ProdutoDTOValidationException("A data de entrada não pode ser nula");
+            throw new ProdutoDTOValidationException("A data de entrada não pode ser nula ou vazia");
         }
         if (produtoDTO.codigoProduto() == null || produtoDTO.codigoProduto().isEmpty() || produtoDTO.codigoProduto().isBlank()) {
             throw new ProdutoDTOValidationException("O codigo do produto não pode ser nulo ou vazio");
@@ -158,6 +178,7 @@ public class ProdutoService{
         produto.setQuantidade(produtoDTO.quantidade());
         produto.setDataEntrada(LocalDate.now());
         produto.setCategoria(produtoDTO.categoria());
+        produto.setFornecedor(produtoDTO.fornecedor());
         produto.setPrecoTotal(produto.valorTotal(produtoDTO.quantidade(), produtoDTO.preco()));
         Produto produtoAtualizado = produtoRepository.save(produto);
 

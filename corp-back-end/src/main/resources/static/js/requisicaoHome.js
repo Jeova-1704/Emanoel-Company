@@ -9,6 +9,7 @@ document.getElementById('produtoForm').addEventListener('submit', function (even
     const quantidade = parseInt(document.getElementById('quantidade').value);
     const preco = parseFloat(document.getElementById('preco').value);
     const categoria = document.getElementById('categoria').value;
+    const fornecedor = document.getElementById('fornecedor').value;
 
     const data_entrada_parts = data_entrada.split('/');
     const data_entrada_formatada = `${data_entrada_parts[2]}-${data_entrada_parts[1]}-${data_entrada_parts[0]}`;
@@ -19,7 +20,8 @@ document.getElementById('produtoForm').addEventListener('submit', function (even
         dataEntrada: data_entrada_formatada,
         quantidade: quantidade,
         preco: preco,
-        categoria: categoria
+        categoria: categoria,
+        fornecedor: fornecedor
     };
 
 
@@ -39,6 +41,7 @@ document.getElementById('produtoForm').addEventListener('submit', function (even
                 document.getElementById('quantidade').value = '';
                 document.getElementById('preco').value = '';
                 document.getElementById('categoria').value = '';
+                document.getElementById('fornecedor').value = '';
 
                 const toastElement = document.getElementById('toast');
                 const toast = new bootstrap.Toast(toastElement);
