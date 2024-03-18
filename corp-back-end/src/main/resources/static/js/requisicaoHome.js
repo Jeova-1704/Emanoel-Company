@@ -333,8 +333,9 @@ document.addEventListener('DOMContentLoaded', function (event) {
         listagemVendaProduto();
     });
 });
+document.getElementById("vender_salvarAlteracoes").addEventListener("click", function(event) {
+    event.preventDefault(); // Prevenindo o comportamento padrão do formulário
 
-document.getElementById("vender_salvarAlteracoes").addEventListener("click", function() {
     var rows = document.getElementsByClassName("input-row");
     var dataToSend = {};
 
@@ -345,7 +346,6 @@ document.getElementById("vender_salvarAlteracoes").addEventListener("click", fun
 
         // Verifica se ambos os campos possuem valores
         if (quantidade && produto_id) {
-
             dataToSend[parseInt(produto_id)] = parseInt(quantidade);
         }
     }
@@ -363,6 +363,19 @@ document.getElementById("vender_salvarAlteracoes").addEventListener("click", fun
             .then(response => {
                 if (response.ok) {
 
+                    document.getElementById('quantidade_venda').value = '';
+                    document.getElementById('id_venda').value = '';
+
+                    var container = document.getElementById("inputs-container");
+                    var rows = container.getElementsByClassName("input-row");
+
+                    if (rows.length > 1) {
+                        let c = 0;
+                        for(c;(rows.length)-1;c++){
+                            container.removeChild(container.lastChild);
+                        }
+                    }
+
                     const toastElement = document.getElementById('mensagemVendaProduto');
                     const toast = new bootstrap.Toast(toastElement);
                     toast.show();
@@ -377,13 +390,13 @@ document.getElementById("vender_salvarAlteracoes").addEventListener("click", fun
                         console.error('Falha ao vender o produto.', data);
                         const toastErroElement = document.getElementById('mensagemErroVendaProduto');
                         const toastErroBody = toastErroElement.querySelector('.toast-body');
-                        toastErroBody.textContent = `Erro ao cadastrar produto! Erro: ${data.message}`;
+                        toastErroBody.textContent = `Erro ao vender produto! Erro: ${data.message}`;
                         const toastErro = new bootstrap.Toast(toastErroElement);
                         toastErro.show();
 
                         setTimeout(() => {
                             toastErro.hide();
-                            }, 2000);
+                        }, 2000);
 
                     }).catch(error => {
                         console.error("Erro ao fazer parsing json" ,  error);
@@ -394,9 +407,16 @@ document.getElementById("vender_salvarAlteracoes").addEventListener("click", fun
                 console.error("Erro ao enviar dados para o backend:", error);
             });
     } else {
-        alert("Por favor, preencha pelo menos uma linha de dados.");
+        const toastElement = document.getElementById('vendaDadosInsuficiente');
+        const toast = new bootstrap.Toast(toastElement);
+        toast.show();
+
+        setTimeout(() => {
+            toast.hide();
+        }, 2000);
     }
 });
+
 
 
 //Listar produtos
@@ -457,10 +477,10 @@ document.getElementById("add-row").addEventListener("click", function () {
     newRow.classList.add("row", "input-row", "mt-3");
     newRow.innerHTML = `
         <div class="col">
-            <input type="number" class="form-control" name="quantidade">
+            <input type="number" class="form-control" id="quantidade_venda" name="quantidade">
         </div>
         <div class="col">
-            <input type="text" class="form-control" name="produto_id">
+            <input type="text" class="form-control" id="id_venda" name="produto_id">
         </div>
     `;
     container.appendChild(newRow);
@@ -472,10 +492,6 @@ document.getElementById("remove-row").onclick = function () {
 
     if (rows.length > 1) {
         container.removeChild(container.lastChild);
-    } else {
-        alert("Pelo menos uma linha deve ser mantida visível.");
-
-
     }
 };
 
@@ -563,4 +579,17 @@ document.querySelector('form').addEventListener('submit', function(event) {
     pesquisarPorFornecedor();
 });
 
+function pesquisarPorNomeVender() {
+    var nome = document.querySelector('input[name="pesquisaVender"]').value.toLowerCase();
+    var linhas = document.querySelectorAll('#venderProdutoModal tbody tr');
 
+    linhas.forEach(function(linha) {
+        var nomeProduto = linha.querySelector('td:nth-child(2)').textContent.toLowerCase();
+
+        if (nomeProduto.includes(nome)) {
+            linha.style.display = 'table-row';
+        } else {
+            linha.style.display = 'none';
+        }
+    });
+}
