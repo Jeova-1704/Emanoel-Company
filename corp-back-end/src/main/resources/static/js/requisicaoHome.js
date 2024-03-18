@@ -135,12 +135,15 @@ function abrirModalDeDelecao(id) {
     const confirmacaoModal = new bootstrap.Modal(document.getElementById('confirmacaoDelecaoModal'));
     confirmacaoModal.show();
 
+
     const btnConfirmar = document.getElementById('confirmarDelecao');
     // Limpa o evento onclick anterior para evitar múltiplas chamadas
     btnConfirmar.onclick = null; // Remove qualquer manipulador anterior
     btnConfirmar.onclick = function () {
         deletarProduto(id);
     };
+
+
 }
 
 //requisição para deletar
@@ -151,8 +154,22 @@ function deletarProduto(id) {
         method: 'DELETE',
     }).then(data => {
         console.log('Produto deletado:', data);
+        const toastElement = document.getElementById('toastDeletar');
+        const toast = new bootstrap.Toast(toastElement);
+        toast.show();
+
+        setTimeout(() => {
+            toast.hide();
+        }, 2000);
         carregarProdutos();
     }).catch(error => {
+
+        const toastErroElement = document.getElementById('toastErroDeletar');
+        const toastErroBody = toastErroElement.querySelector('.toast-body');
+        toastErroBody.textContent = `Erro ao cadastrar produto! Erro: ${data.message}`;
+        const toastErro = new bootstrap.Toast(toastErroElement);
+        toastErro.show();
+
         console.error('Erro ao deletar produto:', error);
     });
 
@@ -279,9 +296,25 @@ document.addEventListener('DOMContentLoaded', function() {
                 const confirmacaoModal = bootstrap.Modal.getInstance(document
                     .getElementById('editarProdutoModal'));
                 confirmacaoModal.hide();
+
+                const toastElement = document.getElementById('toastAtualizado');
+                const toast = new bootstrap.Toast(toastElement);
+                toast.show();
+
+                setTimeout(() => {
+                    toast.hide();
+                }, 2000);
+
                 carregarProdutos();
             })
             .catch(error => {
+
+                const toastErroElement = document.getElementById('toastErroAtualizar');
+                const toastErroBody = toastErroElement.querySelector('.toast-body');
+                toastErroBody.textContent = `Erro ao cadastrar produto! Erro: ${data.message}`;
+                const toastErro = new bootstrap.Toast(toastErroElement);
+                toastErro.show();
+
                 console.error('Erro:', error);
             });
     });
@@ -391,11 +424,33 @@ document.getElementById("buscar").onclick = function () {
 };
 
 document.getElementById("venderProdutoForm").onsubmit = function (event) {
-    event.preventDefault(); // Evita o envio padrão do formulário
-
-    // Aqui você pode implementar a lógica para enviar o formulário de venda
-    // Por exemplo, você pode fazer uma requisição AJAX para um servidor
-    // ou processar os dados diretamente no cliente
-    // Por enquanto, vamos apenas exibir um alerta confirmando o envio
+    event.preventDefault();
     alert("Formulário de venda enviado com sucesso!");
 };
+
+
+
+
+    //Função para listar produtos controle de caixa
+    document.addEventListener('DOMContentLoaded', function () {
+    const modal = document.getElementById('controleCaixaModal');
+    modal.addEventListener('show.bs.modal', function (event) {
+        fetch('http://localhost:8080/estoque')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Erro ao obter os dados do estoque');
+                }
+                return response.json();
+            })
+            .then(data => {
+                document.getElementById('totalEstoque').value = data.totalDinheiroEstoque.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });;
+                document.getElementById('totalProduto').value = data.totalProdutos;
+                document.getElementById('totalUnitario').value = data.totalUnitario;
+            })
+            .catch(error => {
+                console.error(error);
+                // Aqui você pode lidar com o erro, por exemplo, exibir uma mensagem para o usuário
+            });
+    });
+});
+
