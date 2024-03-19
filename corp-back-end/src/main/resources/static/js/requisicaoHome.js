@@ -520,10 +520,10 @@ document.getElementById("add-row").addEventListener("click", function () {
     newRow.classList.add("row", "input-row", "mt-3");
     newRow.innerHTML = `
         <div class="col">
-            <input type="number" class="form-control" id="quantidade_venda" name="quantidade">
+            <input type="number" class="form-control" id="quantidade_venda" name="quantidade" placeholder="Insira a quantidade">
         </div>
         <div class="col">
-            <input type="text" class="form-control" id="id_venda" name="produto_id">
+            <input type="text" class="form-control" id="id_venda" name="produto_id" placeholder="Insira o ID do produto">
         </div>
     `;
     container.appendChild(newRow);
