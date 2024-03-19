@@ -27,20 +27,6 @@ public class EstoqueController {
         return ResponseEntity.ok(estoqueDTO);
     }
 
-    @GetMapping("/emitir-relatorio")
-    public ResponseEntity<byte[]> gerarRelatorioProdutos() {
-        byte[] relatorioTxt = estoqueServices.criarRelatorioProdutosTxt();
-
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.TEXT_PLAIN);
-        headers.setContentDispositionFormData("filename", "relatorio_produtos.txt");
-
-        return ResponseEntity
-                .ok()
-                .headers(headers)
-                .body(relatorioTxt);
-    }
-
     @GetMapping("/products/pdf")
     public ResponseEntity<byte[]> getProductPDF() {
         try {
