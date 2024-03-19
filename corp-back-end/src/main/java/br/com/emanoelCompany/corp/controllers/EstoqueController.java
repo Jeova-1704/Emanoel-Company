@@ -30,7 +30,7 @@ public class EstoqueController {
     @GetMapping("/products/pdf")
     public ResponseEntity<byte[]> getProductPDF() {
         try {
-            byte[] pdfBytes = estoqueServices.generateProductPDF();
+            byte[] pdfBytes = estoqueServices.criarRelatorioPDF();
 
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_PDF);
