@@ -599,3 +599,32 @@ document.addEventListener("DOMContentLoaded", function() {
         xhr.send();
     });
 });
+
+
+document.getElementById('emitirNotaLink').addEventListener('click', function(e) {
+    e.preventDefault(); // Impede o comportamento padrão do link
+    fetch('http://localhost:8080/estoque/products/pdf', {
+        method: 'GET',
+        headers: {
+            // Adicione cabeçalhos se necessário
+        },
+        responseType: 'blob' // Indica que a resposta esperada é um blob
+    })
+        .then(response => {
+            if (response.ok) return response.blob();
+            throw new Error('Erro na solicitação do PDF.');
+        })
+        .then(blob => {
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'products.pdf'; // Define o nome do arquivo para download
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
+        })
+        .catch(error => {
+            console.error('Erro ao baixar o PDF:', error);
+        });
+});
