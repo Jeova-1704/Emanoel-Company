@@ -76,6 +76,9 @@ public class ProdutoService{
         if (produto.codigoProduto() == null || produto.codigoProduto().isEmpty() || produto.codigoProduto().isBlank()) {
             throw new ProdutoDTOValidationException("O codigo do produto não pode ser nulo ou vazio");
         }
+        if (LocalDate.parse(produto.dataEntrada()).isAfter(LocalDate.now())) {
+            throw new ProdutoDTOValidationException("Data não pode ser maior do que a data atual");
+        }
 
 
         Produto prod = new Produto(produto);
